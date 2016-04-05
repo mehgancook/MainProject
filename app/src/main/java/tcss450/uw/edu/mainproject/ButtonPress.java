@@ -31,7 +31,7 @@ public class ButtonPress extends AppCompatActivity {
         Intent intent = getIntent();
         TextView textView = new TextView(this);
         textView.setTextSize(40);
-        textView.setText("Hello to you too!");
+        textView.setText("Hello to you too! Mehgan and tony have figured out github!");
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.pressed);
         layout.addView(textView);
 
