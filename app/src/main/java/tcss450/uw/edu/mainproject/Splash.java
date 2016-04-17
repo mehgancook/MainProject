@@ -1,12 +1,14 @@
 package tcss450.uw.edu.mainproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
+
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-
-import android.view.View;
 
 public class Splash extends AppCompatActivity {
 
@@ -16,6 +18,13 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
+        TextView joinLink = (TextView) findViewById(R.id.join);
+        TextView loginLink = (TextView) findViewById(R.id.login);
+
+        Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
+        joinLink.setTypeface(oswald);
+        loginLink.setTypeface(oswald);
     }
 
     public void toLoginPage(View view) {
@@ -25,8 +34,8 @@ public class Splash extends AppCompatActivity {
 
     public void toFacebook(View view) {
 
-       // Intent intentFacebook = new Intent(this, .class);
-       // startActivity(intentImage);
+        // Intent intentFacebook = new Intent(this, .class);
+        // startActivity(intentImage);
     }
 
     public void toJoin(View view) {
