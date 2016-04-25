@@ -30,9 +30,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_title"
+                android:id="@+id/login_title"
+                android:textSize="@dimen/title"
+                android:layout_marginBottom="@dimen/title_bottom_margin" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:color="@color/background">
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
@@ -47,7 +56,8 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:color="@color/colorPrimaryDark">
 
                 <EditText
                     android:id="@+id/password"
@@ -69,6 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/button_font"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 

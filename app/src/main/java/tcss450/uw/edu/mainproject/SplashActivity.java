@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.widget.LoginButton;
 
 public class SplashActivity extends AppCompatActivity {
+
+    public static Typeface oswald = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +24,10 @@ public class SplashActivity extends AppCompatActivity {
         TextView joinLink = (TextView) findViewById(R.id.join);
         TextView loginLink = (TextView) findViewById(R.id.login);
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+//        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+//        loginButton.setReadPermissions("email");
 
-        Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
+        oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
         joinLink.setTypeface(oswald);
         loginLink.setTypeface(oswald);
     }
