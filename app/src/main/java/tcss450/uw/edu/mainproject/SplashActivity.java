@@ -17,14 +17,14 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+     //   FacebookSdk.sdkInitialize(getApplicationContext());
+     //   AppEventsLogger.activateApp(this);
 
         TextView joinLink = (TextView) findViewById(R.id.join);
         TextView loginLink = (TextView) findViewById(R.id.login);
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+     //   LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+     //   loginButton.setReadPermissions("email");
 
         Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
         joinLink.setTypeface(oswald);
