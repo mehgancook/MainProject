@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".SplashActivity"
-    tools:showIn="@layout/activity_splash">
+    tools:context=".authenticate.MainLoginActivity"
+    tools:showIn="@layout/activity_main_login">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,8 +21,8 @@
         android:background="@drawable/splashbackground_image"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".SplashActivity"
-        tools:showIn="@layout/activity_splash">
+        tools:context=".authenticate.MainLoginActivity"
+        tools:showIn="@layout/activity_main_login">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:src="@drawable/splashtitle"/>
 
         </LinearLayout>
-       <!-- <LinearLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight=".5"
@@ -52,13 +52,13 @@
                     android:src="@drawable/facebook"
                     android:id="@+id/facebook_login"
                     android:onClick="toFacebook"/>
-           COMMENT ME BACK LATER <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+            <!-- <com.facebook.login.widget.LoginButton
+                 android:id="@+id/login_button"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_horizontal"
+                 android:layout_marginTop="30dp"
+                 android:layout_marginBottom="30dp" /> -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,13 +79,13 @@
                     android:id="@+id/login"
                     android:onClick="toLoginPage" />
 
-        </LinearLayout> -->
+        </LinearLayout>
 
 
         <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Link" />-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Link" />-->
 
     </LinearLayout>
 </RelativeLayout>

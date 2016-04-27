@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_add_course"
-    android:name="edu.uw.tacoma.mmuppa.webservicepractice.CourseAddFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddUserActivity">
+    tools:context=".authenticate.LoginUserActivity">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/user"
         android:hint="@string/user_id_hint"
-        android:id="@+id/add_user" />
-
+        android:inputType="text"
+        android:layout_gravity="fill_vertical"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/email_hint"
-        android:id="@+id/add_email" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/password"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
-        android:id="@+id/add_password" />
-
+        android:layout_gravity="fill_vertical"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_course_button"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/register_user"
-        android:onClick="addUser" />
+        android:id="@+id/login_user_button"
+        android:layout_gravity="right"
+        android:text="SIGN IN"
+        android:onClick="loginUser" />
+
 
 </LinearLayout>
+
