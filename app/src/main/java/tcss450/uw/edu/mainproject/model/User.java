@@ -33,14 +33,14 @@ public class User {
     /**
      * Parses the json string, returns an error message if unsuccessful.
      * Returns course list if success.
-     * @param courseJSON
+     * @param userJSON
      * @return reason or null if successful.
      */
-    public static String parseCourseJSON(String courseJSON, List<User> userList) {
+    public static String parseUserJSON(String userJSON, List<User> userList) {
         String reason = null;
-        if (courseJSON != null) {
+        if (userJSON != null) {
             try {
-                JSONArray arr = new JSONArray(courseJSON);
+                JSONArray arr = new JSONArray(userJSON);
 
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);

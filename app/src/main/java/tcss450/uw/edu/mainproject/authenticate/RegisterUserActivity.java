@@ -1,6 +1,8 @@
 package tcss450.uw.edu.mainproject.authenticate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +18,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -25,8 +26,9 @@ import tcss450.uw.edu.mainproject.MainAppActivity;
 import tcss450.uw.edu.mainproject.R;
 
 public class RegisterUserActivity extends AppCompatActivity {
+    protected SharedPreferences mSharedPreferences;
     private String mResult;
-    private final static String COURSE_ADD_URL
+    private final static String ADD_USER
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
 
     private EditText mUsername;
@@ -39,6 +41,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         mUsername = (EditText) findViewById(R.id.add_username);
         mEmail = (EditText) findViewById(R.id.add_email);
         mPassword = (EditText) findViewById(R.id.add_password);
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
 
     }
 
@@ -76,18 +80,21 @@ public class RegisterUserActivity extends AppCompatActivity {
             mPassword.requestFocus();
             return;
         }
+
         String url = buildCourseURL(v);
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
+
       //  if (mResult.equals("success")) {
             Intent i = new Intent(this, MainAppActivity.class);
             startActivity(i);
+        mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
       //  }
     }
 
     private String buildCourseURL(View v) {
         StringBuilder sb = new StringBuilder();
-        sb.append(COURSE_ADD_URL);
+        sb.append(ADD_USER);
         String username = mUsername.getText().toString();
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
