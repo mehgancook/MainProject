@@ -23,7 +23,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
 
-        TextView titleText = (TextView) findViewById(R.id.login_user_button);
+        TextView titleText = (TextView) findViewById(R.id.sign_title);
         titleText.setTypeface(oswald);
 
         TextView userid = (TextView) findViewById(R.id.userid);
