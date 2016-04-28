@@ -3,6 +3,7 @@ package tcss450.uw.edu.mainproject.authenticate;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ public class LoginUserActivity extends AppCompatActivity {
 
         TextView titleText = (TextView) findViewById(R.id.login_title);
         titleText.setTypeface(oswald);
+
 
 
         EditText user = (EditText) findViewById(R.id.user);

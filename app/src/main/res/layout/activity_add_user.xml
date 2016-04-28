@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/user_id_hint"
-        android:id="@+id/add_user" />
+        android:id="@+id/add_username" />
 
     <EditText
         android:layout_width="match_parent"
