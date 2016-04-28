@@ -7,15 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 
 public class MainLoginActivity extends AppCompatActivity {
+
+    private Helper mHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
-      //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mHelper = new Helper(getAssets());
+
+        //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
      //   setSupportActionBar(toolbar);
         //   FacebookSdk.sdkInitialize(getApplicationContext());
         //   AppEventsLogger.activateApp(this);
