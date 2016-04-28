@@ -6,6 +6,9 @@
     <string name="title_activity_join">Join</string>
     <string name="facebook_app_id">217701851953852</string>
 
+    <!-- Strings related to register  -->
+    <string name="register_title">Join with Email</string>
+
     <!-- Strings related to login -->
     <string name="login_title">Log in with Email</string>
     <string name="prompt_email">Email</string>
