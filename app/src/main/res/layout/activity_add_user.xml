@@ -30,6 +30,7 @@
         android:inputType="text"
         android:layout_gravity="fill_vertical"
         android:color="@color/colorPrimaryDark" />
+        android:id="@+id/add_username" />
 
     <EditText
         android:layout_width="match_parent"

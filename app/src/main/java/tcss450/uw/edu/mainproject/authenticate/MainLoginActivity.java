@@ -36,7 +36,8 @@ public class MainLoginActivity extends AppCompatActivity {
            loginLink.setTypeface(oswald);
 
 
-      //  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        //  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
        // fab.setOnClickListener(new View.OnClickListener() {
         //    @Override
       //      public void onClick(View view) {
@@ -58,6 +59,10 @@ public class MainLoginActivity extends AppCompatActivity {
     public void toLoginPage(View v) {
         Intent intent = new Intent(this, LoginUserActivity.class);
         startActivity(intent);
+    }
+
+    public void toFacebook(View v) {
+
     }
 
 }

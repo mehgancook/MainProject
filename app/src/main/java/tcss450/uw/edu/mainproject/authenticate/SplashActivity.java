@@ -1,13 +1,16 @@
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.authenticate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
+import tcss450.uw.edu.mainproject.MainAppActivity;
+import tcss450.uw.edu.mainproject.R;
 
 public class SplashActivity extends AppCompatActivity {
-
+    private SharedPreferences mSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +22,15 @@ public class SplashActivity extends AppCompatActivity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashActivity.this,MainLoginActivity.class);
-                    startActivity(intent);
+                    mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                            , Context.MODE_PRIVATE);
+                    if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+                        Intent intent = new Intent(SplashActivity.this, MainLoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, MainAppActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         };
