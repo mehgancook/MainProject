@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import tcss450.uw.edu.mainproject.Helper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,12 +42,17 @@ public class LoginUserActivity extends AppCompatActivity {
     private EditText mEmail;
     private EditText mPassword;
 
+    private Helper mHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
         mEmail = (EditText) findViewById(R.id.user);
         mPassword = (EditText) findViewById(R.id.password);
+
+        mHelper = new Helper(getAssets());
+
 
         Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
 
@@ -162,4 +168,5 @@ public class LoginUserActivity extends AppCompatActivity {
 
         }
     }
+
 }

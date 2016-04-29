@@ -3,13 +3,16 @@ package tcss450.uw.edu.mainproject.authenticate;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -22,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.MainAppActivity;
 import tcss450.uw.edu.mainproject.R;
 
@@ -31,6 +35,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     private final static String ADD_USER
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
 
+    private Helper mHelper;
+
     private EditText mUsername;
     private EditText mEmail;
     private EditText mPassword;
@@ -38,9 +44,28 @@ public class RegisterUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
-        mUsername = (EditText) findViewById(R.id.add_username);
-        mEmail = (EditText) findViewById(R.id.add_email);
-        mPassword = (EditText) findViewById(R.id.add_password);
+
+        mHelper = new Helper(getAssets());
+
+        Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
+
+        TextView titleText = (TextView) findViewById(R.id.sign_title);
+        titleText.setTypeface(oswald);
+
+        TextView userid = (TextView) findViewById(R.id.userid);
+        userid.setTypeface(oswald);
+
+        EditText user = (EditText) findViewById(R.id.user);
+        user.setTypeface(oswald);
+
+        EditText password = (EditText) findViewById(R.id.password);
+        password.setTypeface(oswald);
+
+        Button signInButton = (Button) findViewById(R.id.login_user_button);
+        signInButton.setTypeface(oswald);
+        mUsername = (EditText) findViewById(R.id.userid);
+        mEmail = (EditText) findViewById(R.id.user);
+        mPassword = (EditText) findViewById(R.id.password);
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 

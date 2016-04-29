@@ -1,39 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_add_course"
-    android:name="edu.uw.tacoma.mmuppa.webservicepractice.CourseAddFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddUserActivity">
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/fragment_add_course"
+    android:name="edu.uw.tacoma.mmuppa.webservicepractice.CourseAddFragment"
+    tools:context=".authenticate.RegisterUserActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_title"
+        android:id="@+id/sign_title"
+        android:textSize="@dimen/title"
+        android:layout_marginBottom="@dimen/title_bottom_margin" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/user_id_hint"
+        android:id="@+id/userid"
+        android:inputType="text"
+        android:layout_gravity="fill_vertical"
+        android:color="@color/colorPrimaryDark" />
         android:id="@+id/add_username" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
+        android:id="@+id/user"
         android:hint="@string/email_hint"
-        android:id="@+id/add_email" />
+        android:inputType="text"
+        android:layout_gravity="fill_vertical"
+        android:color="@color/colorPrimaryDark" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/password"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
-        android:id="@+id/add_password" />
+        android:layout_gravity="fill_vertical"
+        android:color="@color/colorPrimaryDark" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_course_button"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/register_user"
-        android:onClick="addUser" />
+        android:id="@+id/login_user_button"
+        android:layout_gravity="right"
+        android:onClick="addUser"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/button_font"
+        android:text="@string/action_register"
+        android:textStyle="bold" />
 
 </LinearLayout>
