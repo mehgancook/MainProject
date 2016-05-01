@@ -4,13 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mehgan on 4/26/2016.
  */
-public class User {
+public class User implements Serializable{
 
     public static final String USERNAME = "username", EMAIL = "email",
                         PASSWORD = "password", USER_ID = "userid";

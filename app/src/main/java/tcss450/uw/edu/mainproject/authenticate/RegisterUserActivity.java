@@ -28,10 +28,12 @@ import java.net.URLEncoder;
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.MainAppActivity;
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.data.UserDB;
 
 public class RegisterUserActivity extends AppCompatActivity {
     protected SharedPreferences mSharedPreferences;
     private String mResult;
+    private UserDB mUserDB;
     private final static String ADD_USER
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
 
@@ -68,8 +70,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.password);
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
-
     }
+
 
     public void addUser(View v) {
         String username = mUsername.getText().toString();
@@ -114,6 +116,11 @@ public class RegisterUserActivity extends AppCompatActivity {
             Intent i = new Intent(this, MainAppActivity.class);
             startActivity(i);
         mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
+        if (mUserDB == null) {
+            mUserDB = new UserDB(this);
+        }
+        mUserDB.deleteUsers();
+        mUserDB.insertUser(email);
       //  }
     }
 

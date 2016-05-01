@@ -107,6 +107,13 @@ public class LoginUserActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences =
                         getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
                 sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
+                if (mUserDB == null) {
+                    mUserDB = new UserDB(this);
+                }
+                mUserDB.deleteUsers();
+                mUserDB.insertUser(email);
+
+
 
             } else {
                 Toast.makeText(this, "Password is incorrect! Please try again.", Toast.LENGTH_LONG);

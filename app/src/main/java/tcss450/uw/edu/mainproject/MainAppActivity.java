@@ -7,15 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
+import tcss450.uw.edu.mainproject.model.User;
 
-public class MainAppActivity extends AppCompatActivity {
-
+public class MainAppActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener,
+        AskerListFragment.OnListFragmentInteractionListener {
+    private AskerListFragment mAskerListFragment;
+    private FollowListFragment mFollowListFragment;
+    private Button mFollowButton;
+    private Button mAskerButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
+        mFollowButton = (Button) findViewById(R.id.followers_button);
+        mAskerButton = (Button) findViewById(R.id.askers_button);
     }
 
     @Override
@@ -46,4 +55,52 @@ public class MainAppActivity extends AppCompatActivity {
         }
         return  super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onListFragmentInteraction(User item) {
+
+        UserDetailsFragment courseDetailFragment = new UserDetailsFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(UserDetailsFragment.USER_ITEM_SELECTED, item);
+        courseDetailFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, courseDetailFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void toFollowers(View v) {
+//        if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+        if (mAskerListFragment != null) {
+            mFollowListFragment = new FollowListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mFollowListFragment)
+                    .remove(mAskerListFragment)
+                    .commit();
+            //      }
+        } else {
+            mFollowListFragment = new FollowListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mFollowListFragment)
+                    .commit();
+        }
+    }
+    public void toAskers(View v) {
+
+//        if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+        mAskerListFragment = new AskerListFragment();
+        if (mFollowListFragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mAskerListFragment)
+                    .remove(mFollowListFragment)
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mAskerListFragment)
+                    .commit();
+        }
+        //      }
+    }
+
 }
