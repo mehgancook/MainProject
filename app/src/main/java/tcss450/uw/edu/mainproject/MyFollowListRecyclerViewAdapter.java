@@ -1,12 +1,11 @@
 package tcss450.uw.edu.mainproject;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-
 
 import java.util.List;
 
@@ -21,10 +20,17 @@ public class MyFollowListRecyclerViewAdapter extends RecyclerView.Adapter<MyFoll
 
     private final List<User> mValues;
     private final FollowListFragment.OnListFragmentInteractionListener mListener;
+    private Typeface mFont = null;
 
     public MyFollowListRecyclerViewAdapter(List<User> items, FollowListFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+    }
+
+    public MyFollowListRecyclerViewAdapter(List<User> items, FollowListFragment.OnListFragmentInteractionListener listener,
+                                           Typeface font) {
+        this(items, listener);
+        mFont = font;
     }
 
     @Override
@@ -67,7 +73,13 @@ public class MyFollowListRecyclerViewAdapter extends RecyclerView.Adapter<MyFoll
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
+            if (mFont != null) {
+                mIdView.setTypeface(mFont);
+            }
             mContentView = (TextView) view.findViewById(R.id.content);
+            if (mFont != null) {
+                mContentView.setTypeface(mFont);
+            }
         }
 
         @Override

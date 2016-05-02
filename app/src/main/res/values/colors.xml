@@ -6,4 +6,6 @@
     <color name="background">#9b59b6</color>
     <color name="splash_font">#dfdce1</color>
     <color name="button_font">#dfdce1</color>
+    <color name="toolbar_main">#2a2a2a</color>
+    <color name="white">#FFFFFF</color>
 </resources>

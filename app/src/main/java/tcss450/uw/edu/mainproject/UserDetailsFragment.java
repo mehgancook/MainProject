@@ -1,6 +1,7 @@
 package tcss450.uw.edu.mainproject;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,10 +34,13 @@ public class UserDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Typeface oswald = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_details, container, false);
         mUsername = (TextView) view.findViewById(R.id.username);
+        mUsername.setTypeface(oswald);
         mEmailAddress = (TextView) view.findViewById(R.id.email);
+        mEmailAddress.setTypeface(oswald);
         return view;
     }
 
