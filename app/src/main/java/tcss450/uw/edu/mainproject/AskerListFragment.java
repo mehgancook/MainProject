@@ -1,6 +1,7 @@
 package tcss450.uw.edu.mainproject;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -91,6 +91,7 @@ public class AskerListFragment extends Fragment {
             }
             DownloadAskersTask task = new DownloadAskersTask();
             task.execute(new String[]{url});
+
             // recyclerView.setAdapter(new MyFollowListRecyclerViewAdapter(mFollowers, mListener));
         }
         //   DownloadFollowersTask task = new DownloadFollowersTask();
@@ -163,7 +164,7 @@ public class AskerListFragment extends Fragment {
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to download the list of courses, Reason: "
+                    response = "Unable to download the list of askers, Reason: "
                             + e.getMessage();
                 }
                 finally {
@@ -197,7 +198,9 @@ public class AskerListFragment extends Fragment {
 
             if (!mAskers.isEmpty()) {
 
-                mRecyclerView.setAdapter(new MyAskerListRecyclerViewAdapter(mAskers, mListener));
+                mRecyclerView.setAdapter(new MyAskerListRecyclerViewAdapter(mAskers, mListener,
+                        Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
+
 //                if (mCourseDB == null) {
 //                    mCourseDB = new CourseDB(getActivity());
 //                }

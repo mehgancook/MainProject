@@ -1,5 +1,6 @@
 package tcss450.uw.edu.mainproject;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,17 @@ public class MyAskerListRecyclerViewAdapter extends RecyclerView.Adapter<MyAsker
 
     private final List<User> mValues;
     private final AskerListFragment.OnListFragmentInteractionListener mListener;
+    private Typeface mFont;
 
     public MyAskerListRecyclerViewAdapter(List<User> items, AskerListFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+    }
+
+    public MyAskerListRecyclerViewAdapter(List<User> items, AskerListFragment.OnListFragmentInteractionListener listener,
+                                          Typeface font) {
+        this(items, listener);
+        mFont = font;
     }
 
     @Override
@@ -67,7 +75,13 @@ public class MyAskerListRecyclerViewAdapter extends RecyclerView.Adapter<MyAsker
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
+            if (mFont != null) {
+                mIdView.setTypeface(mFont);
+            }
             mContentView = (TextView) view.findViewById(R.id.content);
+            if (mFont != null) {
+                mContentView.setTypeface(mFont);
+            }
         }
 
         @Override

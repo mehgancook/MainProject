@@ -1,6 +1,7 @@
 package tcss450.uw.edu.mainproject;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -80,6 +81,7 @@ public class FollowListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followlist_list, container, false);
         String url = buildURL(view);
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -163,7 +165,7 @@ public class FollowListFragment extends Fragment {
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to download the list of courses, Reason: "
+                    response = "Unable to download the list of followers, Reason: "
                             + e.getMessage();
                 }
                 finally {
@@ -197,7 +199,8 @@ public class FollowListFragment extends Fragment {
 
             if (!mFollowers.isEmpty()) {
 
-                mRecyclerView.setAdapter(new MyFollowListRecyclerViewAdapter(mFollowers, mListener));
+                mRecyclerView.setAdapter(new MyFollowListRecyclerViewAdapter(mFollowers, mListener,
+                        Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
 //                if (mCourseDB == null) {
 //                    mCourseDB = new CourseDB(getActivity());
 //                }
