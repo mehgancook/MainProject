@@ -96,7 +96,7 @@ public class LoginUserActivity extends AppCompatActivity {
         int marker = 0;
         for (int i = 0; i < mUsers.size(); i++) {
             if (email.equals(mUsers.get(i).getEmail())) {
-                flag = true;
+                flag = true; //email exists in the database
                 marker = i;
             }
         }
@@ -112,15 +112,12 @@ public class LoginUserActivity extends AppCompatActivity {
                 }
                 mUserDB.deleteUsers();
                 mUserDB.insertUser(email);
-
-
-
             } else {
-                Toast.makeText(this, "Password is incorrect! Please try again.", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Password is incorrect! Please try again.", Toast.LENGTH_LONG).show();
                 mPassword.requestFocus();
             }
         } else {
-            Toast.makeText(this, "Email address has not been registered. Please Register!", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Email address has not been registered. Please Register!", Toast.LENGTH_LONG).show();
         }
     }
 
