@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -80,6 +81,19 @@ public class AskerListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_askerlist_list, container, false);
         String url = buildURL(view);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        if (fab != null) {
+//            fab.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    CourseAddFragment courseAddFragment = new CourseAddFragment();
+//                    getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.fragment_container, courseAddFragment)
+//                            .addToBackStack(null)
+//                            .commit();
+//                }
+//            });
+//        }
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

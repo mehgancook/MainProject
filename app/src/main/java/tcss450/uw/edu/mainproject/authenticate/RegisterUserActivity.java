@@ -32,8 +32,8 @@ import tcss450.uw.edu.mainproject.data.UserDB;
 
 public class RegisterUserActivity extends AppCompatActivity {
     protected SharedPreferences mSharedPreferences;
-    private String mResult;
     private UserDB mUserDB;
+    private RegisterUserActivity mMe;
     private final static String ADD_USER
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
 
@@ -45,6 +45,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMe = this;
         setContentView(R.layout.activity_add_user);
 
         mHelper = new Helper(getAssets());
@@ -112,16 +113,13 @@ public class RegisterUserActivity extends AppCompatActivity {
         AddUserTask task = new AddUserTask();
         task.execute(new String[]{url.toString()});
 
-      //  if (mResult.equals("success")) {
-            Intent i = new Intent(this, MainAppActivity.class);
-            startActivity(i);
         mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
         if (mUserDB == null) {
             mUserDB = new UserDB(this);
         }
         mUserDB.deleteUsers();
         mUserDB.insertUser(email);
-      //  }
+   //     }
     }
 
     private String buildCourseURL(View v) {
@@ -191,26 +189,30 @@ private class AddUserTask extends AsyncTask<String, Void, String> {
      */
     @Override
     protected void onPostExecute(String result) {
-        // Something wrong with the network or the URL.
-        Log.i("result", result);
-        try {
+       try {
             JSONObject jsonObject = new JSONObject(result);
-            mResult = (String) jsonObject.get("result");
             String status = (String) jsonObject.get("errors");
-            Log.i("status", status);
             if (status.equals("none")) {
-                Toast.makeText(getApplicationContext(), mUsername + " successfully added!"
+                Intent i = new Intent(mMe, MainAppActivity.class);
+                startActivity(i);
+                mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
+                if (mUserDB == null) {
+                    mUserDB = new UserDB(mMe);
+                }
+                mUserDB.deleteUsers();
+                mUserDB.insertUser(mEmail.getText().toString());
+                Toast.makeText(getApplicationContext(), mUsername.getText().toString() + " successfully added!"
                         , Toast.LENGTH_LONG)
                         .show();
             } else {
-                Toast.makeText(getApplicationContext(), "Failed to add: "
-                                + jsonObject.get("error")
+                Toast.makeText(getApplicationContext(), "Email is already registered! Please log in"
+
                         , Toast.LENGTH_LONG)
                         .show();
             }
         } catch (JSONException e) {
-           // Toast.makeText(getApplicationContext(), "Something wrong with the data" +
-             //       e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                    e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }
