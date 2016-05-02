@@ -31,7 +31,6 @@ public class MainAppActivity extends AppCompatActivity implements FollowListFrag
         setContentView(R.layout.activity_main_app);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
-//            getSupportActionBar().setIcon(getDrawable(R.drawable.logo_adjusted));
             setTitle("");
         }
         mHelper = new Helper(getAssets());
