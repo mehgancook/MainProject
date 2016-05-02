@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -49,6 +50,11 @@ public class RegisterUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_user);
 
         mHelper = new Helper(getAssets());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
+            setTitle("");
+        }
 
         Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
 
