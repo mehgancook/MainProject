@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.authenticate;
 
 import android.content.Context;
@@ -9,12 +14,24 @@ import android.support.v7.app.AppCompatActivity;
 import tcss450.uw.edu.mainproject.MainAppActivity;
 import tcss450.uw.edu.mainproject.R;
 
+/**
+ * SplashActivity displays an image of our logo.
+ * @author Mehgan Cook and Tony Zullo
+ * */
 public class SplashActivity extends AppCompatActivity {
+    /**Used to see if the user is logged in*/
     private SharedPreferences mSharedPreferences;
+
+    /**
+     * onCreate creates the activity
+     * @param savedInstanceState the saved instance state
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        //creates a timer that will last for 3 second. this is how long the splash screen
+        //will be displayed
         Thread timerThread = new Thread(){
             public void run(){
                 try{
@@ -37,26 +54,13 @@ public class SplashActivity extends AppCompatActivity {
         timerThread.start();
     }
 
+    /**
+     * onPause
+     * */
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
         finish();
     }
-
-
-    //   FacebookSdk.sdkInitialize(getApplicationContext());
-    //   AppEventsLogger.activateApp(this);
-
-    //   TextView joinLink = (TextView) findViewById(R.id.join);
-    //   TextView loginLink = (TextView) findViewById(R.id.login);
-
-    //   LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-    //   loginButton.setReadPermissions("email");
-
-    //    Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
-    //   joinLink.setTypeface(oswald);
-    //   loginLink.setTypeface(oswald);
-
-
 }

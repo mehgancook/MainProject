@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.authenticate;
 
 import android.content.Context;
@@ -31,18 +36,34 @@ import tcss450.uw.edu.mainproject.MainAppActivity;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 
+
+/**
+ * RegisterUserAcitivity is the form that the user fills out in order to register
+ * @author Mehgan Cook and Tony Zullo
+ * */
 public class RegisterUserActivity extends AppCompatActivity {
-    protected SharedPreferences mSharedPreferences;
-    private UserDB mUserDB;
-    private RegisterUserActivity mMe;
+    /**static variable of the first part of the URL for adding a user to the databse*/
     private final static String ADD_USER
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
-
+    /**the SharedPrferences used to store if a user is logged in*/
+    protected SharedPreferences mSharedPreferences;
+    /**the User database to store the email of a user who registers*/
+    private UserDB mUserDB;
+    /**this class used in the private async class*/
+    private RegisterUserActivity mMe;
+    /**Helper method for style*/
     private Helper mHelper;
-
+    /**the username entered by the User*/
     private EditText mUsername;
+    /**the email entered by the User*/
     private EditText mEmail;
+    /**the password entered by the user*/
     private EditText mPassword;
+
+    /**
+     *onCreate creates the activity
+     *@param savedInstanceState the savedInstanceState
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,12 +100,15 @@ public class RegisterUserActivity extends AppCompatActivity {
                 , Context.MODE_PRIVATE);
     }
 
-
+    /**
+     * addUser is the button that will register a user
+     * @param v the View
+     * */
     public void addUser(View v) {
         String username = mUsername.getText().toString();
         String email = mEmail.getText().toString();
         String password = mPassword.getText().toString();
-
+        //checks to see if they input a username
         if (TextUtils.isEmpty(username))  {
             Toast.makeText(this, "Enter username"
                     , Toast.LENGTH_SHORT)
@@ -92,6 +116,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             mUsername.requestFocus();
             return;
         }
+        //checks to make sure the email is valid
         if (!email.contains("@")) {
             Toast.makeText(this, "Enter a valid email address"
                     , Toast.LENGTH_SHORT)
@@ -99,7 +124,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             mEmail.requestFocus();
             return;
         }
-
+        // checks to make sure the password field is not empty
         if (TextUtils.isEmpty(password))  {
             Toast.makeText(this, "Enter password"
                     , Toast.LENGTH_SHORT)
@@ -107,6 +132,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             mPassword.requestFocus();
             return;
         }
+        //users have to create a password at least 6 characters long
         if (password.length() < 6) {
             Toast.makeText(this, "Enter password of at least 6 characters"
                     , Toast.LENGTH_SHORT)
@@ -115,9 +141,9 @@ public class RegisterUserActivity extends AppCompatActivity {
             return;
         }
 
-        String url = buildCourseURL(v);
+        String url = buildCourseURL();
         AddUserTask task = new AddUserTask();
-        task.execute(new String[]{url.toString()});
+        task.execute(url);
 
         mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
         if (mUserDB == null) {
@@ -125,10 +151,14 @@ public class RegisterUserActivity extends AppCompatActivity {
         }
         mUserDB.deleteUsers();
         mUserDB.insertUser(email);
-   //     }
     }
 
-    private String buildCourseURL(View v) {
+    /**
+     * buildCourseURL encodes the information that they user gave and returns a URL to add the
+     * user to the database
+     * @return the url string
+     * */
+    private String buildCourseURL() {
         StringBuilder sb = new StringBuilder();
         sb.append(ADD_USER);
         String username = mUsername.getText().toString();
@@ -139,24 +169,32 @@ public class RegisterUserActivity extends AppCompatActivity {
         try {
             url = URLEncoder.encode(url, "UTF-8");
         } catch (Exception exception) {
-            //showing an exception yet its adding the data?
-          //  Toast.makeText(v.getContext(), "Something wrong with the url" + exception.getMessage(), Toast.LENGTH_LONG)
-           //         .show();
+            Log.e("exception", exception.toString());
         }
         Log.i(username, url);
         sb.append(url);
         return sb.toString();
     }
 
-
+    /**
+     * DownloadUsersTask is an async class that will acccess the database and retreive the current list of users
+     * @author Meneka Abraham and Mehgan Cook
+     * */
 private class AddUserTask extends AsyncTask<String, Void, String> {
 
-
+    /**
+     * onPreExecute
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
+    /**
+     * doInBackground
+     * @param urls is the string url
+     * @return String returns the response from the server
+     * */
     @Override
     protected String doInBackground(String... urls) {
         String response = "";
@@ -169,7 +207,7 @@ private class AddUserTask extends AsyncTask<String, Void, String> {
                 InputStream content = urlConnection.getInputStream();
 
                 BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                String s = "";
+                String s;
                 while ((s = buffer.readLine()) != null) {
                     response += s;
                 }
@@ -191,7 +229,7 @@ private class AddUserTask extends AsyncTask<String, Void, String> {
      * exception is caught. It tries to call the parse Method and checks to see if it was successful.
      * If not, it displays the exception.
      *
-     * @param result
+     * @param result is the result
      */
     @Override
     protected void onPostExecute(String result) {
