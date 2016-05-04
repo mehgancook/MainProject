@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject;
 
 import android.content.Context;
@@ -28,20 +33,23 @@ import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.User;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
+ * A fragment representing a list of Followers.
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
 public class FollowListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+    /**string column count*/
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+    /**int column count*/
     private int mColumnCount = 1;
+    /**List of users*/
     private List<User> mFollowers;
+    /**Listener*/
     private OnListFragmentInteractionListener mListener;
+    /**Recycle view*/
     private RecyclerView mRecyclerView;
+    /**String for the url to access the users from the database*/
     private static final String FOLLOWER_LIST_URL
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Followers%2CUser+where+" +
@@ -57,7 +65,10 @@ public class FollowListFragment extends Fragment {
     public FollowListFragment() {
     }
 
-    // TODO: Customize parameter initialization
+    /**
+     * newInstance of fragment
+     * @param columnCount the column count
+     * */
     @SuppressWarnings("unused")
     public static FollowListFragment newInstance(int columnCount) {
         FollowListFragment fragment = new FollowListFragment();
@@ -67,6 +78,10 @@ public class FollowListFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * onCreate
+     * @param savedInstanceState the saved instance state
+     * */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +91,18 @@ public class FollowListFragment extends Fragment {
         }
     }
 
+    /**
+     * On create view
+     * @param savedInstanceState the saved instance state
+     * @param inflater the inflater
+     * @param container the container
+     * @return view
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followlist_list, container, false);
-        String url = buildURL(view);
+        String url = buildURL();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -92,15 +114,16 @@ public class FollowListFragment extends Fragment {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             DownloadFollowersTask task = new DownloadFollowersTask();
-            task.execute(new String[]{url});
-           // recyclerView.setAdapter(new MyFollowListRecyclerViewAdapter(mFollowers, mListener));
+            task.execute(url);
         }
-     //   DownloadFollowersTask task = new DownloadFollowersTask();
-     //   task.execute(new String[]{url});
+
         return view;
     }
 
-
+    /**
+     * on attack
+     * @param context the context
+     * */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -112,13 +135,20 @@ public class FollowListFragment extends Fragment {
         }
     }
 
+    /**
+     * on detach
+     * */
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    public String buildURL(View v) {
+    /**
+     * Build the url string based on the currently logged in user email address
+     * @return the url
+     * */
+    public String buildURL() {
         StringBuilder sb = new StringBuilder(FOLLOWER_LIST_URL);
         UserDB userDB = new UserDB(getActivity());
         String email = userDB.getUsers().get(0).getEmail();
@@ -136,17 +166,25 @@ public class FollowListFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     *
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(User item);
+        /**list fragement interaction
+         * @param user a user*/
+        void onListFragmentInteraction(User user);
     }
+    /**
+     * Class to download the followeres list in the backgroud using an async task
+     * */
     private class DownloadFollowersTask extends AsyncTask<String, Void, String> {
-
+        /**
+         * call the server in the background
+         * @param urls the url
+         * @return the response from the servier
+         * */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -159,7 +197,7 @@ public class FollowListFragment extends Fragment {
                     InputStream content = urlConnection.getInputStream();
 
                     BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s = "";
+                    String s;
                     while ((s = buffer.readLine()) != null) {
                         response += s;
                     }
@@ -175,6 +213,10 @@ public class FollowListFragment extends Fragment {
             }
             return response;
         }
+        /**
+         * on post execute
+         * @param result the result from the server
+         * */
         @Override
         protected void onPostExecute(String result) {
             // Something wrong with the network or the URL.
@@ -184,7 +226,7 @@ public class FollowListFragment extends Fragment {
                 return;
             }
 
-            mFollowers = new ArrayList<User>();
+            mFollowers = new ArrayList<>();
             result = User.parseUserJSON(result, mFollowers);
             // Something wrong with the JSON returned.
             if (result != null) {
@@ -194,28 +236,9 @@ public class FollowListFragment extends Fragment {
             }
 
             // Everything is good, show the list of courses.
-
-
-
             if (!mFollowers.isEmpty()) {
-
                 mRecyclerView.setAdapter(new MyFollowListRecyclerViewAdapter(mFollowers, mListener,
                         Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
-//                if (mCourseDB == null) {
-//                    mCourseDB = new CourseDB(getActivity());
-//                }
-//                // Delete old data so that you can refresh the local
-//                // database with the network data.
-//                mCourseDB.deleteCourses();
-//
-//                // Also, add to the local database
-//                for (int i=0; i<mCourseList.size(); i++) {
-//                    Course course = mCourseList.get(i);
-//                    mCourseDB.insertCourse(course.getCourseId(),
-//                            course.getShortDescription(),
-//                            course.getLongDescription(),
-//                            course.getPrereqs());
-//                }
           }
         }
 

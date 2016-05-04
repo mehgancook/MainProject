@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject;
 
 import android.graphics.Typeface;
@@ -16,38 +21,52 @@ import tcss450.uw.edu.mainproject.model.User;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link User} and makes a call to the
  * specified {@link FollowListFragment.OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ *
  */
 public class MyAskerListRecyclerViewAdapter extends RecyclerView.Adapter<MyAskerListRecyclerViewAdapter.ViewHolder> {
-
+    /**List of users*/
     private final List<User> mValues;
+    /**Listener*/
     private final AskerListFragment.OnListFragmentInteractionListener mListener;
+    /**font*/
     private Typeface mFont;
 
+    /**Constructor for recycler view
+     * @param items the users
+     * @param listener the listener*/
     public MyAskerListRecyclerViewAdapter(List<User> items, AskerListFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
-
+    /**Constructor for recylcer view
+     * @param listener the listener
+     * @param items the users
+     * @param font the font*/
     public MyAskerListRecyclerViewAdapter(List<User> items, AskerListFragment.OnListFragmentInteractionListener listener,
                                           Typeface font) {
         this(items, listener);
         mFont = font;
     }
-
+    /**
+     * on create view holder
+     * @param parent the view group
+     * @param viewType the view type
+     * */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_askerlist, parent, false);
         return new ViewHolder(view);
     }
-
+    /**
+     * on bind view holder
+     * @param holder the view holder
+     * @param position the position
+     * */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getUsername());
-//        holder.mContentView.setText(mValues.get(position).getUsername());
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,18 +78,29 @@ public class MyAskerListRecyclerViewAdapter extends RecyclerView.Adapter<MyAsker
             }
         });
     }
-
+    /**
+     * get item count
+     * @return amount of users
+     * */
     @Override
     public int getItemCount() {
         return mValues.size();
     }
-
+    /**
+     * View holder class to hold the recylcer view
+     * */
     public class ViewHolder extends RecyclerView.ViewHolder {
+        /**the view*/
         public final View mView;
+        /** the text view of id*/
         public final TextView mIdView;
+        /**the text view of content*/
         public final TextView mContentView;
+        /**the user*/
         public User mItem;
 
+        /**Constructor of the viewholder
+         * @param view the view*/
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -83,7 +113,10 @@ public class MyAskerListRecyclerViewAdapter extends RecyclerView.Adapter<MyAsker
                 mContentView.setTypeface(mFont);
             }
         }
-
+        /**
+         * tostring
+         * @return string
+         * */
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

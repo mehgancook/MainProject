@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import tcss450.uw.edu.mainproject.MainAppActivity;
+import tcss450.uw.edu.mainproject.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
 
 /**
@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
                         Intent intent = new Intent(SplashActivity.this, MainLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(SplashActivity.this, MainAppActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, MainViewUsersActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -59,7 +59,6 @@ public class SplashActivity extends AppCompatActivity {
      * */
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         super.onPause();
         finish();
     }

@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject;
 
 
@@ -13,16 +18,24 @@ import tcss450.uw.edu.mainproject.model.User;
 
 
 /**
+ * Displays the user deatails when a user is clicked
  * A simple {@link Fragment} subclass.
  */
 public class UserDetailsFragment extends Fragment {
+    /**user item selected*/
     public static String USER_ITEM_SELECTED = "UserDetailFragment";
+    /**the username*/
     private TextView mUsername;
+    /**the email*/
     private TextView mEmailAddress;
+    /**Empty Constructor*/
     public UserDetailsFragment() {
         // Required empty public constructor
     }
-
+    /**
+     * update the view with current information
+     * @param user the user
+     * */
     public void updateView(User user) {
         if (user != null) {
             mUsername.setText(user.getUsername());
@@ -30,7 +43,14 @@ public class UserDetailsFragment extends Fragment {
         }
     }
 
-
+    /**
+     * on create view sets the username and password
+     * @param inflater inflater
+     * @param savedInstanceState the saved instance state
+     * @param container a container
+     * @return the view
+     *
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,6 +64,9 @@ public class UserDetailsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * onStart
+     * */
     @Override
     public void onStart() {
         super.onStart();

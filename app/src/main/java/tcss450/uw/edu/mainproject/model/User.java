@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.model;
 
 import org.json.JSONArray;
@@ -9,32 +14,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mehgan on 4/26/2016.
+ * User class that holds information about a user
+ * @author Mehgan Cook and Tony Zullo
  */
 public class User implements Serializable{
-
-    public static final String USERNAME = "username", EMAIL = "email",
+    /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
+     * USER_ID is the user id*/
+    private static final String USERNAME = "username", EMAIL = "email",
                         PASSWORD = "password", USER_ID = "userid";
+    /**username*/
     private String mUsername;
+    /**email address*/
     private String mEmailAddress;
+    /**Password*/
     private String mPassword;
-    private String mUserID;
-    private List<User> mFollowers;
-    private List<User> mAskers;
 
+    /**
+     * Constructor for user
+     * @param emailAddress the email address
+     * @param password the password
+     * @param userid the userid
+     * @param username the username
+     *
+     * */
     public User(String username, String emailAddress, String password, String userid) {
         mUsername = username;
         mEmailAddress = emailAddress;
         mPassword = password;
-        mUserID = userid;
-        mFollowers = new ArrayList<>();
-        mAskers = new ArrayList<>();
     }
 
     /**
      * Parses the json string, returns an error message if unsuccessful.
-     * Returns course list if success.
-     * @param userJSON
+     * Returns user list if success.
+     * @param userJSON json
      * @return reason or null if successful.
      */
     public static String parseUserJSON(String userJSON, List<User> userList) {
@@ -56,30 +68,36 @@ public class User implements Serializable{
         }
         return reason;
     }
-
+    /**
+     * Gets the username
+     * @return the username
+     * */
     public String getUsername() {
         return mUsername;
     }
-
+    /**
+     * Gets the email
+     * @return the email
+     * */
     public String getEmail() {
         return mEmailAddress;
     }
-
+    /**
+     * Gets the password
+     * @return the password
+     * */
     public String getPassword() {
         return mPassword;
     }
-
-    public void setUsername(String username) {
-        mUsername = username;
-    }
-
+    /**
+     * Set the eamil
+     * @param email the email address
+     * */
     public void setEmail(String email) {
         mEmailAddress = email;
     }
 
-    public void setPassword(String password) {
-        mPassword = password;
-    }
+
 
 
 }

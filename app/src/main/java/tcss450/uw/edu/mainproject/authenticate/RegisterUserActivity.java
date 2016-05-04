@@ -32,7 +32,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import tcss450.uw.edu.mainproject.Helper;
-import tcss450.uw.edu.mainproject.MainAppActivity;
+import tcss450.uw.edu.mainproject.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 
@@ -237,7 +237,7 @@ private class AddUserTask extends AsyncTask<String, Void, String> {
             JSONObject jsonObject = new JSONObject(result);
             String status = (String) jsonObject.get("errors");
             if (status.equals("none")) {
-                Intent i = new Intent(mMe, MainAppActivity.class);
+                Intent i = new Intent(mMe, MainViewUsersActivity.class);
                 startActivity(i);
                 mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
                 if (mUserDB == null) {

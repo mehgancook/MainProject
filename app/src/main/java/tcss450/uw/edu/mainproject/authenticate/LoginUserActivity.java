@@ -30,7 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import tcss450.uw.edu.mainproject.MainAppActivity;
+import tcss450.uw.edu.mainproject.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.User;
@@ -134,7 +134,7 @@ public class LoginUserActivity extends AppCompatActivity {
             // if the email is in the system and the user enters the correct passwords
             // then the main app activity will launch
             if (password.equals(mUsers.get(marker).getPassword())) {
-                Intent i = new Intent(this, MainAppActivity.class);
+                Intent i = new Intent(this, MainViewUsersActivity.class);
                 startActivity(i);
                 // stores that the usr has logged in so they will not be shown the log in screen again
                 // until they log out.
