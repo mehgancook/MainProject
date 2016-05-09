@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tcss450.uw.edu.mainproject.EnterQuestionFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your question"
+        android:id="@+id/question"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enter_question"
+        android:layout_below="@+id/question"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select options"
+        android:id="@+id/select_options"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Who do you want to send it to"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_below="@+id/enter_question"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="75dp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="All"-->
+        <!--android:id="@+id/all_friends"-->
+        <!--android:layout_below="@+id/textView"-->
+        <!--android:layout_toLeftOf="@+id/textView"-->
+        <!--android:layout_marginRight="40dp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Select followers"-->
+        <!--android:id="@+id/select_followers"-->
+        <!--android:layout_alignTop="@+id/all_friends"-->
+        <!--android:layout_alignLeft="@+id/button" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Select Group"-->
+        <!--android:id="@+id/select_group"-->
+        <!--android:layout_alignTop="@+id/select_followers"-->
+        <!--android:layout_toRightOf="@+id/textView" />-->
+</RelativeLayout>

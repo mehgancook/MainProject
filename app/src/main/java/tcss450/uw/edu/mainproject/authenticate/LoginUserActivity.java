@@ -56,6 +56,7 @@ public class LoginUserActivity extends AppCompatActivity {
     private Helper mHelper;
 
 
+
     /**
      * OnCreate method to create the actiity
      * @param savedInstanceState the savedinstancestate

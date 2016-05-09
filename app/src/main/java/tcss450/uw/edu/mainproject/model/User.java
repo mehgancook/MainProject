@@ -29,6 +29,9 @@ public class User implements Serializable{
     /**Password*/
     private String mPassword;
 
+    private String mUserID;
+
+
     /**
      * Constructor for user
      * @param emailAddress the email address
@@ -41,6 +44,8 @@ public class User implements Serializable{
         mUsername = username;
         mEmailAddress = emailAddress;
         mPassword = password;
+        mUserID = userid;
+
     }
 
     /**
@@ -60,6 +65,8 @@ public class User implements Serializable{
                     User user = new User(obj.getString(User.USERNAME), obj.getString(User.EMAIL)
                             , obj.getString(User.PASSWORD), obj.getString(User.USER_ID));
                     userList.add(user);
+
+
                 }
             } catch (JSONException e) {
                 reason =  "Unable to parse data, Reason: " + e.getMessage();
@@ -95,6 +102,10 @@ public class User implements Serializable{
      * */
     public void setEmail(String email) {
         mEmailAddress = email;
+    }
+
+    public int getUserID() {
+        return Integer.parseInt(mUserID);
     }
 
 

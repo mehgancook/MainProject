@@ -30,9 +30,12 @@
 
     <string name="LOGIN_PREFS">tcss450.uw.edu.mainproject.PREFS</string>
     <string name="LOGGEDIN">loggedin</string>
+    <string name="USERID">userid</string>
     <string name="action_logout">Logout</string>
     <string name="LOGIN_FILE">tcss450.uw.edu.mainproject.LOGIN_FILE</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

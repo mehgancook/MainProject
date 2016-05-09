@@ -82,6 +82,4 @@ public class UserDetailsFragment extends Fragment {
         }
     }
 
-
-
 }
