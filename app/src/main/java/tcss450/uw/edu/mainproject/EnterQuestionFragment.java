@@ -67,6 +67,10 @@ public class EnterQuestionFragment extends Fragment {
                 Log.i("mquestion", mQuestion);
                 AddQuestionTask task = new AddQuestionTask();
                 task.execute(url);
+                Fragment options = new EnterQuestionOptionFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.blast_question_container,options)
+                        .commit();
             }
         }) ;
         return view;//inflater.inflate(R.layout.fragment_enter_question, container, false);

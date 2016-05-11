@@ -14,11 +14,13 @@ public class Question implements Serializable {
     /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
      * USER_ID is the user id*/
     private static final String QUESTION_ID = "questionid", QUESTION_NAME = "questionname",
-            USER_ID = "userid";
+            USER_ID = "useremail";
     /**The group name*/
     private String mQuestionsName;
     /***/
     private String mUserID;
+
+    private String mQuestionID;
     /**
      * Constructor for user
      * @param questionName the name of the group
@@ -28,6 +30,7 @@ public class Question implements Serializable {
     public Question(String questionID, String questionName, String userID) {
         mQuestionsName = questionName;
         mUserID = userID;
+        mQuestionID = questionID;
     }
 
     /**
@@ -59,12 +62,15 @@ public class Question implements Serializable {
     public String getQuestionName() {
         return mQuestionsName;
     }
+    public int getQuestionId() {
+        return Integer.parseInt(mQuestionID);
+    }
     public void setQuestionName(String qn) {
         mQuestionsName = qn;
     }
 
-    public int getUserID() {
-        return Integer.parseInt(mUserID);
+    public String getUserEmail() {
+        return mUserID;
     }
 
 }
