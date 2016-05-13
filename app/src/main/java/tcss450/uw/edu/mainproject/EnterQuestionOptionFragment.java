@@ -25,6 +25,7 @@ import java.util.List;
 
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.Question;
+import tcss450.uw.edu.mainproject.model.QuestionDetail;
 import tcss450.uw.edu.mainproject.model.User;
 
 
@@ -34,14 +35,15 @@ import tcss450.uw.edu.mainproject.model.User;
 public class EnterQuestionOptionFragment extends Fragment {
     private final static String DOWNLOAD_QUESTION
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=select+%2A+from+Question%3B";
-
+    public List<QuestionDetail> mQuestionDetail;
     private View mView;
     private UserDB mUserDB;
     private String mEmail;
-   private EditText mEditTextQuestion;
-    private String mTextQuestion;
+   private EditText mEditTextOption;
+    private String mTextOption;
    private EditText mEditTextComment;
     private String mTextComment;
+    private ImageView mImageView;
    private int mQuestionID;
     private List<Question> mQuestions;
 
@@ -53,12 +55,12 @@ public class EnterQuestionOptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         mView = inflater.inflate(R.layout.fragment_enter_question_option, container, false);
+        mQuestionDetail = new ArrayList<>();
         mUserDB = new UserDB(getActivity());
         mEmail = mUserDB.getUsers().get(0).getEmail();
-        mEditTextQuestion = (EditText) mView.findViewById(R.id.text_question);
-        mTextQuestion  = mEditTextQuestion.getText().toString();
+        mEditTextOption = (EditText) mView.findViewById(R.id.text_question);
+        mTextOption  = mEditTextOption.getText().toString();
         mEditTextComment = (EditText) mView.findViewById(R.id.text_comment);
         mTextComment = mEditTextComment.getText().toString();
         DownloadQuestionTask task = new DownloadQuestionTask();
@@ -72,14 +74,32 @@ public class EnterQuestionOptionFragment extends Fragment {
                 startActivityForResult(intent,0);
             }
         });
+        Button addMoreOptions =  (Button) mView.findViewById(R.id.add_more_options);
+        addMoreOptions.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if (mTextOption == null && mImageView == null) {
+                    Toast.makeText(getActivity(), "Please Select an Image or Enter a Text option", Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment);
+                    mQuestionDetail.add(questionDetail);
+                    mEditTextComment.setText(null);
+                    mEditTextOption.setText(null);
+                    mImageView.setImageDrawable(null); //see if this resets button
+                }
+            }
+        });
+
         // Inflate the layout for this fragment
         return mView;
     }
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView iv = (ImageView) mView.findViewById(R.id.imageView);
+        mImageView = (ImageView) mView.findViewById(R.id.imageView);
         Bitmap bp = (Bitmap) data.getExtras().get("data");
-        iv.setImageBitmap(bp);
+        mImageView.setImageBitmap(bp);
     }
 
     /**
