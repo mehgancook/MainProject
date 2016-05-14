@@ -14,23 +14,27 @@ public class QuestionDetail implements Serializable {
     /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
      * USER_ID is the user id*/
     private static final String QUESTION_ID = "groupid", QUESTION_TEXT = "questiontext",
-            QUESTION_COMMENT = "questioncomment";
+            QUESTION_COMMENT = "questioncomment", QUNESTION_IMAGE = "questionimage";
     /**The group name*/
     private String mQuestionID;
     /***/
     private String mQuestionText;
 
     private String mQuestionComment;
+
+    private String mQuestionImage;
     /**
      * Constructor for user
      * @param questionID the name of the group
-     * @param questionText the user who started the group
+     *
      *
      * */
-    public QuestionDetail(String questionID, String questionText, String questionComment) {
+    public QuestionDetail(String questionID, String questiontext,  String questionComment,
+                          String questionImage) {
+        mQuestionText = questiontext;
         mQuestionID = questionID;
-        mQuestionText = questionText;
         mQuestionComment = questionComment;
+        mQuestionImage = questionImage;
     }
 
     /**
@@ -47,8 +51,8 @@ public class QuestionDetail implements Serializable {
 
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    QuestionDetail questionDetail = new QuestionDetail(obj.getString(QUESTION_ID), obj.getString(QUESTION_TEXT)
-                            , obj.getString(QUESTION_COMMENT));
+                    QuestionDetail questionDetail = new QuestionDetail(obj.getString(QUESTION_ID)
+                            ,obj.getString(QUESTION_TEXT), obj.getString(QUESTION_COMMENT), obj.getString(QUNESTION_IMAGE));
                     questionDetailList.add(questionDetail);
                 }
             } catch (JSONException e) {

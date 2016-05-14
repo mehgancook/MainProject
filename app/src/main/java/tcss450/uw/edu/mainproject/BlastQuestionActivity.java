@@ -1,10 +1,12 @@
 package tcss450.uw.edu.mainproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,13 +30,15 @@ import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.User;
 
-public class BlastQuestionActivity extends AppCompatActivity {
-
+public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener{
+ private List<User> mSendToUsers;
+    private Button mSendButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blast_question);
-
+        mSendButton = (Button) findViewById(R.id.send_button);
+        mSendButton.setVisibility(View.INVISIBLE);
         EnterQuestionFragment enterQuestionFragment = new EnterQuestionFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.blast_question_container, enterQuestionFragment)
@@ -76,6 +80,50 @@ public class BlastQuestionActivity extends AppCompatActivity {
 
         }
         return  super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListFragmentInteraction(User user) {
+        Log.i("question options", ((myApplication) this.getApplication()).getDetailList().size() +"");
+        mSendButton.setVisibility(View.VISIBLE);
+        if (mSendToUsers == null) {
+            mSendToUsers = new ArrayList<>();
+            mSendToUsers.add(user);
+        } else {
+            boolean flag = false;
+            for(int i = 0; i < mSendToUsers.size(); i++) {
+                if (mSendToUsers.get(i).getUsername().equals(user.getUsername())) {
+                    flag = true;
+                    Toast.makeText(this,user.getUsername() + " remmoved from list!", Toast.LENGTH_SHORT).show();
+                    mSendToUsers.remove(i);
+                }
+            }
+            if (!flag) {
+                mSendToUsers.add(user);
+                Toast.makeText(this, user.getUsername() + " added to list!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public void blastQuestion(View v) {
+        String names = mSendToUsers.get(0).getUsername();
+        for (int i = 1; i < mSendToUsers.size(); i++) {
+            names += ", " +mSendToUsers.get(i).getUsername();
+        }
+        new AlertDialog.Builder(this)
+                .setTitle("Send to Users")
+                .setMessage("Are you sure you want to Send to " + names + "?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getBaseContext(), "Question sent!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getBaseContext(), "Reselect followers!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
 

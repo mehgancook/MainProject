@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -39,7 +42,9 @@ public class EnterQuestionOptionFragment extends Fragment {
     private View mView;
     private UserDB mUserDB;
     private String mEmail;
+    private String mImage;
    private EditText mEditTextOption;
+    private int mOptionsCounter;
     private String mTextOption;
    private EditText mEditTextComment;
     private String mTextComment;
@@ -57,6 +62,7 @@ public class EnterQuestionOptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_enter_question_option, container, false);
         mQuestionDetail = new ArrayList<>();
+        mOptionsCounter = 0;
         mUserDB = new UserDB(getActivity());
         mEmail = mUserDB.getUsers().get(0).getEmail();
         mEditTextOption = (EditText) mView.findViewById(R.id.text_question);
@@ -74,22 +80,61 @@ public class EnterQuestionOptionFragment extends Fragment {
                 startActivityForResult(intent,0);
             }
         });
+        final Button imDone =  (Button) mView.findViewById(R.id.done_with_options);
+        imDone.setVisibility(View.INVISIBLE);
         Button addMoreOptions =  (Button) mView.findViewById(R.id.add_more_options);
         addMoreOptions.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                if (mTextOption == null && mImageView == null) {
+                mTextOption = mEditTextOption.getText().toString();
+                if (TextUtils.isEmpty(mTextOption) && mImageView == null) {
                     Toast.makeText(getActivity(), "Please Select an Image or Enter a Text option", Toast.LENGTH_LONG)
                             .show();
                 } else {
-                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment);
+                    mOptionsCounter++;
+                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage);
                     mQuestionDetail.add(questionDetail);
+                    Log.i("question detail size", mQuestionDetail.size() + "");
+                    Log.i("mOptionsCounter", mOptionsCounter + "");
                     mEditTextComment.setText(null);
                     mEditTextOption.setText(null);
-                    mImageView.setImageDrawable(null); //see if this resets button
+                    if (mImageView != null)
+                    mImageView.setImageDrawable(null);
+                    imDone.setVisibility(View.VISIBLE);
+
                 }
             }
+        });
+       // Button imDone =  (Button) mView.findViewById(R.id.done_with_options);
+       // Log.i("mOptionsCounter", mOptionsCounter + "");
+
+        imDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTextOption = mEditTextOption.getText().toString();
+                if (TextUtils.isEmpty(mTextOption) && mImageView == null) {
+                    Toast.makeText(getActivity(), "Please Select an Image or Enter a Text option", Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage);
+                    mQuestionDetail.add(questionDetail);
+                    Log.i("question detail size", mQuestionDetail.size() + "");
+                    Log.i("mOptionsCounter", mOptionsCounter + "");
+                    mEditTextComment.setText(null);
+                    mEditTextOption.setText(null);
+                    if (mImageView != null)
+                        mImageView.setImageDrawable(null);
+                }
+                ((myApplication) getActivity().getApplication()).setDetailList(mQuestionDetail);
+                FollowListFragment followListFragment = new FollowListFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.blast_question_container, followListFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+
         });
 
         // Inflate the layout for this fragment
@@ -99,7 +144,17 @@ public class EnterQuestionOptionFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         mImageView = (ImageView) mView.findViewById(R.id.imageView);
         Bitmap bp = (Bitmap) data.getExtras().get("data");
+        mImage = BitMapToString(bp);
         mImageView.setImageBitmap(bp);
+    }
+    public String BitMapToString(Bitmap bitmap){
+
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,10, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+
+        return temp;
     }
 
     /**

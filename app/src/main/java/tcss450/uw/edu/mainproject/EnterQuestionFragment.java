@@ -1,15 +1,20 @@
 package tcss450.uw.edu.mainproject;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -62,6 +67,13 @@ public class EnterQuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mQuestion = editText.getText().toString();
+                if (TextUtils.isEmpty(mQuestion)) {
+                    Toast.makeText(getActivity(), "Enter Question"
+                            , Toast.LENGTH_SHORT)
+                            .show();
+                    editText.requestFocus();
+                    return;
+                }
                 String url = buildCourseURL();
                 Log.i("url", url);
                 Log.i("mquestion", mQuestion);
@@ -71,6 +83,11 @@ public class EnterQuestionFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.blast_question_container,options)
                         .commit();
+                View view = getActivity().getCurrentFocus();
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+              //  editText.clearFocus();
+
             }
         }) ;
         return view;//inflater.inflate(R.layout.fragment_enter_question, container, false);

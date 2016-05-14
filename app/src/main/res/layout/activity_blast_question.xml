@@ -10,4 +10,15 @@
     android:id="@+id/blast_question_container"
     tools:context="tcss450.uw.edu.mainproject.BlastQuestionActivity">
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send!"
+        android:id="@+id/send_button"
+        android:onClick="blastQuestion"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
