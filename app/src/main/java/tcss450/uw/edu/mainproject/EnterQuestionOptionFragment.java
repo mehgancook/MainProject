@@ -220,6 +220,7 @@ public class EnterQuestionOptionFragment extends Fragment {
             }
             int index = temp.size() - 1;
             mQuestionID = temp.get(index).getQuestionId();
+            ((myApplication) getActivity().getApplication()).setQuestionID(mQuestionID);
             Log.i("QuestionID", mQuestionID + "");
             // Something wrong with the JSON returned.
             if (result != null) {

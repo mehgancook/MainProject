@@ -66,6 +66,7 @@ public class QuestionDetail implements Serializable {
     public int getQuestionId () {
         return Integer.parseInt(mQuestionID);
     }
+    public String getmQuestionImage() {return mQuestionImage; }
     public String getQuestionText() {
         return mQuestionText;
     }

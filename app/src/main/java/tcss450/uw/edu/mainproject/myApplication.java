@@ -12,6 +12,7 @@ import tcss450.uw.edu.mainproject.model.QuestionDetail;
  */
 public class myApplication extends Application {
     public List<QuestionDetail> mQuestions;
+    public int mQuestionID;
 
     public List<QuestionDetail> getDetailList() {
         return mQuestions;
@@ -19,6 +20,13 @@ public class myApplication extends Application {
 
     public void setDetailList(List<QuestionDetail> list) {
         mQuestions = list;
+    }
+
+    public void setQuestionID(int id) {
+        mQuestionID = id;
+    }
+    public int getQuestionID() {
+        return mQuestionID;
     }
 }
 
