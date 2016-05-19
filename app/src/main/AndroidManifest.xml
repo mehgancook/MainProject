@@ -10,12 +10,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".myApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".myApplication">
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -41,7 +41,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".authenticate.RegisterUserActivity" />
         <activity android:name=".authenticate.LoginUserActivity" />
-        <activity android:name=".BlastQuestionActivity"></activity>
+        <activity android:name=".BlastQuestionActivity" />
+        <activity android:name=".VotingActivity"></activity>
     </application>
 
 </manifest>

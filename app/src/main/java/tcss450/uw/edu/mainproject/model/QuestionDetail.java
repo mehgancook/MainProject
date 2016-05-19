@@ -14,7 +14,7 @@ public class QuestionDetail implements Serializable {
     /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
      * USER_ID is the user id*/
     private static final String QUESTION_ID = "groupid", QUESTION_TEXT = "questiontext",
-            QUESTION_COMMENT = "questioncomment", QUNESTION_IMAGE = "questionimage";
+            QUESTION_COMMENT = "questioncomment", QUNESTION_IMAGE = "questionimage", VOTE_COUNT = "votecount";
     /**The group name*/
     private String mQuestionID;
     /***/
@@ -23,6 +23,8 @@ public class QuestionDetail implements Serializable {
     private String mQuestionComment;
 
     private String mQuestionImage;
+
+    private String mVoteCount;
     /**
      * Constructor for user
      * @param questionID the name of the group
@@ -30,11 +32,12 @@ public class QuestionDetail implements Serializable {
      *
      * */
     public QuestionDetail(String questionID, String questiontext,  String questionComment,
-                          String questionImage) {
+                          String questionImage, String voteCount) {
         mQuestionText = questiontext;
         mQuestionID = questionID;
         mQuestionComment = questionComment;
         mQuestionImage = questionImage;
+        mVoteCount = voteCount;
     }
 
     /**
@@ -52,7 +55,8 @@ public class QuestionDetail implements Serializable {
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
                     QuestionDetail questionDetail = new QuestionDetail(obj.getString(QUESTION_ID)
-                            ,obj.getString(QUESTION_TEXT), obj.getString(QUESTION_COMMENT), obj.getString(QUNESTION_IMAGE));
+                            ,obj.getString(QUESTION_TEXT), obj.getString(QUESTION_COMMENT), obj.getString(QUNESTION_IMAGE),
+                            obj.getString(VOTE_COUNT));
                     questionDetailList.add(questionDetail);
                 }
             } catch (JSONException e) {
@@ -66,6 +70,7 @@ public class QuestionDetail implements Serializable {
     public int getQuestionId () {
         return Integer.parseInt(mQuestionID);
     }
+    public int getVoteCount() {return Integer.parseInt(mVoteCount); }
     public String getmQuestionImage() {return mQuestionImage; }
     public String getQuestionText() {
         return mQuestionText;

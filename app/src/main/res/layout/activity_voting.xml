@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/wrapper"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    tools:context=".VotingActivity"
+    android:gravity="bottom"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/maincontent"
+        android:gravity="top"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/follower_bar"
+            android:gravity="top"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            android:weightSum="1"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:layout_height="wrap_content"
+                android:text="Answer Questions"
+                android:textColor="@color/splash_font"
+                android:onClick="toAnswerQuestions"
+                android:id="@+id/answer_button"
+                android:layout_margin="0px"
+                android:paddingRight="0px"
+                android:paddingLeft="0px"
+                android:paddingTop="@dimen/tabVerticalPadding"
+                android:paddingBottom="@dimen/tabVerticalPadding"
+                android:gravity="center_horizontal"
+                android:background="@drawable/icon_border" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight=".5"
+                android:layout_height="wrap_content"
+                android:text="myResults"
+                android:id="@+id/results_button"
+                android:onClick="toVotingResults"
+                android:layout_margin="0px"
+                android:textColor="@color/splash_font"
+                android:paddingRight="0px"
+                android:paddingLeft="0px"
+                android:paddingTop="@dimen/tabVerticalPadding"
+                android:paddingBottom="@dimen/tabVerticalPadding"
+                android:gravity="center_horizontal"
+                android:background="@drawable/icon_border" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/fragment_container"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            android:layout_weight="1">
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_main"
+        android:elevation="4dp"
+        android:layout_alignParentLeft="true"
+        android:transitionGroup="false"
+        android:touchscreenBlocksFocus="false"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <android.support.percent.PercentRelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                app:layout_widthPercent="20%"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/home"
+
+                app:layout_marginLeftPercent="0%"
+                android:background="@color/colorPrimaryDark"/>
+            <ImageView
+                app:layout_widthPercent="20%"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/question"
+                app:layout_marginLeftPercent="20%"/>
+            <ImageView
+                app:layout_widthPercent="20%"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/profile"
+                app:layout_marginLeftPercent="40%" />
+            <ImageView
+                app:layout_widthPercent="20%"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/askers"
+                app:layout_marginLeftPercent="60%"/>
+            <ImageView
+                app:layout_widthPercent="20%"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/settings"
+                app:layout_marginLeftPercent="80%" />
+            <!--<Button-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="A"-->
+            <!--app:layout_widthPercent="50%"-->
+            <!--app:layout_marginLeftPercent="50%" />-->
+            <!--<Button-->
+            <!--android:layout_width="0dp"-->
+            <!--app:layout_widthPercent="50%"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="B" />-->
+        </android.support.percent.PercentRelativeLayout>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

@@ -56,7 +56,6 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         EnterQuestionFragment enterQuestionFragment = new EnterQuestionFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.blast_question_container, enterQuestionFragment)
-                .addToBackStack(null)
                 .commit();
     }
     @Override
@@ -156,7 +155,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         StringBuilder sb = new StringBuilder();
         sb.append(BLAST_QUESTION);
         String url = "insert into QuestionDetail values (" + mQuestionID + ",'" + mQuestionText + "','"
-                + mQuestionComment + "','" + mQuestionImage +"');";
+                + mQuestionComment + "','" + mQuestionImage +"', 0);";
         try {
             url = URLEncoder.encode(url, "UTF-8");
         } catch (Exception exception) {
@@ -168,7 +167,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
     private String insertFollowerURL() {
         StringBuilder sb = new StringBuilder();
         sb.append(BLAST_QUESTION);
-        String url = "insert into QuestionMember values (" + mQuestionID + "," + mFollowerID+ ");";
+        String url = "insert into QuestionMember values (" + mQuestionID + "," + mFollowerID+ ", 'false');";
         try {
             url = URLEncoder.encode(url, "UTF-8");
         } catch (Exception exception) {
@@ -241,6 +240,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 if (status.equals("none")) {
                     Intent i = new Intent(getBaseContext(), MainViewUsersActivity.class);
                     startActivity(i);
+                    finish();
 
                 } else {
 

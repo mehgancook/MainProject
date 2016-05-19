@@ -66,9 +66,9 @@ public class EnterQuestionOptionFragment extends Fragment {
         mUserDB = new UserDB(getActivity());
         mEmail = mUserDB.getUsers().get(0).getEmail();
         mEditTextOption = (EditText) mView.findViewById(R.id.text_question);
-        mTextOption  = mEditTextOption.getText().toString();
+      //  mTextOption  = mEditTextOption.getText().toString();
         mEditTextComment = (EditText) mView.findViewById(R.id.text_comment);
-        mTextComment = mEditTextComment.getText().toString();
+     //   mTextComment = mEditTextComment.getText().toString();
         DownloadQuestionTask task = new DownloadQuestionTask();
         task.execute(DOWNLOAD_QUESTION);
         Button takeImage = (Button) mView.findViewById(R.id.take_picture);
@@ -82,18 +82,19 @@ public class EnterQuestionOptionFragment extends Fragment {
         });
         final Button imDone =  (Button) mView.findViewById(R.id.done_with_options);
         imDone.setVisibility(View.INVISIBLE);
-        Button addMoreOptions =  (Button) mView.findViewById(R.id.add_more_options);
+        final Button addMoreOptions =  (Button) mView.findViewById(R.id.add_more_options);
         addMoreOptions.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 mTextOption = mEditTextOption.getText().toString();
+                mTextComment = mEditTextComment.getText().toString();
                 if (TextUtils.isEmpty(mTextOption) && mImageView == null) {
                     Toast.makeText(getActivity(), "Please Select an Image or Enter a Text option", Toast.LENGTH_LONG)
                             .show();
                 } else {
                     mOptionsCounter++;
-                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage);
+                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage, 0 +"");
                     mQuestionDetail.add(questionDetail);
                     Log.i("question detail size", mQuestionDetail.size() + "");
                     Log.i("mOptionsCounter", mOptionsCounter + "");
@@ -102,6 +103,7 @@ public class EnterQuestionOptionFragment extends Fragment {
                     if (mImageView != null)
                     mImageView.setImageDrawable(null);
                     imDone.setVisibility(View.VISIBLE);
+                    addMoreOptions.setVisibility(View.INVISIBLE); //allows for only 2 options to be selected
 
                 }
             }
@@ -113,11 +115,18 @@ public class EnterQuestionOptionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mTextOption = mEditTextOption.getText().toString();
+                mTextComment = mEditTextComment.getText().toString();
                 if (TextUtils.isEmpty(mTextOption) && mImageView == null) {
                     Toast.makeText(getActivity(), "Please Select an Image or Enter a Text option", Toast.LENGTH_LONG)
                             .show();
                 } else {
-                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage);
+                    if (TextUtils.isEmpty(mTextOption)) {
+                        mTextOption = null;
+                    }
+                    if (TextUtils.isEmpty(mTextComment)) {
+                        mTextComment = null;
+                    }
+                    QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage, 0 + "");
                     mQuestionDetail.add(questionDetail);
                     Log.i("question detail size", mQuestionDetail.size() + "");
                     Log.i("mOptionsCounter", mOptionsCounter + "");
@@ -130,7 +139,6 @@ public class EnterQuestionOptionFragment extends Fragment {
                 FollowListFragment followListFragment = new FollowListFragment();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.blast_question_container, followListFragment)
-                        .addToBackStack(null)
                         .commit();
             }
 

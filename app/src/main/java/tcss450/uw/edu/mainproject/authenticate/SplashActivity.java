@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import tcss450.uw.edu.mainproject.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.VotingActivity;
 
 /**
  * SplashActivity displays an image of our logo.
@@ -46,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
                         Intent intent = new Intent(SplashActivity.this, MainLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(SplashActivity.this, BlastQuestionActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, VotingActivity.class);
                         startActivity(intent);
                     }
                 }
