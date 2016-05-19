@@ -1,4 +1,4 @@
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.blast_question;
 
 
 import android.content.Intent;
@@ -26,10 +26,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
+import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
 import tcss450.uw.edu.mainproject.model.Question;
 import tcss450.uw.edu.mainproject.model.QuestionDetail;
-import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**

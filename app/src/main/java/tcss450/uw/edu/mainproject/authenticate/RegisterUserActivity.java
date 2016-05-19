@@ -32,7 +32,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import tcss450.uw.edu.mainproject.Helper;
-import tcss450.uw.edu.mainproject.MainViewUsersActivity;
+import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_question"
-    tools:context="tcss450.uw.edu.mainproject.EnterQuestionFragment">
+    tools:context=".blast_question.EnterQuestionFragment">
 
 
     <TextView

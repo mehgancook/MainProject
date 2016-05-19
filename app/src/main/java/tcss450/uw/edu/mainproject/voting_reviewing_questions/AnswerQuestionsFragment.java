@@ -3,7 +3,7 @@
   * Mehgan Cook and Tony Zullo
   * Mobile apps TCSS450
  * */
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -29,9 +29,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
-import tcss450.uw.edu.mainproject.model.Question;
+import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
+import tcss450.uw.edu.mainproject.myApplication;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.MyAnswerQuestionsRecyclerViewAdapter;
 
 
 /**

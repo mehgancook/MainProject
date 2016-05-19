@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="tcss450.uw.edu.mainproject.AnswerQuestionsFragment"
+    tools:context=".voting_reviewing_questions.AnswerQuestionsFragment"
     tools:listitem="@layout/fragment_answerquestions" />

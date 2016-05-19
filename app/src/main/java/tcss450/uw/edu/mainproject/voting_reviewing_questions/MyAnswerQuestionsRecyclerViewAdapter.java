@@ -1,4 +1,4 @@
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -7,14 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import tcss450.uw.edu.mainproject.AskedQuestionResultFragment.OnListFragmentInteractionListener;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.AskedQuestionResultFragment.OnListFragmentInteractionListener;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 
 import java.util.List;
 
 /**
- * specified {@link AskedQuestionResultFragment.OnListFragmentInteractionListener}.
+ * specified {@link OnListFragmentInteractionListener}.
  */
 public class MyAnswerQuestionsRecyclerViewAdapter extends RecyclerView.Adapter<MyAnswerQuestionsRecyclerViewAdapter.ViewHolder> {
 

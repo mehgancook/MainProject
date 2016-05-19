@@ -1,10 +1,9 @@
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.blast_question;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -29,10 +27,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
-import tcss450.uw.edu.mainproject.data.UserDB;
+import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
+import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.model.QuestionDetail;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 
 public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener{
  private List<User> mSendToUsers;

@@ -3,7 +3,7 @@
   * Mehgan Cook and Tony Zullo
   * Mobile apps TCSS450
  * */
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -29,34 +29,33 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
-import tcss450.uw.edu.mainproject.model.Question;
-import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
-
+import tcss450.uw.edu.mainproject.model.User;
 
 /**
  * A fragment representing a list of Followers.
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class AskedQuestionResultFragment extends Fragment {
+public class FollowListFragment extends Fragment {
 
     /**string column count*/
     private static final String ARG_COLUMN_COUNT = "column-count";
     /**int column count*/
     private int mColumnCount = 1;
     /**List of users*/
-    private List<QuestionWithDetail> mQuestionWithDetail;
+    private List<User> mFollowers;
     /**Listener*/
     private OnListFragmentInteractionListener mListener;
     /**Recycle view*/
     private RecyclerView mRecyclerView;
     /**String for the url to access the users from the database*/
-    private static final String QUESTIONS_ASKED_URL
+    private static final String FOLLOWER_LIST_URL
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
-            "select+questionname%2C+questionid%2C+questiontext%2C+questioncomment%2C+questionimage" +
-            "%2C+votecount++%0D%0Afrom+QuestionDetail+natural+join+Question+where+Question.useremail+%3D+%27";
-   // "mehganc%40uw.edu%27%3B"
+            "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Followers%2CUser+where+" +
+            "User.userid+%3D+Followers.followerid+and+Followers.userid+%3D+%0D%0A%28select+userid+" +
+            "from+User+where+email+%3D+%27";
 
 
 
@@ -64,7 +63,7 @@ public class AskedQuestionResultFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public AskedQuestionResultFragment() {
+    public FollowListFragment() {
     }
 
     /**
@@ -151,7 +150,7 @@ public class AskedQuestionResultFragment extends Fragment {
      * @return the url
      * */
     public String buildURL() {
-        StringBuilder sb = new StringBuilder(QUESTIONS_ASKED_URL);
+        StringBuilder sb = new StringBuilder(FOLLOWER_LIST_URL);
         UserDB userDB = new UserDB(getActivity());
         String email = userDB.getUsers().get(0).getEmail();
         try {
@@ -159,7 +158,7 @@ public class AskedQuestionResultFragment extends Fragment {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        sb.append("%27%3B");
+        sb.append("%27%29%3B");
         return sb.toString();
     }
 
@@ -175,8 +174,8 @@ public class AskedQuestionResultFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         /**list fragement interaction
-         */
-        void onListFragmentInteraction(QuestionWithDetail questionWithDetail);
+         * @param user a user*/
+        void onListFragmentInteraction(User user);
     }
     /**
      * Class to download the followeres list in the backgroud using an async task
@@ -228,8 +227,8 @@ public class AskedQuestionResultFragment extends Fragment {
                 return;
             }
 
-            mQuestionWithDetail = new ArrayList<>();
-            result = QuestionWithDetail.parseQuestionWithDetailJSON(result, mQuestionWithDetail);
+            mFollowers = new ArrayList<>();
+            result = User.parseUserJSON(result, mFollowers);
             // Something wrong with the JSON returned.
             if (result != null) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
@@ -238,10 +237,10 @@ public class AskedQuestionResultFragment extends Fragment {
             }
 
             // Everything is good, show the list of courses.
-            if (!mQuestionWithDetail.isEmpty()) {
-                mRecyclerView.setAdapter(new MyAskedQuestionResultRecyclerViewAdapter(mQuestionWithDetail, mListener,
+            if (!mFollowers.isEmpty()) {
+                mRecyclerView.setAdapter(new MyFollowListRecyclerViewAdapter(mFollowers, mListener,
                         Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
-            }
+          }
         }
 
 

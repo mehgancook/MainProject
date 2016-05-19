@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/blast_question_container"
-    tools:context="tcss450.uw.edu.mainproject.BlastQuestionActivity">
+    tools:context=".blast_question.BlastQuestionActivity">
 
     <Button
         style="?android:attr/buttonStyleSmall"

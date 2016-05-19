@@ -1,4 +1,4 @@
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.view.View;
 
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
+import tcss450.uw.edu.mainproject.myApplication;
 
 public class VotingActivity extends AppCompatActivity implements AnswerQuestionsFragment.OnListFragmentInteractionListener {
 

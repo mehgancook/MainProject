@@ -7,7 +7,7 @@
     android:id="@+id/wrapper"
     android:padding="0dp"
     android:layout_margin="0dp"
-    tools:context=".VotingActivity"
+    tools:context=".voting_reviewing_questions.VotingActivity"
     android:gravity="bottom"
     android:weightSum="1">
     <LinearLayout

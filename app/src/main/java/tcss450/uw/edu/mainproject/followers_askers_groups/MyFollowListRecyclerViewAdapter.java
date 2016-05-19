@@ -3,7 +3,7 @@
   * Mehgan Cook and Tony Zullo
   * Mobile apps TCSS450
  * */
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.User;
 
 /**

@@ -1,4 +1,4 @@
-package tcss450.uw.edu.mainproject;
+package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 
 import android.graphics.Bitmap;
@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**

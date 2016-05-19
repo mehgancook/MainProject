@@ -11,10 +11,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import tcss450.uw.edu.mainproject.BlastQuestionActivity;
-import tcss450.uw.edu.mainproject.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
-import tcss450.uw.edu.mainproject.VotingActivity;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 /**
  * SplashActivity displays an image of our logo.
