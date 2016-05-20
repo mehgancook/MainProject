@@ -34,6 +34,7 @@ import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.model.QuestionDetail;
 import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener{
  private List<User> mSendToUsers;
@@ -100,6 +101,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         if (mSendToUsers == null) {
             mSendToUsers = new ArrayList<>();
             mSendToUsers.add(user);
+            Toast.makeText(this, user.getUsername() + " added to list!", Toast.LENGTH_SHORT).show();
         } else {
             boolean flag = false;
             for(int i = 0; i < mSendToUsers.size(); i++) {
@@ -132,6 +134,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                             mQuestionComment = mQuestionDetails.get(i).getQuestionComment();
                             mQuestionImage = mQuestionDetails.get(i).getmQuestionImage();
                             String url = insertDetailsURL();
+                            Log.i("String I added", mQuestionImage);
                             BlastQuestionTask task = new BlastQuestionTask();
                             task.execute(url);
                         }
@@ -241,7 +244,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 if (status.equals("none")) {
                     Intent i = new Intent(getBaseContext(), MainViewUsersActivity.class);
                     startActivity(i);
-                    finish();
+                   // finish();
 
                 } else {
 

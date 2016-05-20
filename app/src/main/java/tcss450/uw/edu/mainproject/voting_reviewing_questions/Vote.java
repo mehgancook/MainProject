@@ -49,29 +49,20 @@ public class Vote extends Fragment {
             mOption2Text.setText(questionWithDetail.get(1).getQuestionText());
             String image1 = questionWithDetail.get(0).getQuestionImage();
             String image2 = questionWithDetail.get(1).getQuestionImage();
-           // Log.i("image1", image1);
+            Log.i("image1", image1);
+            Log.i("image2", image2);
             if (!image1.equals(null)) {
-                Log.i("image1", image1);
-                byte[] decodedString = Base64.decode(image1, Base64.URL_SAFE);
-                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                mOption1Image.setImageBitmap(StringToBitMap(image1));
 
-                byte[] imageAsBytes = Base64.decode(image1.getBytes(), Base64.DEFAULT);
-               // ImageView image = (ImageView)this.findViewById(R.id.ImageView);
-                mOption1Image.setImageBitmap(
-                        BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
-              //  Bitmap img1 = StringToBitMap(image1);
-             //   mOption1Image.setImageBitmap(decodedByte);
             }
             if (!image2.equals(null)) {
-                byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
-                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-              //  Bitmap img2 = StringToBitMap(image2);
-                mOption2Image.setImageBitmap(decodedByte);
+                mOption2Image.setImageBitmap(StringToBitMap(image2));
             }
 
             mOption1Comment.setText(questionWithDetail.get(0).getQuestionComment());
             mOption2Comment.setText(questionWithDetail.get(1).getQuestionComment());
         }
+
     }
     /**
      * @param encodedString
@@ -79,6 +70,7 @@ public class Vote extends Fragment {
      */
     public Bitmap StringToBitMap(String encodedString){
         try{
+           // Log.i("StringToBitMap", encodedString);
             byte [] encodeByte=Base64.decode(encodedString, Base64.DEFAULT);
             Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return bitmap;
@@ -100,6 +92,25 @@ public class Vote extends Fragment {
         mOption2Comment = (TextView) view.findViewById(R.id.option2Comment);
         mOption1Image = (ImageView) view.findViewById(R.id.option1Image);
         mOption2Image = (ImageView) view.findViewById(R.id.option2Image);
+       // List<QuestionWithDetail> questionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
+        if (questionWithDetail != null) {
+            mOption1Text.setText(questionWithDetail.get(0).getQuestionText());
+            mOption2Text.setText(questionWithDetail.get(1).getQuestionText());
+            String image1 = questionWithDetail.get(0).getQuestionImage();
+            String image2 = questionWithDetail.get(1).getQuestionImage();
+            Log.i("image1", image1);
+            Log.i("image2", image2);
+            if (!image1.equals(null)) {
+                mOption1Image.setImageBitmap(StringToBitMap(image1));
+
+            }
+            if (!image2.equals(null)) {
+                mOption2Image.setImageBitmap(StringToBitMap(image2));
+            }
+
+            mOption1Comment.setText(questionWithDetail.get(0).getQuestionComment());
+            mOption2Comment.setText(questionWithDetail.get(1).getQuestionComment());
+        }
         // Inflate the layout for this fragment
         return view;
     }

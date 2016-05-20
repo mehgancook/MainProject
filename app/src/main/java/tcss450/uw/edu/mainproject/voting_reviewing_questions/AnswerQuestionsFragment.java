@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -245,6 +246,7 @@ public class AnswerQuestionsFragment extends Fragment {
             for (int i = 0; i < mQuestionWithDetail.size(); i+=2) {//this is if we only have 2 options will need to change if we want to add more options
                 if(mQuestionWithDetail.get(i).getQuestionAnswered().equals("false"))
                     distinct.add(mQuestionWithDetail.get(i));
+
             }
             if (!distinct.isEmpty()) {
                 mRecyclerView.setAdapter(new MyAnswerQuestionsRecyclerViewAdapter(distinct, mListener,

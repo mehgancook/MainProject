@@ -3,6 +3,7 @@ package tcss450.uw.edu.mainproject.blast_question;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -155,7 +156,7 @@ public class EnterQuestionOptionFragment extends Fragment {
         mImageView = (ImageView) mView.findViewById(R.id.imageView);
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         mImage = BitMapToString(bp);
-        mImageView.setImageBitmap(bp);
+        mImageView.setImageBitmap(StringToBitMap(mImage));
     }
     public String BitMapToString(Bitmap bitmap){
 
@@ -163,8 +164,21 @@ public class EnterQuestionOptionFragment extends Fragment {
         bitmap.compress(Bitmap.CompressFormat.JPEG,10, baos);
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
-
+        Log.i("bitmap string", temp);
         return temp;
+
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        Log.i("encoded string", encodedString);
+        try{
+            byte [] encodeByte=Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 
     /**

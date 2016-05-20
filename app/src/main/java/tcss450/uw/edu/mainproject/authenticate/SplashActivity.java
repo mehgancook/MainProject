@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 /**
