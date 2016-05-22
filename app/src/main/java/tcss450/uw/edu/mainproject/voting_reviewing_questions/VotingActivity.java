@@ -24,7 +24,7 @@ import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
 
-public class VotingActivity extends AppCompatActivity implements AnswerQuestionsFragment.OnListFragmentInteractionListener,
+public class VotingActivity extends AppCompatActivity implements AnswerQuestionsFragment.OnAnswerListFragmentInteractionListener,
 AskedQuestionResultFragment.OnListFragmentInteractionListener {
     private static String USER_URL ="http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+%2A+from+User+where+email+%3D+%27";
@@ -73,7 +73,7 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
     }
 
     @Override
-    public void onListFragmentInteraction(QuestionWithDetail questionWithDetail) {
+    public void onAnswerListFragmentInteraction(QuestionWithDetail questionWithDetail) {
         Vote voteFragment = new Vote();
         Bundle args = new Bundle();
         String name = questionWithDetail.getQuestionName();
@@ -85,10 +85,33 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
             }
         }
         ((myApplication) getApplication()).setCurrentQuestion(questions);
+
         args.putSerializable(voteFragment.QUESTION_SELECTED, questionWithDetail);
         voteFragment.setArguments(args);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, voteFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void onListFragmentInteraction(QuestionWithDetail questionWithDetail) {
+        VoteResultsFragment voteResults = new VoteResultsFragment();
+        Bundle args = new Bundle();
+
+        String name = questionWithDetail.getQuestionName();
+        List<QuestionWithDetail> questions = ((myApplication) getApplication()).getQuestionList();
+        for (int i = 0; i < questions.size(); i++) {
+            if (!questions.get(i).getQuestionName().equals(name)) {
+                questions.remove(i);
+                i--;
+            }
+        }
+        ((myApplication) getApplication()).setCurrentQuestion(questions);
+
+        args.putSerializable(voteResults.QUESTION_SELECTED, questionWithDetail);
+        voteResults.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, voteResults)
                 .addToBackStack(null)
                 .commit();
     }

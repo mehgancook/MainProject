@@ -20,11 +20,11 @@ import java.util.List;
 public class MyAnswerQuestionsRecyclerViewAdapter extends RecyclerView.Adapter<MyAnswerQuestionsRecyclerViewAdapter.ViewHolder> {
 
     private final List<QuestionWithDetail> mValues;
-    private final AnswerQuestionsFragment.OnListFragmentInteractionListener mListener;
+    private final AnswerQuestionsFragment.OnAnswerListFragmentInteractionListener mListener;
     /**font*/
     private Typeface mFont;
 
-    public MyAnswerQuestionsRecyclerViewAdapter(List<QuestionWithDetail> items, AnswerQuestionsFragment.OnListFragmentInteractionListener listener) {
+    public MyAnswerQuestionsRecyclerViewAdapter(List<QuestionWithDetail> items, AnswerQuestionsFragment.OnAnswerListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -32,7 +32,7 @@ public class MyAnswerQuestionsRecyclerViewAdapter extends RecyclerView.Adapter<M
      * @param listener the listener
      * @param items the users
      * @param font the font*/
-    public MyAnswerQuestionsRecyclerViewAdapter(List<QuestionWithDetail> items, AnswerQuestionsFragment.OnListFragmentInteractionListener listener,
+    public MyAnswerQuestionsRecyclerViewAdapter(List<QuestionWithDetail> items, AnswerQuestionsFragment.OnAnswerListFragmentInteractionListener listener,
                                                     Typeface font) {
         this(items, listener);
         mFont = font;
@@ -57,7 +57,7 @@ public class MyAnswerQuestionsRecyclerViewAdapter extends RecyclerView.Adapter<M
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onAnswerListFragmentInteraction(holder.mItem);
                 }
             }
         });

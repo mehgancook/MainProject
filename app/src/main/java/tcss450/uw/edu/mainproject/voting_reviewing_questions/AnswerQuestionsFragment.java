@@ -40,7 +40,7 @@ import tcss450.uw.edu.mainproject.voting_reviewing_questions.MyAnswerQuestionsRe
 
 /**
  * A fragment representing a list of Followers.
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnAnswerListFragmentInteractionListener}
  * interface.
  */
 public class AnswerQuestionsFragment extends Fragment {
@@ -54,7 +54,7 @@ public class AnswerQuestionsFragment extends Fragment {
 
     private String mQuestionName;
     /**Listener*/
-    private OnListFragmentInteractionListener mListener;
+    private OnAnswerListFragmentInteractionListener mListener;
     /**Recycle view*/
     private RecyclerView mRecyclerView;
     /**String for the url to access the users from the database*/
@@ -132,8 +132,8 @@ public class AnswerQuestionsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OnAnswerListFragmentInteractionListener) {
+            mListener = (OnAnswerListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -176,10 +176,10 @@ public class AnswerQuestionsFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnListFragmentInteractionListener {
+    public interface OnAnswerListFragmentInteractionListener {
         /**list fragement interaction
          */
-        void onListFragmentInteraction(QuestionWithDetail questionWithDetail);
+        void onAnswerListFragmentInteraction(QuestionWithDetail questionWithDetail);
     }
     /**
      * Class to download the followeres list in the backgroud using an async task

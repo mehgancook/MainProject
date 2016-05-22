@@ -244,7 +244,7 @@ public class AskedQuestionResultFragment extends Fragment {
 
             // Everything is good, show the list of courses.
             List<QuestionWithDetail> distinct = new ArrayList<>();
-            //((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);
+            ((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);
             for (int i = 0; i < mQuestionWithDetail.size(); i+=2) {//this is if we only have 2 options will need to change if we want to add more options
                     distinct.add(mQuestionWithDetail.get(i));
 
