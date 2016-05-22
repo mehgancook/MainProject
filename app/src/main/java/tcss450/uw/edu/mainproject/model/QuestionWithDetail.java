@@ -15,7 +15,7 @@ public class QuestionWithDetail implements Serializable {
      * USER_ID is the user id*/
     private static final String  QUESTION_ANSWERED = "questionanswered",QUESTION_NAME = "questionname", QUESTION_ID = "questionid",
             QUESTION_TEXT = "questiontext", QUESTION_COMMENT = "questioncomment",
-            QUESTION_IMAGE = "questionimage", VOTE_COUNT = "votecount";
+            QUESTION_IMAGE = "questionimage", VOTE_COUNT = "votecount", QUESTION_DETAIL_ID = "questiondetailid";
     /**The group name*/
     private String mQuestionsName;
     /***/
@@ -25,12 +25,13 @@ public class QuestionWithDetail implements Serializable {
     private String mQuestionImage;
     private String mVoteCount;
     private String mQuestionAnswered;
+    private String mQuestionDetailID;
     /**
      * Constructor for user
      *
      * */
     public QuestionWithDetail(String questionAnswered, String questionName, String questionID, String questionText, String questionComment,
-                    String questionImage, String voteCount) {
+                    String questionImage, String voteCount, String questionDetailID) {
         mQuestionAnswered = questionAnswered;
         mQuestionsName = questionName;
         mQuestionID = questionID;
@@ -38,6 +39,7 @@ public class QuestionWithDetail implements Serializable {
         mQuestionComment = questionComment;
         mQuestionImage = questionImage;
         mVoteCount = voteCount;
+        mQuestionDetailID = questionDetailID;
     }
 
     /**
@@ -56,7 +58,7 @@ public class QuestionWithDetail implements Serializable {
                     JSONObject obj = arr.getJSONObject(i);
                     QuestionWithDetail questionWithDetail= new QuestionWithDetail(obj.getString(QUESTION_ANSWERED),obj.getString(QUESTION_NAME), obj.getString(QUESTION_ID),
                             obj.getString(QUESTION_TEXT), obj.getString(QUESTION_COMMENT), obj.getString(QUESTION_IMAGE),
-                            obj.getString(VOTE_COUNT));
+                            obj.getString(VOTE_COUNT), obj.getString(QUESTION_DETAIL_ID));
                     questionWithDetailList.add(questionWithDetail);
                 }
             } catch (JSONException e) {
@@ -93,6 +95,8 @@ public class QuestionWithDetail implements Serializable {
     public int getVoteCount() {
         return Integer.parseInt(mVoteCount);
     }
+
+    public int getQuestionDetailID() {return Integer.parseInt(mQuestionDetailID); }
 
 }
 

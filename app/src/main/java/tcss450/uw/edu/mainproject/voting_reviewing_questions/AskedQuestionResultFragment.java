@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
+import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.MyAskedQuestionResultRecyclerViewAdapter;
 
 
@@ -54,10 +56,11 @@ public class AskedQuestionResultFragment extends Fragment {
     /**Recycle view*/
     private RecyclerView mRecyclerView;
     /**String for the url to access the users from the database*/
-    private static final String QUESTIONS_ASKED_URL
-            = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
-            "select+questionname%2C+questionid%2C+questiontext%2C+questioncomment%2C+questionimage" +
-            "%2C+votecount++%0D%0Afrom+QuestionDetail+natural+join+Question+where+Question.useremail+%3D+%27";
+    private static final String QUESTIONS_I_ASKED_URL
+            = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=select+questionanswered%2C+questionname%2C+questionid%2C+questiontext%2C+" +
+            "questioncomment%2C+questionimage%2C+votecount%2C+questiondetailid%0D%0Afrom+" +
+            "QuestionDetail+natural+join+QuestionMember+natural+join+Question+where+" +
+            "Question.useremail+%3D+%27";
    // "mehganc%40uw.edu%27%3B"
 
 
@@ -107,7 +110,7 @@ public class AskedQuestionResultFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followlist_list, container, false);
         String url = buildURL();
-
+        Log.i("URL FOR ASKED Q!", url);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -153,7 +156,7 @@ public class AskedQuestionResultFragment extends Fragment {
      * @return the url
      * */
     public String buildURL() {
-        StringBuilder sb = new StringBuilder(QUESTIONS_ASKED_URL);
+        StringBuilder sb = new StringBuilder(QUESTIONS_I_ASKED_URL);
         UserDB userDB = new UserDB(getActivity());
         String email = userDB.getUsers().get(0).getEmail();
         try {
@@ -240,10 +243,17 @@ public class AskedQuestionResultFragment extends Fragment {
             }
 
             // Everything is good, show the list of courses.
-            if (!mQuestionWithDetail.isEmpty()) {
-                mRecyclerView.setAdapter(new MyAskedQuestionResultRecyclerViewAdapter(mQuestionWithDetail, mListener,
+            List<QuestionWithDetail> distinct = new ArrayList<>();
+            //((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);
+            for (int i = 0; i < mQuestionWithDetail.size(); i+=2) {//this is if we only have 2 options will need to change if we want to add more options
+                    distinct.add(mQuestionWithDetail.get(i));
+
+            }
+            if (!distinct.isEmpty()) {
+                mRecyclerView.setAdapter(new MyAskedQuestionResultRecyclerViewAdapter(distinct, mListener,
                         Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
             }
+
         }
 
 

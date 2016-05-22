@@ -61,7 +61,7 @@ public class AnswerQuestionsFragment extends Fragment {
     private static final String QUESTIONS_ASKED_URL
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+questionanswered%2c+questionname%2C+questionid%2C+questiontext%2C+questioncomment%2C+questionimage%2C" +
-            "+votecount%0D%0Afrom+QuestionDetail+natural+join+QuestionMember+natural+join+Question+where" +
+            "+votecount%2C+questiondetailid%0D%0Afrom+QuestionDetail+natural+join+QuestionMember+natural+join+Question+where" +
             "+QuestionMember.questionmemberid+%3D+%0D%0A%28select+userid+from+User+where+email+%3D+%27";
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -242,7 +242,9 @@ public class AnswerQuestionsFragment extends Fragment {
 
             // Everything is good, show the list of courses.
             List<QuestionWithDetail> distinct = new ArrayList<>();
-            ((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);
+            if (mQuestionWithDetail != null) {
+                ((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);
+            }
             for (int i = 0; i < mQuestionWithDetail.size(); i+=2) {//this is if we only have 2 options will need to change if we want to add more options
                 if(mQuestionWithDetail.get(i).getQuestionAnswered().equals("false"))
                     distinct.add(mQuestionWithDetail.get(i));

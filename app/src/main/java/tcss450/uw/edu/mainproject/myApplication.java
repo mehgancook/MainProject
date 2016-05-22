@@ -14,6 +14,7 @@ import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 public class myApplication extends Application {
     public List<QuestionDetail> mQuestions;
     public int mQuestionID;
+    public int mUserID;
     public List<QuestionWithDetail> mQuestionsToVote;
     public List<QuestionWithDetail> mCurrentQuestion;
 
@@ -38,6 +39,14 @@ public class myApplication extends Application {
     }
     public int getQuestionID() {
         return mQuestionID;
+    }
+
+    public void setUserID(int userID) {
+        mUserID = userID;
+    }
+
+    public int getUserID() {
+        return mUserID;
     }
 }
 

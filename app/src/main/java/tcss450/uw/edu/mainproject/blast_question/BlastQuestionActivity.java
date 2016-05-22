@@ -134,7 +134,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                             mQuestionComment = mQuestionDetails.get(i).getQuestionComment();
                             mQuestionImage = mQuestionDetails.get(i).getmQuestionImage();
                             String url = insertDetailsURL();
-                            Log.i("String I added", mQuestionImage);
+                            Log.i("url working", url);
                             BlastQuestionTask task = new BlastQuestionTask();
                             task.execute(url);
                         }
@@ -159,7 +159,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         StringBuilder sb = new StringBuilder();
         sb.append(BLAST_QUESTION);
         String url = "insert into QuestionDetail values (" + mQuestionID + ",'" + mQuestionText + "','"
-                + mQuestionComment + "','" + mQuestionImage +"', 0);";
+                + mQuestionComment + "','" + mQuestionImage +"', 0,'');";
         try {
             url = URLEncoder.encode(url, "UTF-8");
         } catch (Exception exception) {
@@ -242,7 +242,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("errors");
                 if (status.equals("none")) {
-                    Intent i = new Intent(getBaseContext(), MainViewUsersActivity.class);
+                    Intent i = new Intent(getBaseContext(), VotingActivity.class);
                     startActivity(i);
                    // finish();
 
