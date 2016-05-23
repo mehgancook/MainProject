@@ -9,7 +9,7 @@
     android:layout_margin="0dp"
     android:gravity="bottom"
     android:weightSum="1"
-    tools:context=".blast_question.BlastQuestionActivity">
+    tools:context=".followers_askers_groups.ViewGroups">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,29 +19,11 @@
         android:padding="0dp"
         android:layout_margin="0dp"
         android:layout_weight="1">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/blast_question_container"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-            android:layout_weight="1">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send!"
-                android:id="@+id/send_button"
-                android:onClick="blastQuestion"
-                android:layout_gravity="bottom"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+        <include layout="@layout/content_view_groups" />
 
-        </LinearLayout>
     </LinearLayout>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -69,8 +51,8 @@
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:src="@drawable/question"
-                android:background="@color/colorPrimaryDark"
-                app:layout_marginLeftPercent="20%" />
+                android:onClick="goToBlastQuestion"
+                app:layout_marginLeftPercent="20%"/>
             <ImageView
                 app:layout_widthPercent="20%"
                 android:layout_width="0dp"
@@ -82,8 +64,8 @@
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:src="@drawable/askers"
-                android:onClick="goToFollowers"
-                app:layout_marginLeftPercent="60%" />
+                app:layout_marginLeftPercent="60%"
+                android:background="@color/colorPrimaryDark"/>
             <ImageView
                 app:layout_widthPercent="20%"
                 android:layout_width="0dp"

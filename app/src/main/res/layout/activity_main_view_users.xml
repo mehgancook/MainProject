@@ -100,12 +100,14 @@
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:src="@drawable/question"
+                android:onClick="goToBlastQuestion"
                 app:layout_marginLeftPercent="20%"/>
             <ImageView
                 app:layout_widthPercent="20%"
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:src="@drawable/profile"
+                android:onClick="goToGroups"
                 app:layout_marginLeftPercent="40%" />
             <ImageView
                 app:layout_widthPercent="20%"

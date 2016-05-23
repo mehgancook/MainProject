@@ -43,6 +43,8 @@
         <activity android:name=".authenticate.LoginUserActivity" />
         <activity android:name=".blast_question.BlastQuestionActivity" />
         <activity android:name=".voting_reviewing_questions.VotingActivity"></activity>
+        <activity android:name=".BlastQuestionActivity" />
+        <activity android:name=".followers_askers_groups.ViewGroups"></activity>
     </application>
 
 </manifest>

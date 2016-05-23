@@ -5,9 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +46,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
     private String mQuestionComment;
     private String mQuestionImage;
     private int mFollowerID;
+    private BlastQuestionActivity mOwner;
     /**static variable of the first part of the URL for adding a user to the databse*/
     private final static String BLAST_QUESTION
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
@@ -52,7 +54,12 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blast_question);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
+            setTitle("");
+        }
 
+        mOwner = this;
         mSendButton = (Button) findViewById(R.id.send_button);
         mSendButton.setVisibility(View.INVISIBLE);
         EnterQuestionFragment enterQuestionFragment = new EnterQuestionFragment();
@@ -256,5 +263,9 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         }
     }
 
+    public void goToFollowers(View v) {
+        Intent intent = new Intent(mOwner, MainViewUsersActivity.class);
+        startActivity(intent);
+    }
 
 }

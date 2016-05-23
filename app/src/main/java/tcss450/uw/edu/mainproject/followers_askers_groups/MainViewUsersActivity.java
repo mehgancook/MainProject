@@ -8,7 +8,6 @@ package tcss450.uw.edu.mainproject.followers_askers_groups;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +21,7 @@ import android.widget.TextView;
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
+import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.User;
 
 
@@ -56,17 +56,20 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
             setTitle("");
         }
         mHelper = new Helper(getAssets());
-        Typeface oswald = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
 
         mFollowButton = (TextView) findViewById(R.id.followers_button);
-        mFollowButton.setTypeface(oswald);
-
         mAskerButton = (TextView) findViewById(R.id.askers_button);
-        mAskerButton.setTypeface(oswald);
+
+        mHelper.setFontStyle(mFollowButton);
+        mHelper.setFontStyle(mAskerButton);
+
 
         Toolbar tools = (Toolbar) findViewById(R.id.toolbar);
         tools.setCollapsible(false);
+
+        toFollowers(findViewById(R.id.followers_button));
     }
+
     /**
      * On create options menu
      * @param menu the menu
@@ -122,7 +125,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
                 .commit();
     }
     /**
-     * toFollowers will open the fragment that contains the current usesr followers list
+     * toFollowers will open the fragment that contains the current user followers list
      * @param v the view
      *
      * */
@@ -185,5 +188,14 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         }
     }
 
+    public void goToGroups(View v) {
+        Intent intent = new Intent(this, ViewGroups.class);
+        startActivity(intent);
+    }
+
+    public void goToBlastQuestion(View v) {
+        Intent intent = new Intent(this, BlastQuestionActivity.class);
+        startActivity(intent);
+    }
 
 }
