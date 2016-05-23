@@ -97,12 +97,12 @@ public class User implements Serializable{
         return mPassword;
     }
     /**
-     * Set the eamil
-     * @param email the email address
-     * */
-    public void setEmail(String email) {
-        mEmailAddress = email;
-    }
+//     * Set the eamil
+//     * @param email the email address
+//     * */
+ //   public void setEmail(String email) {
+ //       mEmailAddress = email;
+ //   }
 
     public int getUserID() {
         return Integer.parseInt(mUserID);

@@ -118,6 +118,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, courseDetailFragment)
+                .addToBackStack(null)
                 .commit();
     }
     /**

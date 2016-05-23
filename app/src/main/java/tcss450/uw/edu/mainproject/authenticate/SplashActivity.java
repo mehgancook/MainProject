@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
+import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 /**
@@ -46,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
                         Intent intent = new Intent(SplashActivity.this, MainLoginActivity.class);
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(SplashActivity.this, VotingActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, MainViewUsersActivity.class);
                         startActivity(intent);
                     }
                 }
