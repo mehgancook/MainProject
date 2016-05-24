@@ -73,6 +73,22 @@
 
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/add_asker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_asker"
+        android:background="@drawable/side_button_border"
+        android:layout_gravity="right"
+        android:padding="20px"
+        android:textSize="20dp"
+        android:layout_marginBottom="60px"
+        android:textAllCaps="true"
+        android:drawableLeft="@drawable/miniadd"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:visibility="gone" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -89,50 +105,22 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/home"
-                app:layout_marginLeftPercent="0%"/>
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/question"
-                android:onClick="goToBlastQuestion"
-                app:layout_marginLeftPercent="20%"/>
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/profile"
-                android:onClick="goToGroups"
-                app:layout_marginLeftPercent="40%" />
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/askers"
-                app:layout_marginLeftPercent="60%"
-                android:background="@color/colorPrimaryDark"/>
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/settings"
-                app:layout_marginLeftPercent="80%" />
-            <!--<Button-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="A"-->
-                <!--app:layout_widthPercent="50%"-->
-                <!--app:layout_marginLeftPercent="50%" />-->
-            <!--<Button-->
-                <!--android:layout_width="0dp"-->
-                <!--app:layout_widthPercent="50%"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="B" />-->
+            <ImageView style="@style/HomeIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="0%"
+                android:onClick="goToHome" />
+            <ImageView style="@style/BlastQuestionIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="25%"
+                android:onClick="goToBlastQuestion" />
+            <ImageView style="@style/FollowersIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="50%"
+                android:background="@color/colorPrimaryDark" />
+            <ImageView style="@style/SettingsIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="75%"
+                android:onClick="goToSettings" />
         </android.support.percent.PercentRelativeLayout>
     </android.support.v7.widget.Toolbar>
 </LinearLayout>

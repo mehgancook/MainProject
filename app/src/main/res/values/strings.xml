@@ -24,6 +24,7 @@
     <string name="email_hint">Enter email</string>
     <string name="password_hint">Enter password</string>
     <string name="register_user">Register</string>
+    <string name="add_asker">Find Asker</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
