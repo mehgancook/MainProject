@@ -1,9 +1,9 @@
 package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
-import android.graphics.Typeface;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.data.UserDB;
+import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
@@ -132,6 +134,19 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         sb.append("%27%3B");
         return sb.toString();
     }
+
+    // Start Navigation Methods
+
+    // Go to Blast Question
+    public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
+    // Go to Home
+    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    // Go to Followers
+    public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
+    // Go To Settings TODO : Change to Settings.class
+    public void goToSettings(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+
+    // End Navigation Methods
 
     private class DownloadUserIDTask extends AsyncTask<String, Void, String> {
         /**

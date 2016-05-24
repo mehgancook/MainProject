@@ -263,9 +263,17 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         }
     }
 
-    public void goToFollowers(View v) {
-        Intent intent = new Intent(mOwner, MainViewUsersActivity.class);
-        startActivity(intent);
-    }
+    // Start Navigation Methods
+
+    // Go to Blast Question
+    public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
+    // Go to Home
+    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    // Go to Followers
+    public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
+    // Go To Settings TODO : Change to Settings.class
+    public void goToSettings(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+
+    // End Navigation Methods
 
 }

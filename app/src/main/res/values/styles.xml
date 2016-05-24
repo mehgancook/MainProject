@@ -18,6 +18,31 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
+    <style name="HomeIcon" parent="@android:style/DeviceDefault.ButtonBar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:contentDescription">Home</item>
+        <item name="android:src">@drawable/home</item>
+    </style>
+
+    <style name="BlastQuestionIcon" parent="@android:style/DeviceDefault.ButtonBar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:contentDescription">Blast Quetion</item>
+        <item name="android:src">@drawable/question</item>
+    </style>
+    <style name="FollowersIcon" parent="@android:style/DeviceDefault.ButtonBar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:contentDescription">Followers</item>
+        <item name="android:src">@drawable/askers</item>
+    </style>
+    <style name="SettingsIcon" parent="@android:style/DeviceDefault.ButtonBar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:contentDescription">Settings</item>
+        <item name="android:src">@drawable/settings</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

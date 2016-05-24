@@ -89,49 +89,22 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/home"
-
+            <ImageView style="@style/HomeIcon"
+                app:layout_widthPercent="25%"
                 app:layout_marginLeftPercent="0%"
-                android:background="@color/colorPrimaryDark"/>
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/question"
-                app:layout_marginLeftPercent="20%"/>
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/profile"
-                app:layout_marginLeftPercent="40%" />
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/askers"
-                app:layout_marginLeftPercent="60%"/>
-            <ImageView
-                app:layout_widthPercent="20%"
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/settings"
-                app:layout_marginLeftPercent="80%" />
-            <!--<Button-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="A"-->
-            <!--app:layout_widthPercent="50%"-->
-            <!--app:layout_marginLeftPercent="50%" />-->
-            <!--<Button-->
-            <!--android:layout_width="0dp"-->
-            <!--app:layout_widthPercent="50%"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="B" />-->
+                android:background="@color/colorPrimaryDark" />
+            <ImageView style="@style/BlastQuestionIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="25%"
+                android:onClick="goToBlastQuestion" />
+            <ImageView style="@style/FollowersIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="50%"
+                android:onClick="goToFollowers" />
+            <ImageView style="@style/SettingsIcon"
+                app:layout_widthPercent="25%"
+                app:layout_marginLeftPercent="75%"
+                android:onClick="goToSettings" />
         </android.support.percent.PercentRelativeLayout>
     </android.support.v7.widget.Toolbar>
 </LinearLayout>

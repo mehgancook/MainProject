@@ -23,6 +23,7 @@ import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 
 /**
@@ -41,6 +42,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
     /**The askers button*/
     private TextView mAskerButton;
     /**helper class for styles*/
+    private TextView mAddAskerButton;
     private Helper mHelper;
 
     /**
@@ -63,6 +65,9 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         mHelper.setFontStyle(mFollowButton);
         mHelper.setFontStyle(mAskerButton);
 
+        mHelper.setFontStyle(mFollowButton);
+        mHelper.setFontStyle(mAskerButton);
+        mHelper.setFontStyle((TextView) findViewById(R.id.add_asker));
 
         Toolbar tools = (Toolbar) findViewById(R.id.toolbar);
         tools.setCollapsible(false);
@@ -86,6 +91,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
      * @param item menu item
      * @return boolean
      * */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -106,7 +112,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
             return true;
 
         }
-        return  super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
     /**The list fragment ineraction will open the users detail fragment if
      * a user in either list is clicked on
@@ -161,7 +167,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
      * @param v the view
      * */
     public void toAskers(View v) {
-
+        ((TextView) findViewById(R.id.add_asker)).setVisibility(View.VISIBLE);
         int selectedColor = getResources().getColor(R.color.colorPrimary);
         int white = getResources().getColor(R.color.white);
         Drawable iconBox;
@@ -188,14 +194,20 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         }
     }
 
-    public void goToGroups(View v) {
-        Intent intent = new Intent(this, ViewGroups.class);
-        startActivity(intent);
-    }
+    // Go to Groups
+    public void goToGroups(View v) { startActivity(new Intent(this, ViewGroups.class)); }
 
-    public void goToBlastQuestion(View v) {
-        Intent intent = new Intent(this, BlastQuestionActivity.class);
-        startActivity(intent);
-    }
+    // Start Navigation Methods
+
+    // Go to Blast Question
+    public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
+    // Go to Home
+    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    // Go to Followers
+    public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
+    // Go To Settings TODO : Change to Settings.class
+    public void goToSettings(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+
+    // End Navigation Methods
 
 }
