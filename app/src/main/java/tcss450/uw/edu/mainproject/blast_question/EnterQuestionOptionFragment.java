@@ -119,7 +119,7 @@ public class EnterQuestionOptionFragment extends Fragment {
             public void onClick(View v) {
                 mTextOption = mEditTextOption.getText().toString();
                 mTextComment = mEditTextComment.getText().toString();
-                if (TextUtils.isEmpty(mTextOption) && mImageView == null) {
+                if (TextUtils.isEmpty(mTextOption) && mImageView == null || (mTextOption.equals("") && mImageView == null)) {
                     Toast.makeText(getActivity(), "Please Select an Image or Enter a Text option", Toast.LENGTH_LONG)
                             .show();
                 } else {
@@ -131,8 +131,6 @@ public class EnterQuestionOptionFragment extends Fragment {
                     }
                     QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage, 0 + "");
                     mQuestionDetail.add(questionDetail);
-                    Log.i("question detail size", mQuestionDetail.size() + "");
-                    Log.i("mOptionsCounter", mOptionsCounter + "");
                     mEditTextComment.setText(null);
                     mEditTextOption.setText(null);
                     if (mImageView != null)

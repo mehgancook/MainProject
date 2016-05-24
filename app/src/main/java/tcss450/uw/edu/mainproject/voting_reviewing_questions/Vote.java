@@ -82,6 +82,8 @@ public class Vote extends Fragment {
             mOption2Text.setText(mQuestionWithDetail.get(1).getQuestionText());
             String image1 = mQuestionWithDetail.get(0).getQuestionImage();
             String image2 = mQuestionWithDetail.get(1).getQuestionImage();
+            image1 = image1.replaceAll(" ", "+");
+            image2 = image2.replaceAll(" ", "+");
             mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
             mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
             Log.i("image1", image1);

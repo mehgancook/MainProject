@@ -48,6 +48,8 @@ public class VoteResultsFragment extends Fragment {
         mOption2Text = (TextView) view.findViewById(R.id.option2Text);
         mResults1 = (TextView) view.findViewById(R.id.option1ResultPercent);
         mResults2 = (TextView) view.findViewById(R.id.option2ResultPercent);
+        mOption1Image = (ImageView) view.findViewById(R.id.option1Image);
+        mOption2Image = (ImageView) view.findViewById(R.id.option2Image);
         if (mQuestionWithDetail != null) {
             //  mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
             //  mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
@@ -55,6 +57,15 @@ public class VoteResultsFragment extends Fragment {
             mOption2Text.setText(mQuestionWithDetail.get(1).getQuestionText());
             String image1 = mQuestionWithDetail.get(0).getQuestionImage();
             String image2 = mQuestionWithDetail.get(1).getQuestionImage();
+            image1 = image1.replaceAll(" ","+");
+            image2 = image2.replaceAll(" ", "+");
+            String s =  "       ";
+            s = s.replaceAll("\\s","+");
+            //Log.i("s", s);
+            mOption1Image.setImageBitmap(StringToBitMap(image1));
+            mOption2Image.setImageBitmap(StringToBitMap(image2));
+            Log.i("image1", image1);
+            Log.i("image2", image2);
             String result1;
             String result2;
             int voteResults1 = mQuestionWithDetail.get(0).getVoteCount();

@@ -245,10 +245,18 @@ public class AskedQuestionResultFragment extends Fragment {
             // Everything is good, show the list of courses.
             List<QuestionWithDetail> distinct = new ArrayList<>();
             ((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);
-            for (int i = 0; i < mQuestionWithDetail.size(); i+=2) {//this is if we only have 2 options will need to change if we want to add more options
+            for (int i = 0; i < mQuestionWithDetail.size(); i++) {
+                if (i == 0) {//this is if we only have 2 options will need to change if we want to add more options
                     distinct.add(mQuestionWithDetail.get(i));
+                } else {
+                    if (mQuestionWithDetail.get(i).getQuestionId() !=
+                            mQuestionWithDetail.get(i - 1).getQuestionId()) {
+                        distinct.add(mQuestionWithDetail.get(i));
+                    }
+                }
 
             }
+            Log.i("distinct list numbers", distinct.size() + "");
             if (!distinct.isEmpty()) {
                 mRecyclerView.setAdapter(new MyAskedQuestionResultRecyclerViewAdapter(distinct, mListener,
                         Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
