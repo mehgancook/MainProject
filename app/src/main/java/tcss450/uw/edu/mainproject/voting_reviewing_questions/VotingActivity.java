@@ -101,9 +101,11 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         Bundle args = new Bundle();
 
         String name = questionWithDetail.getQuestionName();
+        int id = questionWithDetail.getQuestionId();
         List<QuestionWithDetail> questions = ((myApplication) getApplication()).getQuestionList();
         for (int i = 0; i < questions.size(); i++) {
-            if (!questions.get(i).getQuestionName().equals(name)) {
+            if (questions.get(i).getQuestionId() != id) {
+           // if (!questions.get(i).getQuestionName().equals(name)) {
                 questions.remove(i);
                 i--;
             }

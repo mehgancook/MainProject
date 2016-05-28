@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import tcss450.uw.edu.mainproject.R;
@@ -44,19 +45,31 @@ public class VoteResultsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_vote_results, container, false);
         mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
+
         mOption1Text = (TextView) view.findViewById(R.id.option1Text);
         mOption2Text = (TextView) view.findViewById(R.id.option2Text);
         mResults1 = (TextView) view.findViewById(R.id.option1ResultPercent);
         mResults2 = (TextView) view.findViewById(R.id.option2ResultPercent);
         mOption1Image = (ImageView) view.findViewById(R.id.option1Image);
         mOption2Image = (ImageView) view.findViewById(R.id.option2Image);
+      //  List<QuestionWithDetail> setViews = new ArrayList<>();
+//        for (int i = 0; i < mQuestionWithDetail.size(); i++) {
+//            if (i == 0) {
+//                mOption1Text.setText(mQuestionWithDetail.get(i).getQuestionText());
+//                String image1 = mQuestionWithDetail.get(i).getQuestionImage();
+//                image1 = image1.replaceAll(" ","+");
+//                mOption1Image.setImageBitmap(StringToBitMap(image1));
+//            }
+//
+//        }
         if (mQuestionWithDetail != null) {
             //  mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
             //  mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
+            int half = mQuestionWithDetail.size() / 2;
             mOption1Text.setText(mQuestionWithDetail.get(0).getQuestionText());
-            mOption2Text.setText(mQuestionWithDetail.get(1).getQuestionText());
+            mOption2Text.setText(mQuestionWithDetail.get(half).getQuestionText());
             String image1 = mQuestionWithDetail.get(0).getQuestionImage();
-            String image2 = mQuestionWithDetail.get(1).getQuestionImage();
+            String image2 = mQuestionWithDetail.get(half).getQuestionImage();
             image1 = image1.replaceAll(" ","+");
             image2 = image2.replaceAll(" ", "+");
             String s =  "       ";
@@ -69,7 +82,7 @@ public class VoteResultsFragment extends Fragment {
             String result1;
             String result2;
             int voteResults1 = mQuestionWithDetail.get(0).getVoteCount();
-            int voteResults2 = mQuestionWithDetail.get(1).getVoteCount();
+            int voteResults2 = mQuestionWithDetail.get(half).getVoteCount();
             if (voteResults1 + voteResults2 != 0) {
                 double votePercentResult1 = (double) voteResults1 / (voteResults1 + voteResults2);
                 double votePercentResult2 = (double) voteResults2 / (voteResults1 + voteResults2);
@@ -116,6 +129,8 @@ public class VoteResultsFragment extends Fragment {
     }
     public void updateView(QuestionWithDetail questionWithDet) {
         mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
+
+               // getCurrentQuestion();
 //        mOption1Text = (TextView) view.findViewById(R.id.option1Text);
 //        mOption2Text = (TextView) view.findViewById(R.id.option2Text);
 //        mResults1 = (TextView) view.findViewById(R.id.option1Result);
@@ -123,14 +138,15 @@ public class VoteResultsFragment extends Fragment {
         if (mQuestionWithDetail != null) {
             //  mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
             //  mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
+            int half = mQuestionWithDetail.size() / 2;
             mOption1Text.setText(mQuestionWithDetail.get(0).getQuestionText());
-            mOption2Text.setText(mQuestionWithDetail.get(1).getQuestionText());
+            mOption2Text.setText(mQuestionWithDetail.get(half).getQuestionText());
             String image1 = mQuestionWithDetail.get(0).getQuestionImage();
-            String image2 = mQuestionWithDetail.get(1).getQuestionImage();
+            String image2 = mQuestionWithDetail.get(half).getQuestionImage();
             String result1;
             String result2;
             int voteResults1 = mQuestionWithDetail.get(0).getVoteCount();
-            int voteResults2 = mQuestionWithDetail.get(1).getVoteCount();
+            int voteResults2 = mQuestionWithDetail.get(half).getVoteCount();
             if (voteResults1 + voteResults2 != 0) {
                 double votePercentResult1 = (double) voteResults1 / (voteResults1 + voteResults2);
                 double votePercentResult2 = (double) voteResults2 / (voteResults1 + voteResults2);

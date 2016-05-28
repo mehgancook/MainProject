@@ -114,7 +114,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
             for(int i = 0; i < mSendToUsers.size(); i++) {
                 if (mSendToUsers.get(i).getUsername().equals(user.getUsername())) {
                     flag = true;
-                    Toast.makeText(this,user.getUsername() + " remmoved from list!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,user.getUsername() + " removed from list!", Toast.LENGTH_SHORT).show();
                     mSendToUsers.remove(i);
                 }
             }
@@ -122,6 +122,11 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 mSendToUsers.add(user);
                 Toast.makeText(this, user.getUsername() + " added to list!", Toast.LENGTH_SHORT).show();
             }
+        }
+        if (mSendToUsers.size() > 0) {
+            mSendButton.setVisibility(View.VISIBLE);
+        } else {
+            mSendButton.setVisibility(View.INVISIBLE);
         }
     }
     public void blastQuestion(View v) {

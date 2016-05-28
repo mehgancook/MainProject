@@ -105,8 +105,12 @@ public class EnterQuestionOptionFragment extends Fragment {
                     mEditTextOption.setText(null);
                     if (mImageView != null)
                     mImageView.setImageDrawable(null);
+                    mImageView = null;
                     imDone.setVisibility(View.VISIBLE);
-                    addMoreOptions.setVisibility(View.INVISIBLE); //allows for only 2 options to be selected
+                    addMoreOptions.setVisibility(View.INVISIBLE);
+                    mEditTextOption.clearFocus();
+                    mEditTextComment.clearFocus();
+                       //allows for only 2 options to be selected
 
                 }
             }
@@ -131,16 +135,14 @@ public class EnterQuestionOptionFragment extends Fragment {
                     }
                     QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage, 0 + "");
                     mQuestionDetail.add(questionDetail);
-                    mEditTextComment.setText(null);
-                    mEditTextOption.setText(null);
-                    if (mImageView != null)
-                        mImageView.setImageDrawable(null);
+                    ((myApplication) getActivity().getApplication()).setDetailList(mQuestionDetail);
+                    FollowListFragment followListFragment = new FollowListFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.blast_question_container, followListFragment)
+                            .commit();
+
                 }
-                ((myApplication) getActivity().getApplication()).setDetailList(mQuestionDetail);
-                FollowListFragment followListFragment = new FollowListFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.blast_question_container, followListFragment)
-                        .commit();
+
             }
 
 
@@ -152,9 +154,15 @@ public class EnterQuestionOptionFragment extends Fragment {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mImageView = (ImageView) mView.findViewById(R.id.imageView);
-        Bitmap bp = (Bitmap) data.getExtras().get("data");
-        mImage = BitMapToString(bp);
-        mImageView.setImageBitmap(StringToBitMap(mImage));
+            try {
+                Bitmap bp = (Bitmap) data.getExtras().get("data");
+                mImage = BitMapToString(bp);
+                mImageView.setImageBitmap(StringToBitMap(mImage));
+            } catch(Exception e) {
+                e.getMessage();
+                mImageView = null;
+            }
+         //   Log.i("Image", mImage);
     }
     public String BitMapToString(Bitmap bitmap){
 
@@ -243,7 +251,7 @@ public class EnterQuestionOptionFragment extends Fragment {
             int index = temp.size() - 1;
             mQuestionID = temp.get(index).getQuestionId();
             ((myApplication) getActivity().getApplication()).setQuestionID(mQuestionID);
-            Log.i("QuestionID", mQuestionID + "");
+     //       Log.i("QuestionID", mQuestionID + "");
             // Something wrong with the JSON returned.
             if (result != null) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
