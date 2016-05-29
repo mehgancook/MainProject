@@ -61,7 +61,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
 
         mOwner = this;
         mSendButton = (Button) findViewById(R.id.send_button);
-        mSendButton.setVisibility(View.INVISIBLE);
+        mSendButton.setVisibility(View.GONE);
         EnterQuestionFragment enterQuestionFragment = new EnterQuestionFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.blast_question_container, enterQuestionFragment)
@@ -126,7 +126,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         if (mSendToUsers.size() > 0) {
             mSendButton.setVisibility(View.VISIBLE);
         } else {
-            mSendButton.setVisibility(View.INVISIBLE);
+            mSendButton.setVisibility(View.GONE);
         }
     }
     public void blastQuestion(View v) {

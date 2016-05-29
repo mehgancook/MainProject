@@ -7,12 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import tcss450.uw.edu.mainproject.voting_reviewing_questions.AskedQuestionResultFragment.OnListFragmentInteractionListener;
+import java.util.List;
 
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
-
-import java.util.List;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.AskedQuestionResultFragment.OnListFragmentInteractionListener;
 
 /**
  * specified {@link OnListFragmentInteractionListener}.
@@ -79,6 +78,10 @@ public class MyAskedQuestionResultRecyclerViewAdapter extends RecyclerView.Adapt
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
+            if (mFont != null) {
+                mIdView.setTypeface(mFont);
+                mContentView.setTypeface(mFont);
+            }
         }
 
         @Override

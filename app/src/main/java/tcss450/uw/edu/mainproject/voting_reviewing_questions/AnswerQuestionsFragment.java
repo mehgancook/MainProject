@@ -13,12 +13,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,12 +28,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.myApplication;
-import tcss450.uw.edu.mainproject.voting_reviewing_questions.MyAnswerQuestionsRecyclerViewAdapter;
 
 
 /**
@@ -63,6 +61,9 @@ public class AnswerQuestionsFragment extends Fragment {
             "select+questionanswered%2c+questionname%2C+questionid%2C+questiontext%2C+questioncomment%2C+questionimage%2C" +
             "+votecount%2C+questiondetailid%0D%0Afrom+QuestionDetail+natural+join+QuestionMember+natural+join+Question+where" +
             "+QuestionMember.questionmemberid+%3D+%0D%0A%28select+userid+from+User+where+email+%3D+%27";
+    /** Helper for fonts */
+    private Helper mHelper;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -108,7 +109,8 @@ public class AnswerQuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followlist_list, container, false);
         String url = buildURL();
-
+//        mHelper = new Helper(getActivity().getAssets());
+//        mHelper.setFontStyle((TextView) view.findViewById(R.id.content));
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

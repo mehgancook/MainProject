@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/Wrapper"
     android:id="@+id/wrapper"
-    android:padding="0dp"
-    android:layout_margin="0dp"
-    tools:context=".followers_askers_groups.MainViewUsersActivity"
-    android:gravity="bottom"
-    android:weightSum="1">
+    tools:context=".followers_askers_groups.MainViewUsersActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
