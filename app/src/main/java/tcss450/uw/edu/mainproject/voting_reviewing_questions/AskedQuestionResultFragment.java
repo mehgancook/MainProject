@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,12 +29,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.myApplication;
-import tcss450.uw.edu.mainproject.voting_reviewing_questions.MyAskedQuestionResultRecyclerViewAdapter;
 
 
 /**
@@ -62,6 +61,8 @@ public class AskedQuestionResultFragment extends Fragment {
             "QuestionDetail+natural+join+QuestionMember+natural+join+Question+where+" +
             "Question.useremail+%3D+%27";
    // "mehganc%40uw.edu%27%3B"
+    /** Helper for fonts */
+    private Helper mHelper;
 
 
 
@@ -92,7 +93,6 @@ public class AskedQuestionResultFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -109,6 +109,8 @@ public class AskedQuestionResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followlist_list, container, false);
+//        mHelper = new Helper(getActivity().getAssets());
+//        mHelper.setFontStyle((TextView) view.findViewById(R.id.content));
         String url = buildURL();
         Log.i("URL FOR ASKED Q!", url);
         // Set the adapter

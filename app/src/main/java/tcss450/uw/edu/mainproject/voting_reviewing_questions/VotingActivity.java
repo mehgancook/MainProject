@@ -1,11 +1,13 @@
 package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -25,6 +27,7 @@ import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
+import tcss450.uw.edu.mainproject.Helper;
 
 public class VotingActivity extends AppCompatActivity implements AnswerQuestionsFragment.OnAnswerListFragmentInteractionListener,
 AskedQuestionResultFragment.OnListFragmentInteractionListener {
@@ -32,20 +35,42 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
             "select+%2A+from+User+where+email+%3D+%27";
     private AnswerQuestionsFragment mAnswerQuestionsFragment;
     private AskedQuestionResultFragment mAskedQuestionFragment;
+    private TextView mResultsButton;
+    private TextView mAnswerButton;
+    private Helper mHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting);
         DownloadUserIDTask task = new DownloadUserIDTask();
         task.execute(buildURL());
+        mHelper = new Helper(getAssets());
 //        AnswerQuestionsFragment answerQuestionsFragment = new AnswerQuestionsFragment();
 //        getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.fragment_container, answerQuestionsFragment)
 //                .commit();
+        mAnswerButton = (TextView) findViewById(R.id.answer_button);
+        mResultsButton = (TextView) findViewById(R.id.results_button);
+        mHelper.setFontStyle(mAnswerButton);
+        mHelper.setFontStyle(mResultsButton);
+        toVotingResults(mResultsButton);
 
     }
 
     public void toAnswerQuestions(View v) {
+        int selectedColor = getResources().getColor(R.color.colorPrimary);
+        int white = getResources().getColor(R.color.white);
+        Drawable iconBox;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            iconBox = getResources().getDrawable(R.drawable.icon_border, getTheme());
+            mResultsButton.setBackground(iconBox);
+        } else {
+            mResultsButton.setBackgroundColor(white);
+        }
+        mAnswerButton.setBackgroundColor(selectedColor);
+
+
         mAnswerQuestionsFragment = new AnswerQuestionsFragment();
         if (mAskedQuestionFragment == null) {
             getSupportFragmentManager().beginTransaction()
@@ -61,6 +86,18 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
     }
 
     public void toVotingResults(View v) {
+        int selectedColor = getResources().getColor(R.color.colorPrimary);
+        int white = getResources().getColor(R.color.white);
+        Drawable iconBox;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            iconBox = getResources().getDrawable(R.drawable.icon_border, getTheme());
+            mAnswerButton.setBackground(iconBox);
+        } else {
+            mAnswerButton.setBackgroundColor(white);
+        }
+        mResultsButton.setBackgroundColor(selectedColor);
+
+
         mAskedQuestionFragment = new AskedQuestionResultFragment();
         if (mAnswerQuestionsFragment == null) {
             getSupportFragmentManager().beginTransaction()

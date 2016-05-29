@@ -10,10 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 
@@ -39,7 +40,7 @@ public class EnterQuestionFragment extends Fragment {
         private String mQuestion;
     private UserDB mUserDB;
     private String mEmail;
-
+    private Helper mHelper;
 
     public EnterQuestionFragment() {
         // Required empty public constructor
@@ -53,9 +54,15 @@ public class EnterQuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_enter_question, container, false);
         // Inflate the layout for this fragment
         final EditText editText = (EditText) view.findViewById(R.id.enter_question);
+
+        mHelper = new Helper(getActivity().getAssets());
         mQuestion = editText.getText().toString();
         mUserDB = new UserDB(getActivity());
         mEmail = mUserDB.getUsers().get(0).getEmail();
+
+        mHelper.setFontStyle((TextView) view.findViewById(R.id.question));
+        mHelper.setFontStyle((TextView) view.findViewById(R.id.select_options));
+        mHelper.setFontStyle((TextView) view.findViewById(R.id.enter_question));
         final String url = buildCourseURL();
 
         Button options = (Button) view.findViewById(R.id.select_options);

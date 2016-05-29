@@ -46,13 +46,13 @@ public class EnterQuestionOptionFragment extends Fragment {
     private UserDB mUserDB;
     private String mEmail;
     private String mImage;
-   private EditText mEditTextOption;
+    private EditText mEditTextOption;
     private int mOptionsCounter;
     private String mTextOption;
-   private EditText mEditTextComment;
+    private EditText mEditTextComment;
     private String mTextComment;
     private ImageView mImageView;
-   private int mQuestionID;
+    private int mQuestionID;
     private List<Question> mQuestions;
 
     public EnterQuestionOptionFragment() {

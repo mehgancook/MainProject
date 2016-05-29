@@ -1,34 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/BlastQuestionContainer"
     android:id="@+id/fragment_question"
     tools:context=".blast_question.EnterQuestionFragment">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter your question"
-        android:id="@+id/question"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <TextView style="@style/Title"
+        android:text="Ask a Question"
+        android:dividerHeight="0px"
+        android:id="@+id/question" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/enter_question"
-        android:layout_below="@+id/question"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" />
+        android:dividerHeight="0px"
+        android:background="@color/white"
+        android:id="@+id/enter_question" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button style="@style/SubmitButton"
         android:text="Select options"
-        android:id="@+id/select_options"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:dividerHeight="0px"
+        android:id="@+id/select_options" />
 
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
@@ -63,4 +56,4 @@
         <!--android:id="@+id/select_group"-->
         <!--android:layout_alignTop="@+id/select_followers"-->
         <!--android:layout_toRightOf="@+id/textView" />-->
-</RelativeLayout>
+</LinearLayout>

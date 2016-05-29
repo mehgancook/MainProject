@@ -1,5 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/BlastQuestionContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/options_fragment"
@@ -7,15 +9,17 @@
 
 
     <Button
+        style="@style/SubmitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Take picture"
         android:id="@+id/take_picture"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_below="@+id/take_picture"
@@ -32,15 +36,27 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Text"
-        android:id="@+id/textView"
-        android:layout_above="@+id/text_question"
-        android:layout_alignLeft="@+id/take_picture"
-        android:layout_alignStart="@+id/take_picture" />
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="50px"
+            android:layout_height="1px"
+            android:background="@color/splash_font" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Text"
+            android:id="@+id/textView"
+            android:layout_above="@+id/text_question"
+            android:layout_alignLeft="@+id/take_picture"
+            android:layout_alignStart="@+id/take_picture" />
+        <TextView
+            android:layout_width="50px"
+            android:layout_height="1px"
+            android:background="@color/splash_font" />
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,4 +105,4 @@
         android:layout_toLeftOf="@+id/add_more_options"
         android:layout_toStartOf="@+id/add_more_options" />
 
-</RelativeLayout>
+</LinearLayout>
