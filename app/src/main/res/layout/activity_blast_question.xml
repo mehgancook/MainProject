@@ -32,6 +32,18 @@
                 android:layout_gravity="bottom"
                 android:textAllCaps="true" />
 
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send to all followers!!"
+                android:id="@+id/send_all_button"
+                android:onClick="blastQuestionAll"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
         </LinearLayout>
     </LinearLayout>
     <android.support.v7.widget.Toolbar

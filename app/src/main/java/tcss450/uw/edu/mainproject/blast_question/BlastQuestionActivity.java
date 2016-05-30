@@ -40,7 +40,9 @@ import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener{
  private List<User> mSendToUsers;
     private Button mSendButton;
+    private Button mSendToAllButton;
     private int mQuestionID;
+    private List<User> mSendToAllFollowers;
     public List<QuestionDetail> mQuestionDetails;
     private String mQuestionText;
     private String mQuestionComment;
@@ -62,6 +64,8 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         mOwner = this;
         mSendButton = (Button) findViewById(R.id.send_button);
         mSendButton.setVisibility(View.GONE);
+        mSendToAllButton = (Button) findViewById(R.id.send_all_button);
+        mSendToAllButton.setVisibility(View.GONE);
         EnterQuestionFragment enterQuestionFragment = new EnterQuestionFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.blast_question_container, enterQuestionFragment)
@@ -103,7 +107,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
 
     @Override
     public void onListFragmentInteraction(User user) {
-        Log.i("question options", ((myApplication) this.getApplication()).getDetailList().size() +"");
+//        Log.i("question options", ((myApplication) this.getApplication()).getDetailList().size() +"");
         mSendButton.setVisibility(View.VISIBLE);
         if (mSendToUsers == null) {
             mSendToUsers = new ArrayList<>();
@@ -128,6 +132,48 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         } else {
             mSendButton.setVisibility(View.GONE);
         }
+    }
+
+    public void blastQuestionAll(View v) {
+        mQuestionID = ((myApplication) getApplication()).getQuestionID();
+        if (mSendToAllFollowers == null) {
+            mSendToAllFollowers = new ArrayList<>();
+        }
+        mSendToAllFollowers =  ((myApplication) getApplication()).getFollowers();
+        new AlertDialog.Builder(this)
+                .setTitle("Send to All Followeres")
+                .setMessage("Are you sure you want to Send to all Followers?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        mQuestionDetails =  ((myApplication) getApplication()).getDetailList();
+                        for (int i = 0; i < mQuestionDetails.size(); i++) {
+                            mQuestionText = mQuestionDetails.get(i).getQuestionText();
+                            mQuestionComment = mQuestionDetails.get(i).getQuestionComment();
+                            mQuestionImage = mQuestionDetails.get(i).getmQuestionImage();
+                            String url = insertDetailsURL();
+                           // Log.i("url working", url);
+                            BlastQuestionTask task = new BlastQuestionTask();
+                            task.execute(url);
+                        }
+                        for (int i = 0; i < mSendToAllFollowers.size(); i++) {
+                            mFollowerID = mSendToAllFollowers.get(i).getUserID();
+                            String url = insertFollowerURL();
+                            BlastQuestionTask task = new BlastQuestionTask();
+                            task.execute(url);
+                        }
+                        Intent i = new Intent(getBaseContext(), VotingActivity.class);
+                        startActivity(i);
+                         finish();
+                        Toast.makeText(getBaseContext(), "Question sent!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getBaseContext(), "Reselect followers!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
     public void blastQuestion(View v) {
         mQuestionID = ((myApplication) getApplication()).getQuestionID();
@@ -156,6 +202,9 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                             BlastQuestionTask task = new BlastQuestionTask();
                             task.execute(url);
                         }
+                        Intent i = new Intent(getBaseContext(), VotingActivity.class);
+                        startActivity(i);
+                         finish();
                         Toast.makeText(getBaseContext(), "Question sent!", Toast.LENGTH_SHORT).show();
                     }
                 })
@@ -254,9 +303,6 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("errors");
                 if (status.equals("none")) {
-                    Intent i = new Intent(getBaseContext(), VotingActivity.class);
-                    startActivity(i);
-                   // finish();
 
                 } else {
 

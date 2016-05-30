@@ -7,6 +7,7 @@ import java.util.List;
 
 import tcss450.uw.edu.mainproject.model.QuestionDetail;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
+import tcss450.uw.edu.mainproject.model.User;
 
 /**
  * Created by Mehgan on 5/11/2016.
@@ -17,11 +18,15 @@ public class myApplication extends Application {
     public int mUserID;
     public List<QuestionWithDetail> mQuestionsToVote;
     public List<QuestionWithDetail> mCurrentQuestion;
+    public List<User> mFollowers;
 
     public List<QuestionWithDetail> getQuestionList() {return mQuestionsToVote;}
 
     public void setQuestionLst(List<QuestionWithDetail> list) {mQuestionsToVote = list;}
 
+    public List<User> getFollowers() {return mFollowers;}
+
+    public void setFollowers(List<User> followers) { mFollowers = followers;}
 
     public void setCurrentQuestion (List<QuestionWithDetail> list) {mCurrentQuestion = list;}
     public List<QuestionWithDetail> getCurrentQuestion() {return mCurrentQuestion;}

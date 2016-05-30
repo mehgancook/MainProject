@@ -32,6 +32,7 @@ import java.util.List;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 
 /**
  * A fragment representing a list of Followers.
@@ -229,6 +230,7 @@ public class FollowListFragment extends Fragment {
 
             mFollowers = new ArrayList<>();
             result = User.parseUserJSON(result, mFollowers);
+            ((myApplication) getActivity().getApplication()).setFollowers(mFollowers);
             // Something wrong with the JSON returned.
             if (result != null) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)

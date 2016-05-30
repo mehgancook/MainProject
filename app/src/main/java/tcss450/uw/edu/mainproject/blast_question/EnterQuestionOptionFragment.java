@@ -152,6 +152,9 @@ public class EnterQuestionOptionFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.blast_question_container, followListFragment)
                             .commit();
+                    Button button =(Button) getActivity().findViewById(R.id.send_all_button);
+                    button.setVisibility(View.VISIBLE);
+
 
                 }
 
