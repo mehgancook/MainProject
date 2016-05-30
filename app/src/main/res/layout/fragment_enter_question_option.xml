@@ -5,8 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/options_fragment"
+    android:gravity="center_vertical"
     tools:context=".blast_question.EnterQuestionOptionFragment">
 
+    <TextView
+        style="@style/Title"
+        android:text="Your Option"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        style="@style/EditText"
+        android:hint="Enter Option Title"
+        android:id="@+id/text_question"
+        android:gravity="center_horizontal"/>
 
     <Button
         style="@style/SubmitButton"
@@ -16,93 +28,61 @@
         android:id="@+id/take_picture"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:textAllCaps="true"
+        android:padding="10px"
         android:layout_gravity="center_horizontal" />
 
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Enter Text"-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_above="@+id/text_question"-->
+        <!--android:layout_alignLeft="@+id/take_picture"-->
+        <!--android:layout_alignStart="@+id/take_picture" />-->
+
+
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:layout_below="@+id/take_picture"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="88dp" />
+        android:scaleType="centerCrop" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_question"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="50px"
-            android:layout_height="1px"
-            android:background="@color/splash_font" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter Text"
-            android:id="@+id/textView"
-            android:layout_above="@+id/text_question"
-            android:layout_alignLeft="@+id/take_picture"
-            android:layout_alignStart="@+id/take_picture" />
-        <TextView
-            android:layout_width="50px"
-            android:layout_height="1px"
-            android:background="@color/splash_font" />
-    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="OR"
-        android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignLeft="@+id/take_picture"
-        android:layout_alignStart="@+id/take_picture" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="---------------   OR   ---------------"
+        android:id="@+id/textView2" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Comment"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/text_question"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="45dp" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Comment"-->
+        <!--android:id="@+id/textView3"-->
+        <!--android:layout_below="@+id/text_question"-->
+        <!--android:layout_alignLeft="@+id/textView"-->
+        <!--android:layout_alignStart="@+id/textView"-->
+        <!--android:layout_marginTop="45dp" />-->
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/EditText"
         android:id="@+id/text_comment"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:hint="Explain it with words."
+        android:gravity="center_horizontal"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/SubmitButton"
         android:text="Add more options"
-        android:id="@+id/add_more_options"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:id="@+id/add_more_options" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Im done!"
-        android:id="@+id/done_with_options"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/add_more_options"
-        android:layout_toStartOf="@+id/add_more_options" />
+        style="@style/SubmitButton"
+        android:text="I'm done!"
+        android:id="@+id/done_with_options" />
 
 </LinearLayout>

@@ -26,13 +26,11 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send!"
+                android:text="Ask Now!"
                 android:id="@+id/send_button"
                 android:onClick="blastQuestion"
                 android:layout_gravity="bottom"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:textAllCaps="true" />
 
         </LinearLayout>
     </LinearLayout>

@@ -2,10 +2,8 @@ package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,14 +28,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
-import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
-import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
 
 
@@ -122,6 +118,9 @@ public class Vote extends Fragment {
                              Bundle savedInstanceState) {
 
         View view =  inflater.inflate(R.layout.fragment_vote, container, false);
+
+        Helper helper = new Helper(getActivity().getAssets());
+
         mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
         mOption1Text = (TextView) view.findViewById(R.id.option1Text);
         mOption2Text = (TextView) view.findViewById(R.id.option2Text);
@@ -131,6 +130,15 @@ public class Vote extends Fragment {
         mOption2Image = (ImageView) view.findViewById(R.id.option2Image);
         mOption1Vote =  (Button) view.findViewById(R.id.voteOption1);
         mOption2Vote =  (Button) view.findViewById(R.id.voteOption2);
+
+        helper.setFontStyle((TextView) view.findViewById(R.id.option1));
+        helper.setFontStyle((TextView) view.findViewById(R.id.option2));
+        helper.setFontStyle(mOption1Text);
+        helper.setFontStyle(mOption2Text);
+        helper.setFontStyle(mOption1Comment);
+        helper.setFontStyle(mOption2Comment);
+        helper.setFontStyle(mOption1Vote);
+        helper.setFontStyle(mOption2Vote);
 
         mUserID = ((myApplication) getActivity().getApplication()).getUserID();
        // List<QuestionWithDetail> questionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
