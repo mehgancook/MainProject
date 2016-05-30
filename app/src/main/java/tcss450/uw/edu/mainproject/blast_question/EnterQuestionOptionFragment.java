@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -27,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.followers_askers_groups.FollowListFragment;
@@ -54,6 +56,7 @@ public class EnterQuestionOptionFragment extends Fragment {
     private ImageView mImageView;
     private int mQuestionID;
     private List<Question> mQuestions;
+    private Helper mHelper;
 
     public EnterQuestionOptionFragment() {
         // Required empty public constructor
@@ -64,11 +67,20 @@ public class EnterQuestionOptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_enter_question_option, container, false);
+        mHelper = new Helper(getActivity().getAssets());
+        mHelper.setFontStyle((TextView) mView.findViewById(R.id.textView));
+        mHelper.setFontStyle((TextView) mView.findViewById(R.id.take_picture));
+        mHelper.setFontStyle((TextView) mView.findViewById(R.id.textView2));
+        mHelper.setFontStyle((TextView) mView.findViewById(R.id.text_comment));
+        mHelper.setFontStyle((TextView) mView.findViewById(R.id.add_more_options));
+        mHelper.setFontStyle((TextView) mView.findViewById(R.id.done_with_options));
+
         mQuestionDetail = new ArrayList<>();
         mOptionsCounter = 0;
         mUserDB = new UserDB(getActivity());
         mEmail = mUserDB.getUsers().get(0).getEmail();
         mEditTextOption = (EditText) mView.findViewById(R.id.text_question);
+        mHelper.setFontStyle(mEditTextOption);
       //  mTextOption  = mEditTextOption.getText().toString();
         mEditTextComment = (EditText) mView.findViewById(R.id.text_comment);
      //   mTextComment = mEditTextComment.getText().toString();

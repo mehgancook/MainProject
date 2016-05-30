@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.myApplication;
+import tcss450.uw.edu.mainproject.Helper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,13 +46,24 @@ public class VoteResultsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_vote_results, container, false);
         mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
 
+        Helper helper = new Helper(getActivity().getAssets());
+
         mOption1Text = (TextView) view.findViewById(R.id.option1Text);
         mOption2Text = (TextView) view.findViewById(R.id.option2Text);
         mResults1 = (TextView) view.findViewById(R.id.option1ResultPercent);
         mResults2 = (TextView) view.findViewById(R.id.option2ResultPercent);
         mOption1Image = (ImageView) view.findViewById(R.id.option1Image);
         mOption2Image = (ImageView) view.findViewById(R.id.option2Image);
-      //  List<QuestionWithDetail> setViews = new ArrayList<>();
+
+        helper.setFontStyle((TextView) view.findViewById(R.id.option1));
+        helper.setFontStyle((TextView) view.findViewById(R.id.option2));
+        helper.setFontStyle(mOption1Text);
+        helper.setFontStyle(mOption2Text);
+        helper.setFontStyle(mResults1);
+        helper.setFontStyle(mResults2);
+
+
+        //  List<QuestionWithDetail> setViews = new ArrayList<>();
 //        for (int i = 0; i < mQuestionWithDetail.size(); i++) {
 //            if (i == 0) {
 //                mOption1Text.setText(mQuestionWithDetail.get(i).getQuestionText());
