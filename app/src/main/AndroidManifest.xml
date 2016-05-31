@@ -43,8 +43,9 @@
         <activity android:name=".authenticate.RegisterUserActivity" />
         <activity android:name=".authenticate.LoginUserActivity" />
         <activity android:name=".blast_question.BlastQuestionActivity" />
-        <activity android:name=".voting_reviewing_questions.VotingActivity"></activity>
-        <activity android:name=".followers_askers_groups.ViewGroups"></activity>
+        <activity android:name=".voting_reviewing_questions.VotingActivity" />
+        <activity android:name=".followers_askers_groups.ViewGroups" />
+        <activity android:name=".account.ProfileActivity"></activity>
     </application>
 
 </manifest>

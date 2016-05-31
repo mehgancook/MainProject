@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.account.ProfileActivity;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.User;
@@ -221,7 +222,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
     // Go to Followers
     public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
     // Go To Settings TODO : Change to Settings.class
-    public void goToSettings(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
 
     // End Navigation Methods
 
