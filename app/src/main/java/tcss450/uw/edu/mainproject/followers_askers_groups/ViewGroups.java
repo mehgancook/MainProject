@@ -1,11 +1,18 @@
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
@@ -32,7 +39,6 @@ public class ViewGroups extends AppCompatActivity implements
         mGroupListFragment = new GroupListFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, mGroupListFragment)
-                .addToBackStack(null)
                 .commit();
 
     }
@@ -53,6 +59,37 @@ public class ViewGroups extends AppCompatActivity implements
     }
 
     // Start Navigation Methods
+
+    public void addGroup(View v) {
+        String groupName = ((EditText) findViewById(R.id.newGroupName)).getText().toString();
+
+        if (groupName.trim().equals("")) {
+            Toast.makeText(getApplicationContext(), "Please, enter a name.", Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        SpecialAsyncTask task = new SpecialAsyncTask();
+        task.prepToast("Added " + groupName, getApplicationContext());
+
+        StringBuilder sb = new StringBuilder("http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=");
+        try {
+            SharedPreferences sharedPreferences =
+                    getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+            int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
+
+            String insertString = "INSERT INTO `Group` VALUES ('', '" + groupName + "', '" + myUserid + "');";
+            System.out.print(insertString);
+            sb.append(URLEncoder.encode(insertString, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        task.execute(sb.toString());
+        Intent intent = new Intent();
+        intent.setClass(this, this.getClass());
+        this.startActivity(intent);
+        this.finish();
+
+    }
 
     // Go to Blast Question
     public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}

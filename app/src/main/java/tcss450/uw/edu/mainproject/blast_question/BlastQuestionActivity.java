@@ -37,7 +37,7 @@ import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
-public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener{
+public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener {
  private List<User> mSendToUsers;
     private Button mSendButton;
     private Button mSendToAllButton;

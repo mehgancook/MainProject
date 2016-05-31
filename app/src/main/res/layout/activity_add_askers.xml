@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/wrapper"
-    android:padding="0dp"
-    android:layout_margin="0dp"
-    android:gravity="bottom"
-    android:weightSum="1"
-    tools:context=".followers_askers_groups.ViewGroups">
+    style="@style/Wrapper"
+    tools:context=".followers_askers_groups.AddAskersActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,32 +12,13 @@
         android:padding="0dp"
         android:layout_margin="0dp"
         android:layout_weight="1">
+    <TextView style="@style/Title"
+        android:id="@+id/title"
+        android:text="Click to Add Askers"/>
 
         <include layout="@layout/content_view_groups" />
 
     </LinearLayout>
-    <EditText style="@style/EditText"
-        android:id="@+id/newGroupName"
-        android:hint="Enter New Group Name Here"
-        android:padding="20px"
-        android:textSize="20dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
-        android:onClick="addGroup"
-        android:gravity="center_horizontal" />
-    <TextView style="@style/SubmitButton"
-        android:id="@+id/add_group"
-        android:layout_width="match_parent"
-        android:text="Add a group"
-        android:layout_gravity="right"
-        android:padding="20px"
-        android:textSize="20dp"
-        android:layout_marginBottom="60px"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
-        android:textAllCaps="true"
-        android:onClick="addGroup"
-        android:gravity="center_horizontal" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
