@@ -2,6 +2,7 @@ package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -45,7 +46,7 @@ public class Vote extends Fragment {
     public static String QUESTION_SELECTED = "questionSelected";
     public static String UPDATE_QUESTIONMEMBER_URL = "http://cssgate.insttech.washington.edu/~_450atm4/" +
             "zombieturtles.php?totallyNotSecure=update+QuestionMember+set+questionanswered+" +
-            "%3D+%27true%27+where+questionmemberid+%3D+";
+            "%3D+%27true%27%2C+optionpicked+%3D+";
     public static String UPDATE_QUESTIONDETAIL_URL = "http://cssgate.insttech.washington.edu/~_450atm4/" +
             "zombieturtles.php?totallyNotSecure=update+QuestionDetail+set+votecount+%3D+";
     public int mUserID;
@@ -172,13 +173,15 @@ public class Vote extends Fragment {
                         .setMessage("Are you sure you want to vote for option 1?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                String url = buildURL();
+                                String url = buildURL(1);
                                 AnswerQuestionTask task = new AnswerQuestionTask();
                                 task.execute(url);
                                 String url1 = buildDetailURL(0);
                                 AnswerQuestionTask task1 = new AnswerQuestionTask();
                                 task1.execute(url1);
                                 Toast.makeText(getContext(), "Option 1 picked!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), VotingActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -201,7 +204,7 @@ public class Vote extends Fragment {
                         .setMessage("Are you sure you want to vote for option 2?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                String url = buildURL();
+                                String url = buildURL(2);
                                 AnswerQuestionTask task = new AnswerQuestionTask();
                                 task.execute(url);
                                 String url1 = buildDetailURL(1);
@@ -209,6 +212,8 @@ public class Vote extends Fragment {
                                 AnswerQuestionTask task1 = new AnswerQuestionTask();
                                 task1.execute(url1);
                                 Toast.makeText(getContext(), "Option 2 picked!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), VotingActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -247,12 +252,12 @@ public class Vote extends Fragment {
      * Build the url string based on the currently logged in user email address
      * @return the url
      * */
-    public String buildURL() {
+    public String buildURL(int option) {
         StringBuilder sb = new StringBuilder(UPDATE_QUESTIONMEMBER_URL);
         UserDB userDB = new UserDB(getActivity());
        // String email = userDB.getUsers().get(0).getEmail();
         try {
-            String needsEncode = mUserID + " and questionid = " + mVoteId;
+            String needsEncode = option + " where questionmemberid = " + mUserID + " and questionid = " + mVoteId;
             sb.append(URLEncoder.encode(needsEncode, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

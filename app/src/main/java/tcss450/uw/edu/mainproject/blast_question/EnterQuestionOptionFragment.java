@@ -113,8 +113,8 @@ public class EnterQuestionOptionFragment extends Fragment {
                     mQuestionDetail.add(questionDetail);
                     Log.i("question detail size", mQuestionDetail.size() + "");
                     Log.i("mOptionsCounter", mOptionsCounter + "");
-                    mEditTextComment.setText(null);
-                    mEditTextOption.setText(null);
+                    mEditTextComment.setText("");
+                    mEditTextOption.setText("");
                     if (mImageView != null)
                     mImageView.setImageDrawable(null);
                     mImageView = null;
@@ -140,10 +140,10 @@ public class EnterQuestionOptionFragment extends Fragment {
                             .show();
                 } else {
                     if (TextUtils.isEmpty(mTextOption)) {
-                        mTextOption = null;
+                        mTextOption = "";
                     }
                     if (TextUtils.isEmpty(mTextComment)) {
-                        mTextComment = null;
+                        mTextComment = "";
                     }
                     QuestionDetail questionDetail = new QuestionDetail(mQuestionID + "", mTextOption, mTextComment, mImage, 0 + "");
                     mQuestionDetail.add(questionDetail);

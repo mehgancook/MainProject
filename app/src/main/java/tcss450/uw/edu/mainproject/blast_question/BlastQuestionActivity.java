@@ -233,7 +233,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
     private String insertFollowerURL() {
         StringBuilder sb = new StringBuilder();
         sb.append(BLAST_QUESTION);
-        String url = "insert into QuestionMember values (" + mQuestionID + "," + mFollowerID+ ", 'false');";
+        String url = "insert into QuestionMember values (" + mQuestionID + "," + mFollowerID+ ", 'false', '');";
         try {
             url = URLEncoder.encode(url, "UTF-8");
         } catch (Exception exception) {

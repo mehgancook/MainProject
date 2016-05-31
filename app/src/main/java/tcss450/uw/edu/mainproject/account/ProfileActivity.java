@@ -74,6 +74,21 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
 //    public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
     @Override
     public void onPastAnsweredListFragmentInteraction(QuestionWithDetail questionWithDetail) {
+        AnsweredQuestionDetailsFragment details = new AnsweredQuestionDetailsFragment();
+        int id = questionWithDetail.getQuestionId();
+        List<QuestionWithDetail> questions = ((myApplication) getApplication()).getQuestionList();
+        for (int i = 0; i < questions.size(); i++) {
+            if (questions.get(i).getQuestionId() != id) {
+                // if (!questions.get(i).getQuestionName().equals(name)) {
+                questions.remove(i);
+                i--;
+            }
+        }
+        ((myApplication) getApplication()).setCurrentQuestion(questions);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, details)
+                .addToBackStack(null)
+                .commit();
 
     }
 
