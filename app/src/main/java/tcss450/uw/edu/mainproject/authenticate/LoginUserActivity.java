@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,19 +19,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import tcss450.uw.edu.mainproject.Helper;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
+import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
+import tcss450.uw.edu.mainproject.followers_askers_groups.SpecialAsyncTask;
 import tcss450.uw.edu.mainproject.model.User;
 /**
  * Login User activity will allow a user to log in to our app.
@@ -149,6 +150,23 @@ public class LoginUserActivity extends AppCompatActivity {
                 // the database in other activities.
                 mUserDB.deleteUsers();
                 mUserDB.insertUser(email);
+
+                // Added by Tony to pull userid from db
+                String url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+                SpecialAsyncTask task = new SpecialAsyncTask();
+                task.prepToast("Added ", getApplicationContext());
+                int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
+                if (myUserid == -1) {
+                    task.setGetUserId(true);
+                    String selectUserId = "Select userid FROM User WHERE email = '" + email + "';";
+                    try {
+                        url += URLEncoder.encode(selectUserId, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    task.execute(url);
+                }
+
             } else {
                 Toast.makeText(this, "Password is incorrect! Please try again.", Toast.LENGTH_LONG).show();
                 mPassword.requestFocus();

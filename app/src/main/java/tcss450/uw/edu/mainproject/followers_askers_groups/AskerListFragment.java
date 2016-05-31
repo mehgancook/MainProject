@@ -6,7 +6,6 @@
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -50,7 +49,7 @@ public class AskerListFragment extends Fragment {
     /**Recycle view*/
     private RecyclerView mRecyclerView;
     /**URL to retrieve user information*/
-    private static final String ASKER_LIST_URL
+    private String ASKER_LIST_URL
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Askers%2CUser+where+" +
             "User.userid+%3D+Askers.askerid+and+Askers.userid+%3D+%0D%0A%28select+userid+" +
@@ -101,6 +100,16 @@ public class AskerListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_askerlist_list, container, false);
+        Bundle args = getArguments();
+        if (args != null) {
+            // If args are passed, change the asker list url
+            ASKER_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
+                    "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Askers%2CUser+where+" +
+                    "User.userid+%3D+Askers.askerid+and+Askers.userid+%21%3D+%0D%0A%28select+userid+" +
+                    "from+User+where+email+%3D+%27";
+
+        }
+
         String url = buildURL();
 
         // Set the adapter
@@ -240,8 +249,7 @@ public class AskerListFragment extends Fragment {
             // Everything is good, show the list of courses.
             if (!mAskers.isEmpty()) {
 
-                mRecyclerView.setAdapter(new MyAskerListRecyclerViewAdapter(mAskers, mListener,
-                        Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
+                mRecyclerView.setAdapter(new MyAskerListRecyclerViewAdapter(mAskers, mListener));
             }
         }
 

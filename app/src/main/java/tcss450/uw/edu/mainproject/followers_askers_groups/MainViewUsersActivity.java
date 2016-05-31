@@ -42,8 +42,11 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
     /**The askers button*/
     private TextView mAskerButton;
     /**helper class for styles*/
-    private TextView mAddAskerButton;
     private Helper mHelper;
+    /** Add Asker Button */
+    private TextView mAddAskerButton;
+    /** View Group Button */
+    private TextView mViewGroupButton;
 
     /**
      * onCreate
@@ -61,9 +64,13 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
 
         mFollowButton = (TextView) findViewById(R.id.followers_button);
         mAskerButton = (TextView) findViewById(R.id.askers_button);
+        mAddAskerButton = (TextView) findViewById(R.id.add_asker);
+        mViewGroupButton = (TextView) findViewById(R.id.view_group);
 
         mHelper.setFontStyle(mFollowButton);
         mHelper.setFontStyle(mAskerButton);
+        mHelper.setFontStyle(mAddAskerButton);
+        mHelper.setFontStyle(mViewGroupButton);
 
         mHelper.setFontStyle(mFollowButton);
         mHelper.setFontStyle(mAskerButton);
@@ -72,7 +79,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         Toolbar tools = (Toolbar) findViewById(R.id.toolbar);
         tools.setCollapsible(false);
 
-        toFollowers(findViewById(R.id.followers_button));
+        toFollowers(mFollowButton);
     }
 
     /**
@@ -142,10 +149,13 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             iconBox = getResources().getDrawable(R.drawable.icon_border, getTheme());
             mAskerButton.setBackground(iconBox);
+
         } else {
             mAskerButton.setBackgroundColor(white);
         }
         mFollowButton.setBackgroundColor(selectedColor);
+        mAddAskerButton.setVisibility(View.GONE);
+        mViewGroupButton.setVisibility(View.VISIBLE);
 
         //if the asker list has been clicked on and is not null, then remove the asker list
         //and replace with the followers list
@@ -178,6 +188,8 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
             mFollowButton.setBackgroundColor(white);
         }
         mAskerButton.setBackgroundColor(selectedColor);
+        mAddAskerButton.setVisibility(View.VISIBLE);
+        mViewGroupButton.setVisibility(View.GONE);
 
         mAskerListFragment = new AskerListFragment();
         /*if the followers list has been clicked on, then remove it from the screen
@@ -193,6 +205,9 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
                     .commit();
         }
     }
+
+    // Go to Add Askers
+    public void goToAddAskersActivity(View v) { startActivity(new Intent(this, AddAskersActivity.class)); }
 
     // Go to Groups
     public void goToGroups(View v) { startActivity(new Intent(this, ViewGroups.class)); }

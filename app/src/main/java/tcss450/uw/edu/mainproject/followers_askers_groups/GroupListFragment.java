@@ -1,6 +1,7 @@
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tcss450.uw.edu.mainproject.R;
-import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.Group;
 
 /**
@@ -138,10 +138,12 @@ public class GroupListFragment extends Fragment {
      * */
     public String buildURL() {
         StringBuilder sb = new StringBuilder(GROUP_LIST_URL);
-        UserDB userDB = new UserDB(getActivity());
-        String email = userDB.getUsers().get(0).getEmail();
         try {
-            String selectString = "SELECT * FROM `Group` WHERE userid = '" + 1 + "';";
+            SharedPreferences sharedPreferences =
+                    getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+            int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
+
+            String selectString = "SELECT * FROM `Group` WHERE userid = '" + myUserid + "';";
             sb.append(URLEncoder.encode(selectString, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -230,6 +232,7 @@ public class GroupListFragment extends Fragment {
                 mRecyclerView.setAdapter(new MyGroupRecyclerViewAdapter(mGroups, mListener,
                         Typeface.createFromAsset(getActivity().getAssets(), "fonts/Oswald-Regular.ttf")));
             }
+
         }
 
 
