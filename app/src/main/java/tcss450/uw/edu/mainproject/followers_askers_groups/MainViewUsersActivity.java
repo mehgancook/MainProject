@@ -120,6 +120,9 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
             return true;
 
         }
+        if (id == R.id.action_email) {
+
+        }
         return super.onOptionsItemSelected(item);
     }
     /**The list fragment ineraction will open the users detail fragment if
