@@ -72,6 +72,11 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 .replace(R.id.blast_question_container, enterQuestionFragment)
                 .commit();
     }
+    /**
+     * On create options menu
+     * @param menu the menu
+     * @return a bolean
+     * */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -83,6 +88,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
      * @param item menu item
      * @return boolean
      * */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -103,7 +109,50 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
             return true;
 
         }
-        return  super.onOptionsItemSelected(item);
+        if (id == R.id.action_email) {
+            String title = "";
+            String toastMessage = "";
+            SharedPreferences sharedPreferences =
+                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+            if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), false)) {
+                title = "Turn off notifications?";
+                toastMessage = "You will not longer send emails from Slick Pick!";
+            } else {
+                title = "Turn on notifications?";
+                toastMessage = "You will now send emails from Slick Pick!";
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle("Email Notifications")
+                    .setMessage(title)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String toastMessage = "";
+                            SharedPreferences sharedPreferences =
+                                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                            if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), true)) {
+                                toastMessage = "You will no longer send emails from Slick Pick!";
+                                sharedPreferences =
+                                        getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), false).commit();
+                            } else {
+                                toastMessage = "You will now send emails from Slick Pick!";
+                                sharedPreferences =
+                                        getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), true).commit();
+                            }
+                            Toast.makeText(getBaseContext(),toastMessage , Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

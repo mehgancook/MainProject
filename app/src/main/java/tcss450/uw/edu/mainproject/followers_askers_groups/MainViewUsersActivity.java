@@ -6,17 +6,21 @@
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
@@ -24,6 +28,7 @@ import tcss450.uw.edu.mainproject.account.ProfileActivity;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 
@@ -121,7 +126,47 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
 
         }
         if (id == R.id.action_email) {
+            String title = "";
+            String toastMessage = "";
+            SharedPreferences sharedPreferences =
+                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+            if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), false)) {
+                title = "Turn off notifications?";
+                toastMessage = "You will not longer send emails from Slick Pick!";
+            } else {
+                title = "Turn on notifications?";
+                toastMessage = "You will now send emails from Slick Pick!";
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle("Email Notifications")
+                    .setMessage(title)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String toastMessage = "";
+                            SharedPreferences sharedPreferences =
+                                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                            if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), true)) {
+                                toastMessage = "You will no longer send emails from Slick Pick!";
+                                sharedPreferences =
+                                        getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), false).commit();
+                            } else {
+                                toastMessage = "You will now send emails from Slick Pick!";
+                                sharedPreferences =
+                                        getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), true).commit();
+                            }
+                            Toast.makeText(getBaseContext(),toastMessage , Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }

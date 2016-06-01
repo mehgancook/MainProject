@@ -144,7 +144,9 @@ public class RegisterUserActivity extends AppCompatActivity {
         String url = buildCourseURL();
         AddUserTask task = new AddUserTask();
         task.execute(url);
-
+        SharedPreferences sharedPreferences =
+                getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), true).commit();
         mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
         if (mUserDB == null) {
             mUserDB = new UserDB(this);

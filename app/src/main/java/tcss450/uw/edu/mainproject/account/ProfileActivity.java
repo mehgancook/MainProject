@@ -1,10 +1,16 @@
 package tcss450.uw.edu.mainproject.account;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +26,7 @@ import java.util.List;
 
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
@@ -43,6 +50,88 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, pastAnsweredFragment)
                 .commit();
+    }
+    /**
+     * On create options menu
+     * @param menu the menu
+     * @return a bolean
+     * */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    /**
+     * on options item selected
+     * @param item menu item
+     * @return boolean
+     * */
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //will log the user out
+        if (id == R.id.action_logout) {
+            SharedPreferences sharedPreferences =
+                    getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false)
+                    .commit();
+            //will return to the main login activity
+            Intent i = new Intent(this, MainLoginActivity.class);
+            startActivity(i);
+            finish();
+            return true;
+
+        }
+        if (id == R.id.action_email) {
+            String title = "";
+            String toastMessage = "";
+            SharedPreferences sharedPreferences =
+                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+            if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), false)) {
+                title = "Turn off notifications?";
+                toastMessage = "You will not longer send emails from Slick Pick!";
+            } else {
+                title = "Turn on notifications?";
+                toastMessage = "You will now send emails from Slick Pick!";
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle("Email Notifications")
+                    .setMessage(title)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String toastMessage = "";
+                            SharedPreferences sharedPreferences =
+                                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                            if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), true)) {
+                                toastMessage = "You will no longer send emails from Slick Pick!";
+                                sharedPreferences =
+                                        getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), false).commit();
+                            } else {
+                                toastMessage = "You will now send emails from Slick Pick!";
+                                sharedPreferences =
+                                        getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+                                sharedPreferences.edit().putBoolean(getString(R.string.YESEMAIL), true).commit();
+                            }
+                            Toast.makeText(getBaseContext(),toastMessage , Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
