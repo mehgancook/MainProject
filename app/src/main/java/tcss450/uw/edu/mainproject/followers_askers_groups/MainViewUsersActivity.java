@@ -255,21 +255,28 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         }
     }
 
-    // Go to Add Askers
+    /** Go to Add Askers
+     * @param v the view*/
     public void goToAddAskersActivity(View v) { startActivity(new Intent(this, AddAskersActivity.class)); }
 
-    // Go to Groups
+    /** Go to Groups
+     * @param v the view*/
     public void goToGroups(View v) { startActivity(new Intent(this, ViewGroups.class)); }
+
 
     // Start Navigation Methods
 
-    // Go to Blast Question
+    /** Go to Blast Question activity
+     * @param v the view*/
     public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
-    // Go to Home
+    /** Go to Home activity
+     * @param v the view */
     public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
-    // Go to Followers
+    /** Go to Followers activity
+     * @param v the view*/
     public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
-    // Go To Settings TODO : Change to Settings.class
+    /** Go To Settings activity
+     * @param v the view*/
     public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
 
     // End Navigation Methods

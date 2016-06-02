@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
@@ -18,6 +23,7 @@ import java.net.URL;
 import tcss450.uw.edu.mainproject.R;
 
 /**
+ * Async task that is used to add askers.
  * Created by anthonyzullo on 5/30/16.
  */
 public class SpecialAsyncTask  extends AsyncTask<String, Void, String> {
@@ -25,14 +31,21 @@ public class SpecialAsyncTask  extends AsyncTask<String, Void, String> {
     private String mToastString;
     /** Context of this */
     private Context mContext;
-
+    /**boolean to get user id*/
     private boolean mGetUserId = false;
 
+    /**Toast used when adding a user
+     * @param toast the string to toast with
+     * @param con the context*/
     public void prepToast(String toast, Context con) {
         mToastString = toast;
         mContext = con;
     }
 
+    /**
+     * sets the get user id
+     * @param gettingUserId gets the user id
+     * */
     public void setGetUserId(boolean gettingUserId) {
         mGetUserId = gettingUserId;
     }

@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.graphics.Typeface;
@@ -15,14 +20,18 @@ import tcss450.uw.edu.mainproject.model.Group;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Group} and makes a call to the
  * specified {@link GroupListFragment.OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecyclerViewAdapter.ViewHolder> {
 
+    /**List of groups*/
     private final List<Group> mValues;
+    /**The listener*/
     private final GroupListFragment.OnListFragmentInteractionListener mListener;
+    /**font used for style*/
     private Typeface mFont;
-
+    /**Constructor for recycler view
+     * @param items the users
+     * @param listener the listener*/
     public MyGroupRecyclerViewAdapter(List<Group> items, GroupListFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
@@ -37,14 +46,22 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
         this(items, listener);
         mFont = font;
     }
-
+    /**
+     * on create view holder
+     * @param parent the view group
+     * @param viewType the view type
+     * */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_group, parent, false);
         return new ViewHolder(view);
     }
-
+    /**
+     * on bind view holder
+     * @param holder the view holder
+     * @param position the position
+     * */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
@@ -61,18 +78,28 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
             }
         });
     }
-
+    /**
+     * get item count
+     * @return amount of users
+     * */
     @Override
     public int getItemCount() {
         return mValues.size();
     }
-
+    /**
+     * View holder class to hold the recylcer view
+     * */
     public class ViewHolder extends RecyclerView.ViewHolder {
+        /**the view*/
         public final View mView;
+        /** the text view of id*/
         public final TextView mIdView;
+        /**the text view of content*/
         public final TextView mContentView;
+        /**The group item*/
         public Group mItem;
-
+        /**Constructor of the viewholder
+         * @param view the view*/
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -85,7 +112,10 @@ public class MyGroupRecyclerViewAdapter extends RecyclerView.Adapter<MyGroupRecy
                 mContentView.setTypeface(mFont);
             }
         }
-
+        /**
+         * tostring
+         * @return string
+         * */
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

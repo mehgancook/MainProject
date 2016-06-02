@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
@@ -15,15 +20,26 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.account.ProfileActivity;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.Group;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
+/**
+ * View groups allows a user to view the current groups
+ *
+ * */
 public class ViewGroups extends AppCompatActivity implements
     GroupListFragment.OnListFragmentInteractionListener {
 
+    /**
+     * Group list fragment that will be placed on the activity.
+     * */
     private GroupListFragment mGroupListFragment;
-
+    /**
+     * onCreate
+     * @param savedInstanceState the saved instance
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +59,10 @@ public class ViewGroups extends AppCompatActivity implements
 
     }
 
-
+    /**
+     * onListFragmentInteraction allows the user to see the details about a group
+     * @param group the group to view details
+     * */
     @Override
     public void onListFragmentInteraction(Group group) {
         GroupListFragment groupDetailFragment = new GroupListFragment();
@@ -60,6 +79,10 @@ public class ViewGroups extends AppCompatActivity implements
 
     // Start Navigation Methods
 
+    /**
+     * add group adds a group
+     * @param v the view
+     * */
     public void addGroup(View v) {
         String groupName = ((EditText) findViewById(R.id.newGroupName)).getText().toString();
 
@@ -91,14 +114,18 @@ public class ViewGroups extends AppCompatActivity implements
 
     }
 
-    // Go to Blast Question
+    /** Go to Blast Question activity
+     * @param v the view*/
     public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
-    // Go to Home
+    /** Go to Home activity
+     * @param v the view */
     public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
-    // Go to Followers
+    /** Go to Followers activity
+     * @param v the view*/
     public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
-    // Go To Settings TODO : Change to Settings.class
-    public void goToSettings(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    /** Go To Settings activity
+     * @param v the view*/
+    public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
 
     // End Navigation Methods
 

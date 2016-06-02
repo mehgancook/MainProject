@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.followers_askers_groups;
 
 import android.content.Context;
@@ -28,7 +33,7 @@ import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.model.Group;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment that shows the groups that have been created by a user
  * <p>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
@@ -40,11 +45,17 @@ public class GroupListFragment extends Fragment {
 
     /** String Column Count */
     private static final String ARG_COLUMN_COUNT = "column-count";
+
+    /**Start of the url in order to create a group*/
+    private String GROUP_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+
     /** int column count */
     private int mColumnCount = 1;
+    /**a listener*/
     private OnListFragmentInteractionListener mListener;
-    private String GROUP_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+    /**a list of groups*/
     private List<Group>  mGroups;
+    /**a recycler view*/
     private RecyclerView mRecyclerView;
 
     /**
@@ -133,7 +144,7 @@ public class GroupListFragment extends Fragment {
     }
 
     /**
-     * builds the url to retreive asker lists using the email of the current logged in user
+     * builds the url to retrieve group lists using the userid of the current logged in user
      * @return the url string
      * */
     public String buildURL() {

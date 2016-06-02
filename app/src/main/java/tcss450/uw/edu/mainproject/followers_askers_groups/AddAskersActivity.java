@@ -30,16 +30,11 @@ import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.model.User;
 
 /**
- * This class is the main fragment container that will allow the app user to view their followers
- * and their askers
+ * This class is used to allow the user to add askers to their current asker list
  *
  * */
 public class AddAskersActivity extends AppCompatActivity implements AskerListFragment.OnListFragmentInteractionListener  {
 
-    /**asker list fragment*/
-    private AskerListFragment mAskerListFragment;
-    /**follower list fragment*/
-    private FollowListFragment mFollowListFragment;
     /** helper */
     private Helper mHelper;
 
@@ -154,6 +149,10 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * OnListFragmentInteraction will add an akser when a user is selected from the list
+     * @param user is the user being clicked on
+     * */
     @Override
     public void onListFragmentInteraction(User user) {
         int userid = user.getUserID();
