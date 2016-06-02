@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.blast_question;
 
 
@@ -32,21 +37,35 @@ import tcss450.uw.edu.mainproject.data.UserDB;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * EnterQuestionFragment is the fragment where the user enters the question title.
  */
 public class EnterQuestionFragment extends Fragment {
+    /**Static string to add a question*/
     private final static String ADD_QUESTION
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
-        private String mQuestion;
+    /**The question entered by the user*/
+    private String mQuestion;
+    /**User database to access email*/
     private UserDB mUserDB;
+    /**Email of the user*/
     private String mEmail;
+    /**Helper method for style*/
     private Helper mHelper;
 
+    /**
+     * Empty Constructor
+     * */
     public EnterQuestionFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * On create view
+     * @param savedInstanceState the saved instance state
+     * @param inflater the inflater
+     * @param container the container
+     * @return view
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,10 +82,9 @@ public class EnterQuestionFragment extends Fragment {
         mHelper.setFontStyle((TextView) view.findViewById(R.id.question));
         mHelper.setFontStyle((TextView) view.findViewById(R.id.select_options));
         mHelper.setFontStyle((TextView) view.findViewById(R.id.enter_question));
-        final String url = buildCourseURL();
+      //  final String url = buildCourseURL();
 
         Button options = (Button) view.findViewById(R.id.select_options);
-      //  options.setOnClickListener(this);
         options.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -79,9 +97,7 @@ public class EnterQuestionFragment extends Fragment {
                     editText.requestFocus();
                     return;
                 }
-                String url = buildCourseURL();
-                Log.i("url", url);
-                Log.i("mquestion", mQuestion);
+                String url = buildURL();
                 AddQuestionTask task = new AddQuestionTask();
                 task.execute(url);
                 Fragment options = new EnterQuestionOptionFragment();
@@ -98,13 +114,13 @@ public class EnterQuestionFragment extends Fragment {
         return view;//inflater.inflate(R.layout.fragment_enter_question, container, false);
     }
 
-
-
-
-    private String buildCourseURL() {
+    /**
+     * Builds the Url to enter a question
+     * @return the enocoded string
+     * */
+    private String buildURL() {
         StringBuilder sb = new StringBuilder();
         sb.append(ADD_QUESTION);
-    //    String selectStatement = "(select userid from User where email = '"  + mEmail + "')";
         String url = "insert into Question values ('','" + mQuestion + "','" + mEmail + "');";
         try {
             url = URLEncoder.encode(url, "UTF-8");
@@ -118,7 +134,7 @@ public class EnterQuestionFragment extends Fragment {
 
 
     /**
-     * DownloadUsersTask is an async class that will acccess the database and retreive the current list of users
+     * AddQuestionTask is an async class that will acccess the database and add the question
      * @author Meneka Abraham and Mehgan Cook
      * */
     private class AddQuestionTask extends AsyncTask<String, Void, String> {
@@ -176,17 +192,6 @@ public class EnterQuestionFragment extends Fragment {
         protected void onPostExecute(String result) {
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                String status = (String) jsonObject.get("errors");
-                if (status.equals("none")) {
-//                    Intent i = new Intent(mMe, MainViewUsersActivity.class);
-//                    startActivity(i);  START THE NEW FRAGMENT
-
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Email is already registered! Please log in"
-
-                            , Toast.LENGTH_LONG)
-                            .show();
-                }
             } catch (JSONException e) {
                 Toast.makeText(getActivity().getApplicationContext(), "Something wrong with the data" +
                         e.getMessage(), Toast.LENGTH_LONG).show();

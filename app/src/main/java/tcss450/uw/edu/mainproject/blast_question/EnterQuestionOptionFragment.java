@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.blast_question;
 
 
@@ -38,31 +43,56 @@ import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Enter Question Option Fragment is where the user enters the details to the question
+ * that they want to ask.
  */
 public class EnterQuestionOptionFragment extends Fragment {
+    /**Static string that downlads the question*/
     private final static String DOWNLOAD_QUESTION
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=select+%2A+from+Question%3B";
+    /**List of the question details*/
     public List<QuestionDetail> mQuestionDetail;
+    /**the view*/
     private View mView;
+    /**user database that holds the email*/
     private UserDB mUserDB;
+    /**the email of the user*/
     private String mEmail;
+    /**The string version of the image*/
     private String mImage;
+    /**The edittext that allows user to enter text option*/
     private EditText mEditTextOption;
+    /**Counter to keep track of how many options have been answered*/
     private int mOptionsCounter;
+    /**The text option the user input*/
     private String mTextOption;
+    /**Edit text field for user to enter a comment*/
     private EditText mEditTextComment;
+    /**The comment entered by the user*/
     private String mTextComment;
+    /**Imageview to display image taken by the user*/
     private ImageView mImageView;
+    /**The question id*/
     private int mQuestionID;
+    /**List of questions*/
     private List<Question> mQuestions;
+    /**Helper method for style*/
     private Helper mHelper;
 
+    /**
+     * Empty constructor
+     * */
     public EnterQuestionOptionFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * On create view
+     * @param savedInstanceState the saved instance state
+     * @param inflater the inflater
+     * @param container the container
+     * @return view
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -127,8 +157,6 @@ public class EnterQuestionOptionFragment extends Fragment {
                 }
             }
         });
-       // Button imDone =  (Button) mView.findViewById(R.id.done_with_options);
-       // Log.i("mOptionsCounter", mOptionsCounter + "");
 
         imDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +194,14 @@ public class EnterQuestionOptionFragment extends Fragment {
         // Inflate the layout for this fragment
         return mView;
     }
+
+        /**
+         * OnActivityResult is used to get the picture that was taken with the camera
+         * @param requestCode  the request code
+         * @param resultCode the result code
+         * @param data the data
+         *
+         * */
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mImageView = (ImageView) mView.findViewById(R.id.imageView);
@@ -179,6 +215,14 @@ public class EnterQuestionOptionFragment extends Fragment {
             }
          //   Log.i("Image", mImage);
     }
+
+    /**
+     * BitMapToString changes the bitmap image to a string view to be able
+     * to be stored in the database
+     * @param bitmap the bitmap image
+     * @return the string version of the bitmap
+     *
+     * */
     public String BitMapToString(Bitmap bitmap){
 
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
@@ -190,8 +234,12 @@ public class EnterQuestionOptionFragment extends Fragment {
 
     }
 
+    /**StringToBitMap changes a string version of the image
+     * into a bitmap image
+     * @param encodedString the string version of an image
+     * @return the bitmap version of the image
+     * */
     public Bitmap StringToBitMap(String encodedString){
-        Log.i("encoded string", encodedString);
         try{
             byte [] encodeByte=Base64.decode(encodedString, Base64.DEFAULT);
             Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);

@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.blast_question;
 
 import android.content.Context;
@@ -38,21 +43,45 @@ import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
+
+/**
+ * Blast Question Activity allows the user to send a question to their followers.
+ * This Activity contains the fragments in order to add details to a question as well
+ * as send a question
+ *
+ * */
 public class BlastQuestionActivity extends AppCompatActivity implements FollowListFragment.OnListFragmentInteractionListener {
- private List<User> mSendToUsers;
+    /**Holds the list of users to send the question to*/
+    private List<User> mSendToUsers;
+    /**Button to send to individual users*/
     private Button mSendButton;
+    /**Buttom to send to all users*/
     private Button mSendToAllButton;
+    /**The question id*/
     private int mQuestionID;
+    /**Holds the list of all the users in oder to send to all users*/
     private List<User> mSendToAllFollowers;
+    /**Holds the question details for the question the user is asking*/
     public List<QuestionDetail> mQuestionDetails;
+    /**Holds the question text*/
     private String mQuestionText;
+    /**Holds the question comment*/
     private String mQuestionComment;
+    /**Holds the question image*/
     private String mQuestionImage;
+    /**Contains the follower id to send the question too*/
     private int mFollowerID;
+    /**Owner of the activity*/
     private BlastQuestionActivity mOwner;
-    /**static variable of the first part of the URL for adding a user to the databse*/
+    /**static variable of the first part of the URL for
+     * adding a question to the database*/
     private final static String BLAST_QUESTION
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+
+    /**
+     * OnCreate method to create the actiity
+     * @param savedInstanceState the savedinstancestate
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,10 +183,12 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         }
         return super.onOptionsItemSelected(item);
     }
-
+    /**
+     * OnListFragmentInteraction is the interaction that happens when a follower is selected
+     * @param user is the user that is selected
+     * */
     @Override
     public void onListFragmentInteraction(User user) {
-//        Log.i("question options", ((myApplication) this.getApplication()).getDetailList().size() +"");
         mSendButton.setVisibility(View.VISIBLE);
         if (mSendToUsers == null) {
             mSendToUsers = new ArrayList<>();
@@ -183,7 +214,11 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
             mSendButton.setVisibility(View.GONE);
         }
     }
-
+    /**
+     * blastQuestionAll is the on click for when the send to all followers button is pressed
+     * This wll send the question to all of the followers that a user currently has
+     * @param v the view
+     * */
     public void blastQuestionAll(View v) {
         mQuestionID = ((myApplication) getApplication()).getQuestionID();
         if (mSendToAllFollowers == null) {
@@ -225,6 +260,13 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    /**
+     * blastQuestion will send the question to all of the followers that the user
+     * has selected
+     * @param v the view
+     *
+     * */
     public void blastQuestion(View v) {
         mQuestionID = ((myApplication) getApplication()).getQuestionID();
         String names = mSendToUsers.get(0).getUsername();
@@ -266,6 +308,12 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    /**
+     * insertDetailsURL builds the string for the content that will be placed into the questiondetail
+     * table.
+     * @return string the encoded url
+     * */
     private String insertDetailsURL() {
         StringBuilder sb = new StringBuilder();
         sb.append(BLAST_QUESTION);
@@ -279,6 +327,12 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
         sb.append(url);
         return sb.toString();
     }
+
+    /**
+     * insertFollowerURL builds the url in order to add the currently question and followers
+     * into question member table
+     * @return string the encoded url string
+     * */
     private String insertFollowerURL() {
         StringBuilder sb = new StringBuilder();
         sb.append(BLAST_QUESTION);
@@ -293,7 +347,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
     }
 
     /**
-     * DownloadUsersTask is an async class that will acccess the database and retreive the current list of users
+     * BlastQuestionTask is an async class that will add question informaton into tables.
      * @author Meneka Abraham and Mehgan Cook
      * */
     private class BlastQuestionTask extends AsyncTask<String, Void, String> {
@@ -366,13 +420,17 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
 
     // Start Navigation Methods
 
-    // Go to Blast Question
+    /** Go to Blast Question activity
+     * @param v the view*/
     public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
-    // Go to Home
-    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
-    // Go to Followers
+    /** Go to Home activity
+     * @param v the view */
+     public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    /** Go to Followers activity
+     * @param v the view*/
     public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
-    // Go To Settings TODO : Change to Settings.class
+    /** Go To Settings activity
+     * @param v the view*/
     public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
 
     // End Navigation Methods
