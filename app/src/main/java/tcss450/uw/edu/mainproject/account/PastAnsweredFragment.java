@@ -37,7 +37,7 @@ import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**
- * A fragment representing a list of Followers.
+ * A fragment representing a list of Past answered Questions.
  * Activities containing this fragment MUST implement the {@link OnPastAnsweredListFragmentInteractionListener}
  * interface.
  */
@@ -47,16 +47,15 @@ public class PastAnsweredFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     /**int column count*/
     private int mColumnCount = 1;
-    /**List of users*/
+    /**List of Questions with details*/
     private List<QuestionWithDetail> mQuestionWithDetail;
 
-    private String mQuestionName;
     /**Listener*/
     private OnPastAnsweredListFragmentInteractionListener mListener;
     /**Recycle view*/
     private RecyclerView mRecyclerView;
-    /**String for the url to access the users from the database*/
-    private static final String QUESTIONS_ASKED_URL
+    /**String for the url to access the question with details from the database*/
+    private static final String QUESTIONS_ANSWERED_URL
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+questionanswered%2c+questionname%2C+questionid%2C+questiontext%2C+questioncomment%2C+questionimage%2C" +
             "+votecount%2C+questiondetailid%0D%0Afrom+QuestionDetail+natural+join+QuestionMember+natural+join+Question+where" +
@@ -69,19 +68,6 @@ public class PastAnsweredFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public PastAnsweredFragment() {
-    }
-
-    /**
-     * newInstance of fragment
-     * @param columnCount the column count
-     * */
-    @SuppressWarnings("unused")
-    public static FollowListFragment newInstance(int columnCount) {
-        FollowListFragment fragment = new FollowListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     /**
@@ -109,8 +95,6 @@ public class PastAnsweredFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pastansweredfragment_list, container, false);
         String url = buildURL();
-//        mHelper = new Helper(getActivity().getAssets());
-//        mHelper.setFontStyle((TextView) view.findViewById(R.id.content));
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -120,7 +104,7 @@ public class PastAnsweredFragment extends Fragment {
             } else {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            DownloadFollowersTask task = new DownloadFollowersTask();
+            DownloadQuestionDetailsTask task = new DownloadQuestionDetailsTask();
             task.execute(url);
         }
 
@@ -156,7 +140,7 @@ public class PastAnsweredFragment extends Fragment {
      * @return the url
      * */
     public String buildURL() {
-        StringBuilder sb = new StringBuilder(QUESTIONS_ASKED_URL);
+        StringBuilder sb = new StringBuilder(QUESTIONS_ANSWERED_URL);
         UserDB userDB = new UserDB(getActivity());
         String email = userDB.getUsers().get(0).getEmail();
         try {
@@ -184,9 +168,9 @@ public class PastAnsweredFragment extends Fragment {
         void onPastAnsweredListFragmentInteraction(QuestionWithDetail questionWithDetail);
     }
     /**
-     * Class to download the followeres list in the backgroud using an async task
+     * Class to download the question details list in the backgroud using an async task
      * */
-    private class DownloadFollowersTask extends AsyncTask<String, Void, String> {
+    private class DownloadQuestionDetailsTask extends AsyncTask<String, Void, String> {
         /**
          * call the server in the background
          * @param urls the url

@@ -1,5 +1,9 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.account;
-
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,25 +39,45 @@ import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.Helper;
 
 /**
- * A simple {@link Fragment} subclass.
+ * AnswerQuestionDetailsFragment shows the question details that the user has answered,
+ * as well as shows the way the current votes are going for that question.
  */
 public class AnsweredQuestionDetailsFragment extends Fragment {
-    public static String QUESTION_SELECTED = "questionSelected";
+
+    /**Holds the text for option 1 the user had entered*/
     public TextView mOption1Text;
+    /**Holds the text for option 2 the user had entered*/
     public TextView mOption2Text;
+    /**Holds the image for option 1 the user had entered*/
     public ImageView mOption1Image;
+    /**Holds the image for option 2 the user had entered*/
     public ImageView mOption2Image;
+    /**Holds the voting results for option 1*/
     public TextView mResults1;
+    /**Holds the voting results for option 2*/
     public TextView mResults2;
+    /**Holds the question details for the question selected*/
     private List<QuestionWithDetail> mQuestionWithDetail;
+    /**Displays the users voting results*/
     private TextView mOptionSelectedText;
+    /**Holds the users voting results*/
     private int mOptionSelected;
 
+
+    /**
+     * Constructor for AnsweredQuestionDetailsFragment
+     * */
     public AnsweredQuestionDetailsFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * on create view
+     * @param savedInstanceState the saved instance
+     * @param container of viewGroup
+     * @param inflater inflates the fragment
+     * @return the view
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,11 +86,10 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
         mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
         mOptionSelectedText = (TextView) view.findViewById(R.id.optionPicked);
         String url = buildURL();
-        DownloadUserIDTask task = new DownloadUserIDTask();
+        DownloadOptionSelectedTask task = new DownloadOptionSelectedTask();
         task.execute(url);
 
         Helper helper = new Helper(getActivity().getAssets());
-     //   mOptionSelectedText = (TextView) view.findViewById(R.id.optionPicked);
         mOption1Text = (TextView) view.findViewById(R.id.option1Text);
         mOption2Text = (TextView) view.findViewById(R.id.option2Text);
         mResults1 = (TextView) view.findViewById(R.id.option1ResultPercent);
@@ -80,36 +103,17 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
         helper.setFontStyle(mOption2Text);
         helper.setFontStyle(mResults1);
         helper.setFontStyle(mResults2);
-
-
-        //  List<QuestionWithDetail> setViews = new ArrayList<>();
-//        for (int i = 0; i < mQuestionWithDetail.size(); i++) {
-//            if (i == 0) {
-//                mOption1Text.setText(mQuestionWithDetail.get(i).getQuestionText());
-//                String image1 = mQuestionWithDetail.get(i).getQuestionImage();
-//                image1 = image1.replaceAll(" ","+");
-//                mOption1Image.setImageBitmap(StringToBitMap(image1));
-//            }
-//
-//        }
+        //if there are details available for the question selected
         if (mQuestionWithDetail != null) {
-            //  mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
-            //  mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
-            int half = mQuestionWithDetail.size() / 2;
-            Log.i("Option Selected!", mOptionSelected + "");
+            int half = mQuestionWithDetail.size() / 2; //gets the second option that is in the details list
             mOption1Text.setText(mQuestionWithDetail.get(0).getQuestionText());
             mOption2Text.setText(mQuestionWithDetail.get(half).getQuestionText());
             String image1 = mQuestionWithDetail.get(0).getQuestionImage();
             String image2 = mQuestionWithDetail.get(half).getQuestionImage();
             image1 = image1.replaceAll(" ","+");
             image2 = image2.replaceAll(" ", "+");
-            String s =  "       ";
-            s = s.replaceAll("\\s","+");
-            //Log.i("s", s);
             mOption1Image.setImageBitmap(StringToBitMap(image1));
             mOption2Image.setImageBitmap(StringToBitMap(image2));
-            Log.i("image1", image1);
-            Log.i("image2", image2);
             String result1;
             String result2;
             int voteResults1 = mQuestionWithDetail.get(0).getVoteCount();
@@ -128,20 +132,14 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
                 mResults1.setText(result1);
                 mResults2.setText(result2);
             }
-
-//            if (!image1.equals(null)) {
-//                mOption1Image.setImageBitmap(StringToBitMap(image1));
-//
-//            }
-//            if (!image2.equals(null)) {
-//                mOption2Image.setImageBitmap(StringToBitMap(image2));
-//            }
-
-
         }
         return view;
     }
-
+    /**
+     * Builds the String in order to get the selected option from question selected
+     * @return the string to be used by the async task.
+     *
+     * */
     public String buildURL() {
         StringBuilder sb = new StringBuilder();
         int userid = ((myApplication) getActivity().getApplication()).getUserID();
@@ -172,73 +170,12 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
             return null;
         }
     }
-    public void updateView(QuestionWithDetail questionWithDet) {
-        mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
-
-        // getCurrentQuestion();
-//        mOption1Text = (TextView) view.findViewById(R.id.option1Text);
-//        mOption2Text = (TextView) view.findViewById(R.id.option2Text);
-//        mResults1 = (TextView) view.findViewById(R.id.option1Result);
-//        mResults2 = (TextView) view.findViewById(R.id.option2Result);
-        if (mQuestionWithDetail != null) {
-            //  mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
-            //  mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
-            int half = mQuestionWithDetail.size() / 2;
-            mOption1Text.setText(mQuestionWithDetail.get(0).getQuestionText());
-            mOption2Text.setText(mQuestionWithDetail.get(half).getQuestionText());
-            String image1 = mQuestionWithDetail.get(0).getQuestionImage();
-            String image2 = mQuestionWithDetail.get(half).getQuestionImage();
-            String result1;
-            String result2;
-            int voteResults1 = mQuestionWithDetail.get(0).getVoteCount();
-            int voteResults2 = mQuestionWithDetail.get(half).getVoteCount();
-            if (voteResults1 + voteResults2 != 0) {
-                double votePercentResult1 = (double) voteResults1 / (voteResults1 + voteResults2);
-                double votePercentResult2 = (double) voteResults2 / (voteResults1 + voteResults2);
-                DecimalFormat myFormatter = new DecimalFormat("##.##%");
-                result1 = myFormatter.format(votePercentResult1);
-                result2 = myFormatter.format(votePercentResult2);
-                mResults1.setText(result1);
-                mResults2.setText(result2);
-            } else {
-                result1 = "No votes yet!";
-                result2 = "No votes yet!";
-                mResults1.setText(result1);
-                mResults2.setText(result2);
-            }
-//            Log.i("result1", result1);
-//            Log.i("result2", result2);
-//            mResults1.setText(result1);
-//            mResults2.setText(result2);
-
-//            if (!image1.equals(null)) {
-//                mOption1Image.setImageBitmap(StringToBitMap(image1));
-//
-//            }
-//            if (!image2.equals(null)) {
-//                mOption2Image.setImageBitmap(StringToBitMap(image2));
-//            }
-
-
-        }
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // During startup, check if there are arguments passed to the fragment.
-        // onStart is a good place to do this because the layout has already been
-        // applied to the fragment at this point so we can safely call the method
-        // below that sets the article text.
-        Bundle args = getArguments();
-        if (args != null) {
-            // Set article based on argument passed in
-            updateView((QuestionWithDetail) args.getSerializable(QUESTION_SELECTED));
-        }
-    }
-    private class DownloadUserIDTask extends AsyncTask<String, Void, String> {
+    /**
+     * DownloadOptionSelecctedTask downloads the option that the user selcted for the question
+     * that they have answered.
+     *
+     * */
+    private class DownloadOptionSelectedTask extends AsyncTask<String, Void, String> {
         /**
          * call the server in the background
          * @param urls the url

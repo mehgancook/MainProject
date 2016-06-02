@@ -35,17 +35,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".followers_askers_groups.MainViewUsersActivity" />
+        <activity android:name=".followers_askers_groups.MainViewUsersActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"/>
         <activity android:name=".followers_askers_groups.AddAskersActivity" />
         <activity
             android:name=".authenticate.MainLoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".authenticate.RegisterUserActivity" />
-        <activity android:name=".authenticate.LoginUserActivity" />
-        <activity android:name=".blast_question.BlastQuestionActivity" />
-        <activity android:name=".voting_reviewing_questions.VotingActivity" />
-        <activity android:name=".followers_askers_groups.ViewGroups" />
-        <activity android:name=".account.ProfileActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".authenticate.RegisterUserActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".authenticate.LoginUserActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".blast_question.BlastQuestionActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"
+            />
+
+        <activity android:name=".voting_reviewing_questions.VotingActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".followers_askers_groups.ViewGroups"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"/>
+        <activity android:name=".account.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"></activity>
     </application>
 
 </manifest>
