@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.model;
 
 import org.json.JSONArray;
@@ -8,19 +13,19 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Mehgan on 5/8/2016.
+ * Group holds the information about a group
  */
 public class Group implements Serializable {
-    /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
+    /**GROUP_ID is the groupid, GROUP_NAME is the group name,
      * USER_ID is the user id*/
     private static final String GROUP_ID = "groupid", GROUP_NAME = "groupname",
             USER_ID = "userid";
     /**The group name*/
     private String mGroupName;
-    /***/
+    /**the group id*/
     private String mUserID;
     /**
-     * Constructor for user
+     * Constructor for Group
      * @param groupName the name of the group
      * @param userID the user who started the group
      *
@@ -32,7 +37,7 @@ public class Group implements Serializable {
 
     /**
      * Parses the json string, returns an error message if unsuccessful.
-     * Returns user list if success.
+     * Returns group list if success.
      * @param groupJSON json
      * @return reason or null if successful.
      */
@@ -56,9 +61,17 @@ public class Group implements Serializable {
         return reason;
     }
 
+    /**
+     * Gets the group name
+     * @return the group name
+     * */
     public String getGroupName() {
         return mGroupName;
     }
+    /**
+     * Sets the group name
+     * @param gn is the group name
+     * */
     public void setGroupName(String gn) {
         mGroupName = gn;
     }

@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.model;
 
 import org.json.JSONArray;
@@ -8,23 +13,23 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Mehgan on 5/8/2016.
+ * Holds the information for a question
  */
 public class Question implements Serializable {
-    /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
-     * USER_ID is the user id*/
+    /**QUESTION_ID is the questionid, QUESTION_NAME is the question name,
+     * USER_ID is the user email*/
     private static final String QUESTION_ID = "questionid", QUESTION_NAME = "questionname",
             USER_ID = "useremail";
     /**The group name*/
     private String mQuestionsName;
-    /***/
+    /**The user id*/
     private String mUserID;
-
+    /**The question id*/
     private String mQuestionID;
     /**
-     * Constructor for user
-     * @param questionName the name of the group
-     * @param userID the user who started the group
+     * Constructor for Question
+     * @param questionName the name of the question
+     * @param userID the user who started the question
      *
      * */
     public Question(String questionID, String questionName, String userID) {
@@ -59,16 +64,16 @@ public class Question implements Serializable {
         return reason;
     }
 
-    public String getQuestionName() {
-        return mQuestionsName;
-    }
+    /**
+     * gets the question id
+     * @return the question id
+     * */
     public int getQuestionId() {
         return Integer.parseInt(mQuestionID);
     }
-    public void setQuestionName(String qn) {
-        mQuestionsName = qn;
-    }
 
+    /**Get the user email
+     * @return the user id*/
     public String getUserEmail() {
         return mUserID;
     }

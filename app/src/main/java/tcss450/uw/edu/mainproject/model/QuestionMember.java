@@ -14,30 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User class that holds information about a user
- * @author Mehgan Cook and Tony Zullo
+ * Question member class that holds information about a question member
  */
 public class QuestionMember {
-    /**USERNAME is the username, EMAIL is the email, PASSWORD is the password,
-     * USER_ID is the user id*/
+    /**QUESTION_ID is the questionid, QUESTIOn_MEMBER_ID is the question member id, QUESTION_ANSWEREd
+     * is the question answered, OPTION_PICKED is the option picked*/
     private static final String QUESTION_ID = "questionid", QUESTION_MEMBER_ID = "questionmemberid",
             QUESTION_ANSWERED = "questionanswered", OPTION_PICKED = "optionpicked";
-    /**username*/
+    /**question id*/
     private String mQuestionId;
-    /**email address*/
+    /**question member id*/
     private String mQuestionMemberId;
-    /**Password*/
+    /**question answered*/
     private String mQuestionAnswered;
-
+    /**Option picked*/
     private String mOptionPicked;
 
 
     /**
-     * Constructor for user
-     * @param questionId the email address
-     * @param questionMemberId the password
-     * @param questionAnswered the userid
-     * @param optionPicked the username
+     * Constructor for question member
+     * @param questionId the question id
+     * @param questionMemberId the question member id
+     * @param questionAnswered the question answered
+     * @param optionPicked the option picked
      *
      * */
     public QuestionMember(String questionId, String questionMemberId, String questionAnswered, String optionPicked) {
@@ -50,7 +49,7 @@ public class QuestionMember {
 
     /**
      * Parses the json string, returns an error message if unsuccessful.
-     * Returns user list if success.
+     * Returns question member list if success.
      * @param questionMemberJSON json
      * @return reason or null if successful.
      */
@@ -75,6 +74,9 @@ public class QuestionMember {
         }
         return reason;
     }
+
+    /**gets the option that the user voted for
+     * @return the option picked*/
     public int getOptionPicked() {
         return Integer.parseInt(mOptionPicked);
     }
