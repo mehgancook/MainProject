@@ -156,16 +156,7 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
         sb.append("%27%3B");
         return sb.toString();
     }
-    // Start Navigation Methods
 
-//    // Go to Blast Question
-//    public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
-//    // Go to Home
-//    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
-//    // Go to Followers
-//    public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
-//    // Go To Settings TODO : Change to Settings.class
-//    public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
     @Override
     public void onPastAnsweredListFragmentInteraction(QuestionWithDetail questionWithDetail) {
         AnsweredQuestionDetailsFragment details = new AnsweredQuestionDetailsFragment();
