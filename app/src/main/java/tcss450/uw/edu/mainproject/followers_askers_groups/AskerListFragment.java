@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import java.util.List;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 
 /**
  * A fragment representing a list of Askers.
@@ -55,6 +57,9 @@ public class AskerListFragment extends Fragment {
             "User.userid+%3D+Askers.askerid+and+Askers.userid+%3D+%0D%0A%28select+userid+" +
             "from+User+where+email+%3D+%27";
 
+    /**keep track of current state*/
+    private int state;
+
 
 
     /**
@@ -64,18 +69,18 @@ public class AskerListFragment extends Fragment {
     public AskerListFragment() {
     }
 
-    /**
-     * newIstance of the askerlist
-     * @param columnCount the column count
-     * */
-    @SuppressWarnings("unused")
-    public static AskerListFragment newInstance(int columnCount) {
-        AskerListFragment fragment = new AskerListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    /**
+//     * newIstance of the askerlist
+//     * @param columnCount the column count
+//     * */
+//    @SuppressWarnings("unused")
+//    public static AskerListFragment newInstance(int columnCount) {
+//        AskerListFragment fragment = new AskerListFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_COLUMN_COUNT, columnCount);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     /**
      * oncreate
@@ -102,13 +107,9 @@ public class AskerListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_askerlist_list, container, false);
         Bundle args = getArguments();
         if (args != null) {
-            // If args are passed, change the asker list url
-//            ASKER_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
-//                    "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Askers%2CUser+where+" +
-//                    "User.userid+%3D+Askers.askerid+and+Askers.userid+%21%3D+%0D%0A%28select+userid+" +
-//                    "from+User+where+email+%3D+%27";
             ASKER_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
                     "select+%2A+from+User+where+email+%21%3D+%28%27";
+            state = 1;
 
         }
 
@@ -241,6 +242,9 @@ public class AskerListFragment extends Fragment {
 
             mAskers = new ArrayList<>();
             result = User.parseUserJSON(result, mAskers);
+            if (state != 1) {
+                ((myApplication) getActivity().getApplication()).setAskers(mAskers);
+            }
             // Something wrong with the JSON returned.
             if (result != null) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
@@ -250,7 +254,6 @@ public class AskerListFragment extends Fragment {
 
             // Everything is good, show the list of courses.
             if (!mAskers.isEmpty()) {
-
                 mRecyclerView.setAdapter(new MyAskerListRecyclerViewAdapter(mAskers, mListener));
             }
         }

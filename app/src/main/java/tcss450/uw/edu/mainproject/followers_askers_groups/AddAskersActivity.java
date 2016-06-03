@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
@@ -30,6 +31,7 @@ import tcss450.uw.edu.mainproject.account.ProfileActivity;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
 import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 /**
@@ -157,59 +159,71 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
     @Override
     public void onListFragmentInteraction(User user) {
         int userid = user.getUserID();
-        String url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
-
-        // Add User to askers
-        String username = user.getUsername();
-        SpecialAsyncTask task = new SpecialAsyncTask();
-        task.prepToast(null, getApplicationContext());
-        SharedPreferences sharedPreferences =
-                getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
-        int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
-
-        String insertStatement = "INSERT INTO Askers VALUES (" + myUserid +", " + userid + ");";
-        System.out.println(insertStatement);
-        try {
-            url += URLEncoder.encode(insertStatement, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        task.execute(url);
-
-        // Add Users to followers
-        SpecialAsyncTask task2 = new SpecialAsyncTask();
-        url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
-        task2.prepToast("Added " + username, getApplicationContext());
-        insertStatement = "INSERT INTO Followers VALUES (" + userid +", " + myUserid + ");";
-        System.out.println(insertStatement);
-        try {
-            url += URLEncoder.encode(insertStatement, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        task2.execute(url);
-
-        // Email Asker notification
-        SharedPreferences sp =
-                getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
-        if (sp.getBoolean(getString(R.string.YESEMAIL), true)) {
-            String[] TO = {user.getEmail()};
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.setType("text/plain");
-
-
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Follow Request");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello " + user.getUsername() + "! I would love to " +
-                    "start answering your questions! Please send me questions and I will answer them quickly!");
-            try {
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                finish();
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this,
-                        "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        boolean flag = false;
+        List<User> myAskers =  ((myApplication) getApplication()).getAskers();
+        for (int i = 0; i < myAskers.size(); i++) {
+            if (user.getUserID() == myAskers.get(i).getUserID()) {
+                flag = true;
             }
+        }
+        String url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+        if (!flag) {
+            // Add User to askers
+            myAskers.add(user);
+            ((myApplication) getApplication()).setAskers(myAskers);
+            String username = user.getUsername();
+            SpecialAsyncTask task = new SpecialAsyncTask();
+            task.prepToast(null, getApplicationContext());
+            SharedPreferences sharedPreferences =
+                    getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+            int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
+
+            String insertStatement = "INSERT INTO Askers VALUES (" + myUserid + ", " + userid + ");";
+            System.out.println(insertStatement);
+            try {
+                url += URLEncoder.encode(insertStatement, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            task.execute(url);
+
+            // Add Users to followers
+            SpecialAsyncTask task2 = new SpecialAsyncTask();
+            url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+            task2.prepToast("Added " + username, getApplicationContext());
+            insertStatement = "INSERT INTO Followers VALUES (" + userid + ", " + myUserid + ");";
+            System.out.println(insertStatement);
+            try {
+                url += URLEncoder.encode(insertStatement, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            task2.execute(url);
+
+            // Email Asker notification
+            SharedPreferences sp =
+                    getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
+            if (sp.getBoolean(getString(R.string.YESEMAIL), true)) {
+                String[] TO = {user.getEmail()};
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
+
+
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Follow Request");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello " + user.getUsername() + "! I would love to " +
+                        "start answering your questions! Please send me questions and I will answer them quickly!");
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    finish();
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(this,
+                            "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        } else {
+            Toast.makeText(this, user.getUsername() + " is already an asker!", Toast.LENGTH_SHORT).show();
         }
 
 

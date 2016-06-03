@@ -67,18 +67,18 @@ public class FollowListFragment extends Fragment {
     public FollowListFragment() {
     }
 
-    /**
-     * newInstance of fragment
-     * @param columnCount the column count
-     * */
-    @SuppressWarnings("unused")
-    public static FollowListFragment newInstance(int columnCount) {
-        FollowListFragment fragment = new FollowListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    /**
+//     * newInstance of fragment
+//     * @param columnCount the column count
+//     * */
+//    @SuppressWarnings("unused")
+//    public static FollowListFragment newInstance(int columnCount) {
+//        FollowListFragment fragment = new FollowListFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_COLUMN_COUNT, columnCount);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     /**
      * onCreate
