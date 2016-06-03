@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject;
 
 import android.test.ActivityInstrumentationTestCase2;
@@ -7,23 +12,33 @@ import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 
 import com.robotium.solo.Solo;
 /**
- * Created by Mehgan on 5/22/2016.
+ * Automatic testing on the main view users activity
  */
 public class MainViewUsersActivityTest extends
         ActivityInstrumentationTestCase2<MainViewUsersActivity> {
 
+    /**solo*/
     private Solo solo;
 
+    /**
+     * Constructor for test
+     * */
     public MainViewUsersActivityTest() {
         super(MainViewUsersActivity.class);
     }
 
+    /**
+     * Sets up the test feilds
+     * */
     @Override
     public void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
+    /**
+     * Tears down the test feilds
+     * */
     @Override
     public void tearDown() throws Exception {
         //tearDown() is run after a test case has finished.
@@ -32,6 +47,9 @@ public class MainViewUsersActivityTest extends
 
     }
 
+    /**
+     * tests the log out functionality
+     * */
     public void testALogout() {
         solo.clickOnView(getActivity().findViewById(R.id.action_logout));
         boolean textFound = solo.searchText("Login");
@@ -44,6 +62,9 @@ public class MainViewUsersActivityTest extends
         assertTrue("Sign in worked!", worked);
 
     }
+    /**
+     * Test the interaction when a user is clicked on
+     * */
     public void testUserDetail() {
         solo.clickOnText("Followers");
         solo.clickInRecyclerView(0);
@@ -53,13 +74,18 @@ public class MainViewUsersActivityTest extends
         boolean foundFollowersList = solo.searchText("mehgan");
         assertTrue("Back to List works!", foundFollowersList);
     }
-
+    /**
+     * Test that the followers list loads
+     * */
     public void testFollowersList() {
         solo.clickOnText("Followers");
         boolean fragmentLoaded = solo.searchText("mehgan");
         assertTrue("FollowersList fragment loaded", fragmentLoaded);
     }
 
+    /**
+     * tests that the askers list loads
+     * */
     public void testAskersList() {
         solo.clickOnText("Askers");
         boolean fragmentLoaded = solo.searchText("tony");

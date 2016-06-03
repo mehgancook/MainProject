@@ -17,8 +17,12 @@ public class Helper {
 
     /** The font style for the entire project. */
     private Typeface mFontStyle;
+    /**the manager*/
     private AssetManager mManager;
 
+    /**
+     * Empty Constructor
+     * */
     public Helper() {
 
     }

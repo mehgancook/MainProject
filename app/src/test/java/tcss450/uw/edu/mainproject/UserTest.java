@@ -1,6 +1,9 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject;
-
-import android.util.Log;
 
 import junit.framework.TestCase;
 
@@ -12,10 +15,13 @@ import java.util.ArrayList;
 import tcss450.uw.edu.mainproject.model.User;
 
 /**
- * Created by Mehgan on 5/22/2016.
+ * Junit tests on the user class
  */
 public class UserTest extends TestCase {
 
+    /**
+     * tests the constructor
+     * */
     @Test
     public void testConstructor() {
         User user = new User("mehgan", "mehganc@uw.edu",
@@ -23,6 +29,10 @@ public class UserTest extends TestCase {
         assertNotNull(user);
     }
 
+    /**
+     * Tests the parse user json
+     *
+     * */
     @Test
     public void testParseUserJSON() {
         String userJSON = "[{\"username\":\"mehganc\",\"email\":\"mehganc@uw.edu\",\"password\":\"awesome\",\"userid\":\"1\"}" +
@@ -31,36 +41,46 @@ public class UserTest extends TestCase {
                 , new ArrayList<User>());
         assertTrue("JSON With Valid String", message == null);
     }
-
+    /**User used for testing*/
     private User mUser;
 
+    /**
+     * Sets up the test conditions
+     * */
     @Before
     public void setUp() {
         mUser = new User("mehgan", "mehgancc@uw.edu", "awesome", "1");
     }
 
+    /**
+     * Test for getting the user email
+     * */
     @Test
     public void testGetUserEmail() {
         assertEquals("mehgancc@uw.edu", mUser.getEmail());
     }
 
+    /**
+     * Test for getting the username
+     * */
     @Test
     public void testGetUsername() {
         assertEquals("mehgan", mUser.getUsername());
     }
 
+    /**
+     * test for getting the user password
+     * */
     @Test
     public void testGetPassword() {
         assertEquals("awesome", mUser.getPassword());
     }
 
+    /**
+     * test for getting the user id
+     * */
     @Test
     public void testGetUserID() {
         assertEquals(1, mUser.getUserID());
     }
-
-
-
-
-
 }
