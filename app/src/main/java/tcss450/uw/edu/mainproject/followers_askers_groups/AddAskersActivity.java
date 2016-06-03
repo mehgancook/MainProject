@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +27,11 @@ import java.net.URLEncoder;
 
 import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
+import tcss450.uw.edu.mainproject.account.ProfileActivity;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
+import tcss450.uw.edu.mainproject.blast_question.BlastQuestionActivity;
 import tcss450.uw.edu.mainproject.model.User;
+import tcss450.uw.edu.mainproject.voting_reviewing_questions.VotingActivity;
 
 /**
  * This class is used to allow the user to add askers to their current asker list
@@ -105,15 +109,12 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
         }
         if (id == R.id.action_email) {
             String title = "";
-            String toastMessage = "";
             SharedPreferences sharedPreferences =
                     getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
             if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), false)) {
                 title = "Turn off notifications?";
-                toastMessage = "You will not longer send emails from Slick Pick!";
             } else {
                 title = "Turn on notifications?";
-                toastMessage = "You will now send emails from Slick Pick!";
             }
             new AlertDialog.Builder(this)
                     .setTitle("Email Notifications")
@@ -160,7 +161,7 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
 
         String username = user.getUsername();
         SpecialAsyncTask task = new SpecialAsyncTask();
-        task.prepToast("Added " + username, getApplicationContext());
+      //  task.prepToast("Added " + username, getApplicationContext());
         SharedPreferences sharedPreferences =
                 getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
         int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
@@ -196,5 +197,18 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
             }
         }
     }
+
+    /** Go to Blast Question activity
+     * @param v the view*/
+    public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
+    /** Go to Home activity
+     * @param v the view */
+    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    /** Go to Followers activity
+     * @param v the view*/
+    public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
+    /** Go To Settings activity
+     * @param v the view*/
+    public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
 
 }

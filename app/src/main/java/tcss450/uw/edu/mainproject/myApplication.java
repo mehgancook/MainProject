@@ -29,6 +29,8 @@ public class myApplication extends Application {
     public List<QuestionWithDetail> mCurrentQuestion;
     /**List of followeres*/
     public List<User> mFollowers;
+    /**List of askwers*/
+    public List<User> mAskers;
     /**
      * Gets the question list
      * @return questions with details
@@ -52,6 +54,19 @@ public class myApplication extends Application {
      * @param followers the list of followers
      * */
     public void setFollowers(List<User> followers) { mFollowers = followers;}
+
+    /**
+     * Gets the askers
+     * @return list of followers
+     * */
+    public List<User> getAskers() {return mAskers;}
+
+    /**
+     * Sets the list of askers
+     * @param askers the list of askers
+     * */
+    public void setAskers(List<User> askers) { mAskers = askers;}
+
 
     /**
      * Sets the current Question

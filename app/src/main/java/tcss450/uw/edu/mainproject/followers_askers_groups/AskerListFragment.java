@@ -103,10 +103,12 @@ public class AskerListFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             // If args are passed, change the asker list url
+//            ASKER_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
+//                    "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Askers%2CUser+where+" +
+//                    "User.userid+%3D+Askers.askerid+and+Askers.userid+%21%3D+%0D%0A%28select+userid+" +
+//                    "from+User+where+email+%3D+%27";
             ASKER_LIST_URL = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
-                    "select+username%2CUser.email%2CUser.password%2CUser.userid+from+Askers%2CUser+where+" +
-                    "User.userid+%3D+Askers.askerid+and+Askers.userid+%21%3D+%0D%0A%28select+userid+" +
-                    "from+User+where+email+%3D+%27";
+                    "select+%2A+from+User+where+email+%21%3D+%28%27";
 
         }
 

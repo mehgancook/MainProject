@@ -19,10 +19,12 @@
 
     <EditText style="@style/EditText"
         android:id="@+id/user"
+        android:inputType="textEmailAddress"
         android:layout_gravity="fill_vertical"
         android:hint="@string/email_hint" />
 
     <EditText style="@style/EditText"
+        android:inputType="textPassword"
         android:id="@+id/password"
         android:hint="@string/password_hint" />
 
