@@ -14,6 +14,7 @@
         android:layout_weight="1">
     <TextView style="@style/Title"
         android:id="@+id/title"
+        android:layout_gravity="center_horizontal"
         android:text="Click to Add Askers"/>
 
         <include layout="@layout/content_view_groups" />

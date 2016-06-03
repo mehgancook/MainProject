@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,12 +80,12 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     /**
      * on options item selected
      * @param item menu item
      * @return boolean
      * */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -150,18 +149,20 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
         return super.onOptionsItemSelected(item);
     }
 
+
     /**
-     * OnListFragmentInteraction will add an akser when a user is selected from the list
-     * @param user is the user being clicked on
-     * */
+     * The interaction listener that interacts with the user.
+     * @param user
+     */
     @Override
     public void onListFragmentInteraction(User user) {
         int userid = user.getUserID();
         String url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
 
+        // Add User to askers
         String username = user.getUsername();
         SpecialAsyncTask task = new SpecialAsyncTask();
-      //  task.prepToast("Added " + username, getApplicationContext());
+        task.prepToast(null, getApplicationContext());
         SharedPreferences sharedPreferences =
                 getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
         int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
@@ -173,8 +174,22 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
         task.execute(url);
+
+        // Add Users to followers
+        SpecialAsyncTask task2 = new SpecialAsyncTask();
+        url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+        task2.prepToast("Added " + username, getApplicationContext());
+        insertStatement = "INSERT INTO Followers VALUES (" + userid +", " + myUserid + ");";
+        System.out.println(insertStatement);
+        try {
+            url += URLEncoder.encode(insertStatement, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        task2.execute(url);
+
+        // Email Asker notification
         SharedPreferences sp =
                 getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
         if (sp.getBoolean(getString(R.string.YESEMAIL), true)) {
@@ -196,6 +211,8 @@ public class AddAskersActivity extends AppCompatActivity implements AskerListFra
                         "There is no email client installed.", Toast.LENGTH_SHORT).show();
             }
         }
+
+
     }
 
     /** Go to Blast Question activity

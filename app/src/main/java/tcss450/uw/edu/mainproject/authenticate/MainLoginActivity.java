@@ -32,6 +32,7 @@ public class MainLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
+
         mHelper = new Helper(getAssets());
 
         TextView joinLink = (TextView) findViewById(R.id.join);

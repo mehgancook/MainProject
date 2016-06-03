@@ -10,9 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,11 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
+            setTitle("");
+        }
+
         DownloadUserIDTask task = new DownloadUserIDTask();
         task.execute(buildURL());
         mHelper = new Helper(getAssets());
@@ -139,7 +145,6 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
         return super.onOptionsItemSelected(item);
     }
 
-
     /**
      * Build the url string based on the currently logged in user email address
      * @return the url
@@ -157,6 +162,10 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
         return sb.toString();
     }
 
+    /**
+     * Interacts with past answers
+     * @param questionWithDetail
+     */
     @Override
     public void onPastAnsweredListFragmentInteraction(QuestionWithDetail questionWithDetail) {
         AnsweredQuestionDetailsFragment details = new AnsweredQuestionDetailsFragment();
@@ -176,6 +185,19 @@ public class ProfileActivity extends AppCompatActivity implements PastAnsweredFr
                 .commit();
 
     }
+
+    // Start Navigation Methods
+
+    // Go to Blast Question
+    public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
+    // Go to Home
+    public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
+    // Go to Followers
+    public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
+    // Go To Settings
+    public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
+
+    // End Navigation Methods
 
     private class DownloadUserIDTask extends AsyncTask<String, Void, String> {
         /**

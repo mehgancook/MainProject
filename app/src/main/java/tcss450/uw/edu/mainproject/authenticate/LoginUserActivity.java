@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -66,6 +67,11 @@ public class LoginUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
+            setTitle("");
+        }
+
         mEmail = (EditText) findViewById(R.id.user);
         mPassword = (EditText) findViewById(R.id.password);
 
@@ -155,17 +161,14 @@ public class LoginUserActivity extends AppCompatActivity {
                 String url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
                 SpecialAsyncTask task = new SpecialAsyncTask();
                 task.prepToast("Added ", getApplicationContext());
-                int myUserid = sharedPreferences.getInt(getString(R.string.USERID), -1);
-                if (myUserid == -1) {
-                    task.setGetUserId(true);
-                    String selectUserId = "Select userid FROM User WHERE email = '" + email + "';";
-                    try {
-                        url += URLEncoder.encode(selectUserId, "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    task.execute(url);
+                task.setGetUserId(true);
+                String selectUserId = "Select userid FROM User WHERE email = '" + email + "';";
+                try {
+                    url += URLEncoder.encode(selectUserId, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 }
+                task.execute(url);
 
             } else {
                 Toast.makeText(this, "Password is incorrect! Please try again.", Toast.LENGTH_LONG).show();

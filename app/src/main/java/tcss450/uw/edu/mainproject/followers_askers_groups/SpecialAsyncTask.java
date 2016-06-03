@@ -100,11 +100,10 @@ public class SpecialAsyncTask  extends AsyncTask<String, Void, String> {
             } catch (JSONException e) {
 
             }
-            if (userid != -1) {
-                SharedPreferences sharedPreferences =
-                        mContext.getSharedPreferences(mContext.getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
-                sharedPreferences.edit().putInt(mContext.getString(R.string.USERID), userid).commit();
-            }
+            SharedPreferences sharedPreferences =
+                    mContext.getSharedPreferences(mContext.getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+            sharedPreferences.edit().putInt(mContext.getString(R.string.USERID), userid).commit();
+
         } else {
             Toast.makeText(mContext, mToastString, Toast.LENGTH_LONG)
                     .show();

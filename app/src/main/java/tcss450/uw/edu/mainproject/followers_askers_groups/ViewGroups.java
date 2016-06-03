@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -48,9 +47,6 @@ public class ViewGroups extends AppCompatActivity implements
             getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
             setTitle("");
         }
-
-        Toolbar tools = (Toolbar) findViewById(R.id.toolbar);
-        tools.setCollapsible(false);
 
         mGroupListFragment = new GroupListFragment();
         getSupportFragmentManager().beginTransaction()

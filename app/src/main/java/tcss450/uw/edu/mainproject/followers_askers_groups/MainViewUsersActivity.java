@@ -88,6 +88,7 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
         toFollowers(mFollowButton);
     }
 
+
     /**
      * On create options menu
      * @param menu the menu
@@ -104,7 +105,6 @@ public class MainViewUsersActivity extends AppCompatActivity implements FollowLi
      * @param item menu item
      * @return boolean
      * */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
