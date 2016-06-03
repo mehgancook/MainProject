@@ -38,7 +38,7 @@ import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**
- * A fragment representing a list of Followers.
+ * A fragment representing a list of asked questions.
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
@@ -48,7 +48,7 @@ public class AskedQuestionResultFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     /**int column count*/
     private int mColumnCount = 1;
-    /**List of users*/
+    /**List of questions with details*/
     private List<QuestionWithDetail> mQuestionWithDetail;
     /**Listener*/
     private OnListFragmentInteractionListener mListener;
@@ -60,7 +60,7 @@ public class AskedQuestionResultFragment extends Fragment {
             "questioncomment%2C+questionimage%2C+votecount%2C+questiondetailid%0D%0Afrom+" +
             "QuestionDetail+natural+join+QuestionMember+natural+join+Question+where+" +
             "Question.useremail+%3D+%27";
-   // "mehganc%40uw.edu%27%3B"
+
     /** Helper for fonts */
     private Helper mHelper;
 
@@ -72,19 +72,6 @@ public class AskedQuestionResultFragment extends Fragment {
      */
     public AskedQuestionResultFragment() {
     }
-
-//    /**
-//     * newInstance of fragment
-//     * @param columnCount the column count
-//     * */
-//    @SuppressWarnings("unused")
-//    public static FollowListFragment newInstance(int columnCount) {
-//        FollowListFragment fragment = new FollowListFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_COLUMN_COUNT, columnCount);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     /**
      * onCreate
@@ -122,7 +109,7 @@ public class AskedQuestionResultFragment extends Fragment {
             } else {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            DownloadFollowersTask task = new DownloadFollowersTask();
+            DownloadAskedQuestionsTask task = new DownloadAskedQuestionsTask();
             task.execute(url);
         }
 
@@ -188,7 +175,7 @@ public class AskedQuestionResultFragment extends Fragment {
     /**
      * Class to download the followeres list in the backgroud using an async task
      * */
-    private class DownloadFollowersTask extends AsyncTask<String, Void, String> {
+    private class DownloadAskedQuestionsTask extends AsyncTask<String, Void, String> {
         /**
          * call the server in the background
          * @param urls the url

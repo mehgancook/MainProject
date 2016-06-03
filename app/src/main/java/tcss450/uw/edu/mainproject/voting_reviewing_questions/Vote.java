@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 
@@ -39,67 +44,54 @@ import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**
+ * The vote fragment allows the user to vote for one of the question options
  * A simple {@link Fragment} subclass.
  */
 public class Vote extends Fragment {
-    /**user item selected*/
-    public static String QUESTION_SELECTED = "questionSelected";
+   /** String url used to update the question member*/
     public static String UPDATE_QUESTIONMEMBER_URL = "http://cssgate.insttech.washington.edu/~_450atm4/" +
             "zombieturtles.php?totallyNotSecure=update+QuestionMember+set+questionanswered+" +
             "%3D+%27true%27%2C+optionpicked+%3D+";
+    /**String url to update the question detail*/
     public static String UPDATE_QUESTIONDETAIL_URL = "http://cssgate.insttech.washington.edu/~_450atm4/" +
             "zombieturtles.php?totallyNotSecure=update+QuestionDetail+set+votecount+%3D+";
+    /**The user id*/
     public int mUserID;
+    /**Holder for text option 1*/
     public  TextView mOption1Text;
+    /**Holder for text option 2*/
     public  TextView mOption2Text;
+    /**Holder for image option 1*/
     public  ImageView mOption1Image;
+    /**Holder for image option 2*/
     public  ImageView mOption2Image;
+    /**Holder for comment option 1*/
     public  TextView mOption1Comment;
+    /**Holder for comment option 2*/
     public  TextView mOption2Comment;
+    /**Button to vote for option 1*/
     public Button mOption1Vote;
+    /**Button to vote for option 2*/
     public Button mOption2Vote;
+    /**vote id*/
     public int mVoteId;
+    /**option 1 id*/
     public int mOption1ID;
+    /**option 2 id*/
     public int mOption2ID;
+    /**list of questions with details*/
     private List<QuestionWithDetail> mQuestionWithDetail;
 
-
+    /**
+     * Required empty constructor
+     * */
     public Vote() {
         // Required empty public constructor
     }
 
-    /**
-     * update the view with current information
-
-     * */
-    public void updateView(QuestionWithDetail questionWithDet) {
-        mQuestionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
-        if (mQuestionWithDetail != null) {
-            mOption1Text.setText(mQuestionWithDetail.get(0).getQuestionText());
-            mOption2Text.setText(mQuestionWithDetail.get(1).getQuestionText());
-            String image1 = mQuestionWithDetail.get(0).getQuestionImage();
-            String image2 = mQuestionWithDetail.get(1).getQuestionImage();
-            image1 = image1.replaceAll(" ", "+");
-            image2 = image2.replaceAll(" ", "+");
-            mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
-            mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
-            Log.i("image1", image1);
-            Log.i("image2", image2);
-            if (!image1.equals(null)) {
-                mOption1Image.setImageBitmap(StringToBitMap(image1));
-
-            }
-            if (!image2.equals(null)) {
-                mOption2Image.setImageBitmap(StringToBitMap(image2));
-            }
-
-            mOption1Comment.setText(mQuestionWithDetail.get(0).getQuestionComment());
-            mOption2Comment.setText(mQuestionWithDetail.get(1).getQuestionComment());
-        }
-
-    }
-    /**
-     * @param encodedString
+     /**
+      * string to bitmap
+     * @param encodedString is the string representation of an image
      * @return bitmap (from given string)
      */
     public Bitmap StringToBitMap(String encodedString){
@@ -113,7 +105,13 @@ public class Vote extends Fragment {
             return null;
         }
     }
-
+    /**
+     * On create view
+     * @param savedInstanceState the saved instance state
+     * @param inflater the inflater
+     * @param container the container
+     * @return view
+     * */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -142,7 +140,6 @@ public class Vote extends Fragment {
         helper.setFontStyle(mOption2Vote);
 
         mUserID = ((myApplication) getActivity().getApplication()).getUserID();
-       // List<QuestionWithDetail> questionWithDetail = ((myApplication) getActivity().getApplication()).getCurrentQuestion();
         if (mQuestionWithDetail != null) {
             mOption1ID = mQuestionWithDetail.get(0).getQuestionDetailID();
             mOption2ID = mQuestionWithDetail.get(1).getQuestionDetailID();
@@ -174,10 +171,10 @@ public class Vote extends Fragment {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String url = buildURL(1);
-                                AnswerQuestionTask task = new AnswerQuestionTask();
+                                VoteQuestionTask task = new VoteQuestionTask();
                                 task.execute(url);
                                 String url1 = buildDetailURL(0);
-                                AnswerQuestionTask task1 = new AnswerQuestionTask();
+                                VoteQuestionTask task1 = new VoteQuestionTask();
                                 task1.execute(url1);
                                 Toast.makeText(getContext(), "Option 1 picked!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), VotingActivity.class);
@@ -205,11 +202,10 @@ public class Vote extends Fragment {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String url = buildURL(2);
-                                AnswerQuestionTask task = new AnswerQuestionTask();
+                                VoteQuestionTask task = new VoteQuestionTask();
                                 task.execute(url);
                                 String url1 = buildDetailURL(1);
-                                Log.i("url1", url);
-                                AnswerQuestionTask task1 = new AnswerQuestionTask();
+                                VoteQuestionTask task1 = new VoteQuestionTask();
                                 task1.execute(url1);
                                 Toast.makeText(getContext(), "Option 2 picked!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), VotingActivity.class);
@@ -229,33 +225,13 @@ public class Vote extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-    /**
-     * onStart
-     * */
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // During startup, check if there are arguments passed to the fragment.
-        // onStart is a good place to do this because the layout has already been
-        // applied to the fragment at this point so we can safely call the method
-        // below that sets the article text.
-        Bundle args = getArguments();
-        if (args != null) {
-            // Set article based on argument passed in
-            updateView((QuestionWithDetail) args.getSerializable(QUESTION_SELECTED));
-        }
-    }
-
 
     /**
-     * Build the url string based on the currently logged in user email address
+     * Build the url string to update the question member table
      * @return the url
      * */
     public String buildURL(int option) {
         StringBuilder sb = new StringBuilder(UPDATE_QUESTIONMEMBER_URL);
-        UserDB userDB = new UserDB(getActivity());
-       // String email = userDB.getUsers().get(0).getEmail();
         try {
             String needsEncode = option + " where questionmemberid = " + mUserID + " and questionid = " + mVoteId;
             sb.append(URLEncoder.encode(needsEncode, "UTF-8"));
@@ -267,16 +243,14 @@ public class Vote extends Fragment {
     }
 
     /**
-     * Build the url string based on the currently logged in user email address
+     * Build the url string to update the question with details table
      * @return the url
      * */
     public String buildDetailURL(int option) {
         StringBuilder sb = new StringBuilder(UPDATE_QUESTIONDETAIL_URL);
-        UserDB userDB = new UserDB(getActivity());
         int votecount = mQuestionWithDetail.get(option).getVoteCount();
         votecount++;
         String needsEncode;
-        // String email = userDB.getUsers().get(0).getEmail();
         try {
             if (option == 0) {
                 needsEncode = votecount + " where questiondetailid = " + mOption1ID;
@@ -292,10 +266,10 @@ public class Vote extends Fragment {
     }
 
     /**
-     * DownloadUsersTask is an async class that will acccess the database and retreive the current list of users
+     * VoteQuestionTask is an async class that will acccess the database to update tables
      * @author Meneka Abraham and Mehgan Cook
      * */
-    private class AnswerQuestionTask extends AsyncTask<String, Void, String> {
+    private class VoteQuestionTask extends AsyncTask<String, Void, String> {
 
         /**
          * onPreExecute
@@ -352,13 +326,6 @@ public class Vote extends Fragment {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("errors");
                 if (status.equals("none")) {
-//                    AnswerQuestionsFragment fragment = new AnswerQuestionsFragment();
-//                    getActivity().getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.fragment_container, fragment)
-//                            .commit();
-                   // Intent i = new Intent(getActivity(), MainViewUsersActivity.class);
-                   // startActivity(i);
-                    // finish();
 
                 } else {
 

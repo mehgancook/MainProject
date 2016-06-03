@@ -37,7 +37,7 @@ import tcss450.uw.edu.mainproject.myApplication;
 
 
 /**
- * A fragment representing a list of Followers.
+ * A fragment representing a list of questions to be answered.
  * Activities containing this fragment MUST implement the {@link OnAnswerListFragmentInteractionListener}
  * interface.
  */
@@ -47,15 +47,13 @@ public class AnswerQuestionsFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     /**int column count*/
     private int mColumnCount = 1;
-    /**List of users*/
+    /**List of questions with details*/
     private List<QuestionWithDetail> mQuestionWithDetail;
-
-    private String mQuestionName;
     /**Listener*/
     private OnAnswerListFragmentInteractionListener mListener;
     /**Recycle view*/
     private RecyclerView mRecyclerView;
-    /**String for the url to access the users from the database*/
+    /**String for the url to access the questions asked from the database*/
     private static final String QUESTIONS_ASKED_URL
             = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+questionanswered%2c+questionname%2C+questionid%2C+questiontext%2C+questioncomment%2C+questionimage%2C" +
@@ -69,19 +67,6 @@ public class AnswerQuestionsFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public AnswerQuestionsFragment() {
-    }
-
-    /**
-     * newInstance of fragment
-     * @param columnCount the column count
-     * */
-    @SuppressWarnings("unused")
-    public static FollowListFragment newInstance(int columnCount) {
-        FollowListFragment fragment = new FollowListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     /**
@@ -109,8 +94,6 @@ public class AnswerQuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followlist_list, container, false);
         String url = buildURL();
-//        mHelper = new Helper(getActivity().getAssets());
-//        mHelper.setFontStyle((TextView) view.findViewById(R.id.content));
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -120,7 +103,7 @@ public class AnswerQuestionsFragment extends Fragment {
             } else {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            DownloadFollowersTask task = new DownloadFollowersTask();
+            DownloadAnswerQuestionsTask task = new DownloadAnswerQuestionsTask();
             task.execute(url);
         }
 
@@ -184,9 +167,9 @@ public class AnswerQuestionsFragment extends Fragment {
         void onAnswerListFragmentInteraction(QuestionWithDetail questionWithDetail);
     }
     /**
-     * Class to download the followeres list in the backgroud using an async task
+     * Class to download the questions to be answered list in the backgroud using an async task
      * */
-    private class DownloadFollowersTask extends AsyncTask<String, Void, String> {
+    private class DownloadAnswerQuestionsTask extends AsyncTask<String, Void, String> {
         /**
          * call the server in the background
          * @param urls the url
@@ -242,7 +225,7 @@ public class AnswerQuestionsFragment extends Fragment {
                 return;
             }
 
-            // Everything is good, show the list of courses.
+            // Everything is good, show the list of questions with details.
             List<QuestionWithDetail> distinct = new ArrayList<>();
             if (mQuestionWithDetail != null) {
                 ((myApplication) getActivity().getApplication()).setQuestionLst(mQuestionWithDetail);

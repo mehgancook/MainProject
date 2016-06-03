@@ -1,3 +1,8 @@
+/*
+ * Slick pick app
+  * Mehgan Cook and Tony Zullo
+  * Mobile apps TCSS450
+ * */
 package tcss450.uw.edu.mainproject.voting_reviewing_questions;
 
 import android.content.Context;
@@ -37,16 +42,30 @@ import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
 import tcss450.uw.edu.mainproject.Helper;
 
+/**
+ * Voting Activity is the activity that is used to vote for and display a question with details
+ *
+ * */
 public class VotingActivity extends AppCompatActivity implements AnswerQuestionsFragment.OnAnswerListFragmentInteractionListener,
 AskedQuestionResultFragment.OnListFragmentInteractionListener {
+    /** Retreives users*/
     private static String USER_URL ="http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=" +
             "select+%2A+from+User+where+email+%3D+%27";
+    /**Answer question fragment*/
     private AnswerQuestionsFragment mAnswerQuestionsFragment;
+    /**Asked question fragment*/
     private AskedQuestionResultFragment mAskedQuestionFragment;
+    /**Text view that can be clicked on to switch to results fragment*/
     private TextView mResultsButton;
+    /**Text view that can be clicked on to switch to answer questions fragment*/
     private TextView mAnswerButton;
+    /**Helper method for style*/
     private Helper mHelper;
 
+    /**
+     * onCreate
+     * @param savedInstanceState the saved instance
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +73,6 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         DownloadUserIDTask task = new DownloadUserIDTask();
         task.execute(buildURL());
         mHelper = new Helper(getAssets());
-//        AnswerQuestionsFragment answerQuestionsFragment = new AnswerQuestionsFragment();
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.fragment_container, answerQuestionsFragment)
-//                .commit();
         mAnswerButton = (TextView) findViewById(R.id.answer_button);
         mResultsButton = (TextView) findViewById(R.id.results_button);
         mHelper.setFontStyle(mAnswerButton);
@@ -104,15 +119,12 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         }
         if (id == R.id.action_email) {
             String title = "";
-            String toastMessage = "";
             SharedPreferences sharedPreferences =
                     getSharedPreferences(getString(R.string.EMAIL_PREFS), Context.MODE_PRIVATE);
             if (sharedPreferences.getBoolean(getString(R.string.YESEMAIL), false)) {
                 title = "Turn off notifications?";
-                toastMessage = "You will not longer send emails from Slick Pick!";
             } else {
                 title = "Turn on notifications?";
-                toastMessage = "You will now send emails from Slick Pick!";
             }
             new AlertDialog.Builder(this)
                     .setTitle("Email Notifications")
@@ -148,6 +160,10 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * To answer questions inflates the fragment that will allow a user to answer questions
+     * @param v the view
+     * */
     public void toAnswerQuestions(View v) {
         int selectedColor = getResources().getColor(R.color.colorPrimary);
         int white = getResources().getColor(R.color.white);
@@ -174,7 +190,10 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         }
 
     }
-
+    /**
+     * To voting results inflates the fragment that will allow a user to view voting results
+     * @param v the view
+     * */
     public void toVotingResults(View v) {
         int selectedColor = getResources().getColor(R.color.colorPrimary);
         int white = getResources().getColor(R.color.white);
@@ -201,10 +220,13 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         }
     }
 
+    /**
+     * On answer list will allow a user to vote on the question selected
+     * @param questionWithDetail  the question that is selected
+     * */
     @Override
     public void onAnswerListFragmentInteraction(QuestionWithDetail questionWithDetail) {
         Vote voteFragment = new Vote();
-        Bundle args = new Bundle();
         String name = questionWithDetail.getQuestionName();
         List<QuestionWithDetail> questions = ((myApplication) getApplication()).getQuestionList();
         for (int i = 0; i < questions.size(); i++) {
@@ -215,32 +237,28 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         }
         ((myApplication) getApplication()).setCurrentQuestion(questions);
 
-        args.putSerializable(voteFragment.QUESTION_SELECTED, questionWithDetail);
-        voteFragment.setArguments(args);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, voteFragment)
                 .addToBackStack(null)
                 .commit();
     }
 
+    /**
+     * on list fragment interaction will take the user to their asked question to see the results
+     * @param questionWithDetail the question selected
+     * */
     public void onListFragmentInteraction(QuestionWithDetail questionWithDetail) {
         VoteResultsFragment voteResults = new VoteResultsFragment();
-        Bundle args = new Bundle();
-
-        String name = questionWithDetail.getQuestionName();
         int id = questionWithDetail.getQuestionId();
         List<QuestionWithDetail> questions = ((myApplication) getApplication()).getQuestionList();
         for (int i = 0; i < questions.size(); i++) {
             if (questions.get(i).getQuestionId() != id) {
-           // if (!questions.get(i).getQuestionName().equals(name)) {
                 questions.remove(i);
                 i--;
             }
         }
         ((myApplication) getApplication()).setCurrentQuestion(questions);
 
-        args.putSerializable(voteResults.QUESTION_SELECTED, questionWithDetail);
-        voteResults.setArguments(args);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, voteResults)
                 .addToBackStack(null)
@@ -266,17 +284,26 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
 
     // Start Navigation Methods
 
-    // Go to Blast Question
+
+    /** Go to Blast Question activity
+     * @param v the view*/
     public void goToBlastQuestion(View v) { startActivity(new Intent(this, BlastQuestionActivity.class));}
-    // Go to Home
+    /** Go to Home activity
+     * @param v the view */
     public void goToHome(View v) { startActivity(new Intent(this, VotingActivity.class)); }
-    // Go to Followers
+    /** Go to Followers activity
+     * @param v the view*/
     public void goToFollowers(View v) { startActivity(new Intent(this, MainViewUsersActivity.class)); }
-    // Go To Settings TODO : Change to Settings.class
+    /** Go To Settings activity
+     * @param v the view*/
     public void goToSettings(View v) { startActivity(new Intent(this, ProfileActivity.class)); }
 
     // End Navigation Methods
 
+    /**
+     * DownloadUserID task will download the userid to be used to get question information
+     *
+     * */
     private class DownloadUserIDTask extends AsyncTask<String, Void, String> {
         /**
          * call the server in the background
@@ -334,7 +361,6 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
             }
 
             ((myApplication) getApplication()).setUserID(me.get(0).getUserID());
-            Log.i("myid", ((myApplication) getApplication()).getUserID() + "");
         }
 
 
