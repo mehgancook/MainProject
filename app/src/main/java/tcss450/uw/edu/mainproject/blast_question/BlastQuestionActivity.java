@@ -101,6 +101,7 @@ public class BlastQuestionActivity extends AppCompatActivity implements FollowLi
                 .replace(R.id.blast_question_container, enterQuestionFragment)
                 .commit();
     }
+
     /**
      * On create options menu
      * @param menu the menu

@@ -27,14 +27,16 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
 import tcss450.uw.edu.mainproject.Helper;
-import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.data.UserDB;
+import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
+import tcss450.uw.edu.mainproject.followers_askers_groups.SpecialAsyncTask;
 
 
 /**
@@ -69,6 +71,10 @@ public class RegisterUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mMe = this;
         setContentView(R.layout.activity_add_user);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
+            setTitle("");
+        }
 
         mHelper = new Helper(getAssets());
 
@@ -153,6 +159,20 @@ public class RegisterUserActivity extends AppCompatActivity {
         }
         mUserDB.deleteUsers();
         mUserDB.insertUser(email);
+
+        // Added by Tony to pull userid from db
+        url = "http://cssgate.insttech.washington.edu/~_450atm4/zombieturtles.php?totallyNotSecure=";
+        SpecialAsyncTask task2 = new SpecialAsyncTask();
+        task2.prepToast("Added ", getApplicationContext());
+        task2.setGetUserId(true);
+        String selectUserId = "Select userid FROM User WHERE email = '" + email + "';";
+        try {
+            url += URLEncoder.encode(selectUserId, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        task2.execute(url);
+
     }
 
     /**

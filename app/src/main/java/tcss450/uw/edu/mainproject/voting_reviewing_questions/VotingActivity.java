@@ -11,10 +11,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
 import tcss450.uw.edu.mainproject.account.ProfileActivity;
 import tcss450.uw.edu.mainproject.authenticate.MainLoginActivity;
@@ -40,7 +42,6 @@ import tcss450.uw.edu.mainproject.followers_askers_groups.MainViewUsersActivity;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
 import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
-import tcss450.uw.edu.mainproject.Helper;
 
 /**
  * Voting Activity is the activity that is used to vote for and display a question with details
@@ -70,6 +71,14 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.logo_adjusted));
+            setTitle("");
+        }
+
+        Toolbar tools = (Toolbar) findViewById(R.id.toolbar);
+        tools.setCollapsible(false);
+
         DownloadUserIDTask task = new DownloadUserIDTask();
         task.execute(buildURL());
         mHelper = new Helper(getAssets());
@@ -91,12 +100,12 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     /**
      * on options item selected
      * @param item menu item
      * @return boolean
      * */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -160,10 +169,11 @@ AskedQuestionResultFragment.OnListFragmentInteractionListener {
         return super.onOptionsItemSelected(item);
     }
 
+
     /**
-     * To answer questions inflates the fragment that will allow a user to answer questions
-     * @param v the view
-     * */
+     * Go to Answered Questions
+     * @param v
+     */
     public void toAnswerQuestions(View v) {
         int selectedColor = getResources().getColor(R.color.colorPrimary);
         int white = getResources().getColor(R.color.white);
