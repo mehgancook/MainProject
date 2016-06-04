@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +29,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import tcss450.uw.edu.mainproject.Helper;
 import tcss450.uw.edu.mainproject.R;
-import tcss450.uw.edu.mainproject.data.UserDB;
 import tcss450.uw.edu.mainproject.model.QuestionMember;
 import tcss450.uw.edu.mainproject.model.QuestionWithDetail;
-import tcss450.uw.edu.mainproject.model.User;
 import tcss450.uw.edu.mainproject.myApplication;
-import tcss450.uw.edu.mainproject.Helper;
 
 /**
  * AnswerQuestionDetailsFragment shows the question details that the user has answered,
@@ -62,7 +59,8 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
     private TextView mOptionSelectedText;
     /**Holds the users voting results*/
     private int mOptionSelected;
-
+    /** Helper for font */
+    private Helper mHelper;
 
     /**
      * Constructor for AnsweredQuestionDetailsFragment
@@ -89,7 +87,7 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
         DownloadOptionSelectedTask task = new DownloadOptionSelectedTask();
         task.execute(url);
 
-        Helper helper = new Helper(getActivity().getAssets());
+        mHelper = new Helper(getActivity().getAssets());
         mOption1Text = (TextView) view.findViewById(R.id.option1Text);
         mOption2Text = (TextView) view.findViewById(R.id.option2Text);
         mResults1 = (TextView) view.findViewById(R.id.option1ResultPercent);
@@ -97,12 +95,12 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
         mOption1Image = (ImageView) view.findViewById(R.id.option1Image);
         mOption2Image = (ImageView) view.findViewById(R.id.option2Image);
 
-        helper.setFontStyle((TextView) view.findViewById(R.id.option1));
-        helper.setFontStyle((TextView) view.findViewById(R.id.option2));
-        helper.setFontStyle(mOption1Text);
-        helper.setFontStyle(mOption2Text);
-        helper.setFontStyle(mResults1);
-        helper.setFontStyle(mResults2);
+        mHelper.setFontStyle((TextView) view.findViewById(R.id.option1));
+        mHelper.setFontStyle((TextView) view.findViewById(R.id.option2));
+        mHelper.setFontStyle(mOption1Text);
+        mHelper.setFontStyle(mOption2Text);
+        mHelper.setFontStyle(mResults1);
+        mHelper.setFontStyle(mResults2);
         //if there are details available for the question selected
         if (mQuestionWithDetail != null) {
             int half = mQuestionWithDetail.size() / 2; //gets the second option that is in the details list
@@ -225,7 +223,8 @@ public class AnsweredQuestionDetailsFragment extends Fragment {
             List<QuestionMember> me = new ArrayList<>();
             result = QuestionMember.parseQuestionMemberJSON(result, me);
             mOptionSelected = me.get(0).getOptionPicked();
-            mOptionSelectedText.setText("you select option " + mOptionSelected + "!");
+            mOptionSelectedText.setText("You Selected Option " + mOptionSelected + "!");
+            mHelper.setFontStyle(mOptionSelectedText);
             // Something wrong with the JSON returned.
             if (result != null) {
                 Toast.makeText(getActivity().getBaseContext(), result, Toast.LENGTH_LONG)

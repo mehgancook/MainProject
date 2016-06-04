@@ -2,91 +2,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:weightSum="1"
     tools:context=".account.AnsweredQuestionDetailsFragment">
 
-        <TextView
+    <TextView style="@style/Title"
+            android:paddingTop="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/optionPicked"/>
-    <LinearLayout
-        android:weightSum="1"
-        android:layout_weight=".5"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@drawable/icon_border"
-        android:gravity="center_horizontal">
-        <TextView
-            style="@style/Title"
-            android:text="Option 1"
-            android:id="@+id/option1"
-            android:layout_weight=".1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/option1Text"
-            android:layout_weight=".1" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/option1Image"
+            android:id="@+id/optionPicked"
             android:layout_gravity="center_horizontal"
-            android:layout_weight=".6" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/option1ResultPercent" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:weightSum="1"
-        android:layout_weight=".5"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@drawable/icon_border"
-        android:gravity="center_horizontal">
-        <TextView
-            style="@style/Title"
-            android:text="Option2"
-            android:id="@+id/option2"
+            android:textAllCaps="true"
             android:layout_weight=".1" />
-        <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight=".9">
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_weight=".5"
+            android:layout_height="match_parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/option2Text"
-            android:text="Large Text"
-            android:layout_weight=".1"/>
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/icon_border"
+            android:gravity="center_horizontal">
+            <TextView
+                style="@style/Title"
+                android:text="Option 1"
+                android:id="@+id/option1"
+                android:layout_weight=".1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/option1Text"
+                android:layout_weight=".1" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/option1Image"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight=".6" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/option2Image"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight=".6" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/option1ResultPercent" />
 
-        <TextView
+        </LinearLayout>
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_weight=".5"
+            android:layout_height="match_parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/option2ResultPercent" />
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/icon_border"
+            android:gravity="center_horizontal">
+            <TextView
+                style="@style/Title"
+                android:text="Option2"
+                android:id="@+id/option2"
+                android:layout_weight=".1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/option2Text"
+                android:text="Large Text"
+                android:layout_weight=".1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/option2Image"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight=".6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/option2ResultPercent" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
