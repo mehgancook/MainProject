@@ -44,6 +44,7 @@
                 android:onClick="goToHome" />
             <ImageView style="@style/BlastQuestionIcon"
                 app:layout_widthPercent="25%"
+                android:onClick="goToBlastQuestion"
                 app:layout_marginLeftPercent="25%" />
             <ImageView style="@style/FollowersIcon"
                 app:layout_widthPercent="25%"
@@ -52,7 +53,6 @@
             <ImageView style="@style/SettingsIcon"
                 app:layout_widthPercent="25%"
                 app:layout_marginLeftPercent="75%"
-                android:onClick="goToSettings"
                 android:background="@color/colorPrimaryDark" />
         </android.support.percent.PercentRelativeLayout>
     </android.support.v7.widget.Toolbar>

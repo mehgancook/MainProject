@@ -23,26 +23,32 @@
             android:layout_weight="1">
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                style="@style/SubmitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ask Now!"
+                android:text="Ask Now"
                 android:id="@+id/send_button"
                 android:onClick="blastQuestion"
-                android:layout_gravity="bottom"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_gravity="center_horizontal"
                 android:textAllCaps="true" />
 
             <Button
-                style="?android:attr/buttonStyleSmall"
+                style="@style/SubmitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send to all followers!!"
+                android:text="Send to all followers"
                 android:id="@+id/send_all_button"
                 android:onClick="blastQuestionAll"
-                android:layout_gravity="bottom"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:textAllCaps="true" />
 
         </LinearLayout>
     </LinearLayout>
